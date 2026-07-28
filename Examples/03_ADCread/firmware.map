@@ -1,0 +1,525 @@
+Archive member included to satisfy reference by file (symbol)
+
+/home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+                              /tmp/ccKbxY6C.o (DL_ADC12_setClockConfig)
+/home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+                              /tmp/ccKbxY6C.o (DL_Common_delayCycles)
+/home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+                              /tmp/ccKbxY6C.o (DL_UART_init)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+                              /tmp/cc96RRYB.o (__aeabi_uidiv)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+                              /tmp/ccXPUOuA.o (__libc_init_array)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+                              /tmp/ccXPUOuA.o (memcpy)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+                              /tmp/ccXPUOuA.o (memset)
+
+Discarded input sections
+
+ .text.DL_ADC12_getClockConfig
+                0x0000000000000000       0x30 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+ .text.DL_UART_getClockConfig
+                0x0000000000000000       0x14 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_configBaudRate
+                0x0000000000000000       0xb0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_configIrDAMode
+                0x0000000000000000       0x40 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_setIrDAPulseLength
+                0x0000000000000000       0x34 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_receiveDataBlocking
+                0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_receiveDataCheck
+                0x0000000000000000       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_transmitDataCheck
+                0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_drainRXFIFO
+                0x0000000000000000       0x2c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_fillTXFIFO
+                0x0000000000000000       0x2c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_Main_saveConfiguration
+                0x0000000000000000       0x84 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_Main_restoreConfiguration
+                0x0000000000000000       0x90 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_Extend_saveConfiguration
+                0x0000000000000000       0xa8 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_Extend_restoreConfiguration
+                0x0000000000000000       0xc0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000000000000 0x0000000000020000 xr
+SRAM             0x0000000020200000 0x0000000000008000 xrw
+BCR_CONFIG       0x0000000041c00000 0x00000000000000ff r
+BSL_CONFIG       0x0000000041c00100 0x0000000000000080 r
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /tmp/ccyNCxd7.o
+LOAD /tmp/cc96RRYB.o
+LOAD /tmp/ccxWLUOv.o
+LOAD /tmp/ccKbxY6C.o
+LOAD /tmp/ccXPUOuA.o
+LOAD /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc_nano.a
+END GROUP
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc_nano.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a
+END GROUP
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc_nano.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a
+END GROUP
+                0x0000000000000000                _Min_Heap_Size = 0x0
+                0x0000000000000080                _Min_Stack_Size = 0x80
+                0x0000000000000000                PROVIDE (_intvecs_base_address = DEFINED (_intvecs_base_address)?_intvecs_base_address:0x0)
+
+.intvecs        0x0000000000000000       0xc0
+ *(.intvecs)
+ .intvecs       0x0000000000000000       0xc0 /tmp/ccXPUOuA.o
+                0x0000000000000000                interruptVectors
+                0x0000000020200000                PROVIDE (_vtable_base_address = DEFINED (_vtable_base_address)?_vtable_base_address:0x20200000)
+
+.vtable
+ *(.vtable)
+
+.text           0x00000000000000c0      0x838
+ CREATE_OBJECT_SYMBOLS
+ *(.text)
+ .text          0x00000000000000c0       0x10 /tmp/ccyNCxd7.o
+                0x00000000000000c0                SysTick_Handler
+ .text          0x00000000000000d0       0x54 /tmp/cc96RRYB.o
+                0x00000000000000d0                ADC_ReadRaw
+                0x0000000000000114                ADC_RawToMillivolts
+ .text          0x0000000000000124      0x1bc /tmp/ccxWLUOv.o
+                0x0000000000000124                HC05_SendByte
+                0x000000000000012c                HC05_SendBuffer
+                0x000000000000014c                HC05_SendString
+                0x0000000000000168                HC05_SendUint32
+                0x00000000000001d4                HC05_SendInt32
+                0x00000000000001f0                HC05_SendHex8
+                0x0000000000000214                HC05_ResetReceiver
+                0x0000000000000224                HC05_HandleRxInterrupt
+                0x0000000000000288                HC05_DataAvailable
+                0x000000000000029c                HC05_ReadByte
+                0x00000000000002c8                HC05_RxOverflowed
+                0x00000000000002d4                HC05_ClearRxOverflow
+ .text          0x00000000000002e0      0x15c /tmp/ccKbxY6C.o
+                0x00000000000002e0                SYSCFG_DL_initPower
+                0x0000000000000324                SYSCFG_DL_GPIO_init
+                0x0000000000000338                SYSCFG_DL_SYSCTL_init
+                0x0000000000000370                SYSCFG_DL_HC05_UART_init
+                0x00000000000003e4                SYSCFG_DL_ADC12_0_init
+                0x0000000000000424                SYSCFG_DL_init
+ .text          0x000000000000043c       0x80 /tmp/ccXPUOuA.o
+                0x000000000000043c                TIMG6_IRQHandler
+                0x000000000000043c                TIMG8_IRQHandler
+                0x000000000000043c                I2C0_IRQHandler
+                0x000000000000043c                HardFault_Handler
+                0x000000000000043c                PendSV_Handler
+                0x000000000000043c                NMI_Handler
+                0x000000000000043c                I2C1_IRQHandler
+                0x000000000000043c                UART1_IRQHandler
+                0x000000000000043c                TIMA1_IRQHandler
+                0x000000000000043c                UART0_IRQHandler
+                0x000000000000043c                ADC0_IRQHandler
+                0x000000000000043c                SPI1_IRQHandler
+                0x000000000000043c                TIMG0_IRQHandler
+                0x000000000000043c                ADC1_IRQHandler
+                0x000000000000043c                GROUP1_IRQHandler
+                0x000000000000043c                RTC_IRQHandler
+                0x000000000000043c                GROUP0_IRQHandler
+                0x000000000000043c                UART2_IRQHandler
+                0x000000000000043c                Default_Handler
+                0x000000000000043c                SVC_Handler
+                0x000000000000043c                TIMG12_IRQHandler
+                0x000000000000043c                DAC0_IRQHandler
+                0x000000000000043c                TIMG7_IRQHandler
+                0x000000000000043c                SPI0_IRQHandler
+                0x000000000000043c                AES_IRQHandler
+                0x000000000000043c                DMA_IRQHandler
+                0x000000000000043c                TIMA0_IRQHandler
+                0x000000000000043c                UART3_IRQHandler
+                0x000000000000043c                CANFD0_IRQHandler
+                0x0000000000000440                Reset_Handler
+                0x00000000000004b8                _init
+                0x00000000000004b8                initStub
+ .text          0x00000000000004bc        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+ .text          0x00000000000004bc        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .text          0x00000000000004bc        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text          0x00000000000004bc      0x114 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+                0x00000000000004bc                __udivsi3
+                0x00000000000004bc                __aeabi_uidiv
+                0x00000000000005c8                __aeabi_uidivmod
+ .text          0x00000000000005d0        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+                0x00000000000005d0                __aeabi_ldiv0
+                0x00000000000005d0                __aeabi_idiv0
+ .text          0x00000000000005d4       0x44 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+                0x00000000000005d4                __libc_init_array
+ .text          0x0000000000000618       0xa4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+                0x0000000000000618                memcpy
+ .text          0x00000000000006bc       0xa8 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+                0x00000000000006bc                memset
+                0x0000000000000768                . = ALIGN (0x8)
+ *fill*         0x0000000000000764        0x4 
+ *(.text.*)
+ .text.startup  0x0000000000000768       0xc0 /tmp/ccyNCxd7.o
+                0x0000000000000768                main
+ .text.DL_ADC12_setClockConfig
+                0x0000000000000828       0x40 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+                0x0000000000000828                DL_ADC12_setClockConfig
+ .text.DL_Common_delayCycles
+                0x0000000000000868        0xc /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+                0x0000000000000868                DL_Common_delayCycles
+ .text.DL_UART_init
+                0x0000000000000874       0x48 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+                0x0000000000000874                DL_UART_init
+ .text.DL_UART_setClockConfig
+                0x00000000000008bc       0x14 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+                0x00000000000008bc                DL_UART_setClockConfig
+ .text.DL_UART_transmitDataBlocking
+                0x00000000000008d0       0x24 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+                0x00000000000008d0                DL_UART_transmitDataBlocking
+                0x00000000000008f8                . = ALIGN (0x8)
+ *fill*         0x00000000000008f4        0x4 
+ *(.ctors)
+                0x00000000000008f8                . = ALIGN (0x8)
+ *(.dtors)
+                0x00000000000008f8                . = ALIGN (0x8)
+ *(.init)
+                0x00000000000008f8                . = ALIGN (0x8)
+ *(.fini*)
+                0x00000000000008f8                . = ALIGN (0x8)
+
+.glue_7         0x00000000000008f8        0x0
+ .glue_7        0x00000000000008f8        0x0 linker stubs
+
+.glue_7t        0x00000000000008f8        0x0
+ .glue_7t       0x00000000000008f8        0x0 linker stubs
+
+.vfp11_veneer   0x00000000000008f8        0x0
+ .vfp11_veneer  0x00000000000008f8        0x0 linker stubs
+
+.v4_bx          0x00000000000008f8        0x0
+ .v4_bx         0x00000000000008f8        0x0 linker stubs
+
+.iplt           0x00000000000008f8        0x0
+ .iplt          0x00000000000008f8        0x0 /tmp/ccyNCxd7.o
+
+.ramfunc        0x0000000020200000        0x0 load address 0x00000000000008f8
+                0x00000000000008f8                __ramfunct_load__ = LOADADDR (.ramfunc)
+                0x0000000020200000                __ramfunct_start__ = .
+ *(.ramfunc)
+                0x0000000020200000                . = ALIGN (0x8)
+                0x0000000020200000                __ramfunct_end__ = .
+
+.rodata         0x00000000000008f8       0x70
+ *(.rodata)
+ .rodata        0x00000000000008f8       0x11 /tmp/ccxWLUOv.o
+ *fill*         0x0000000000000909        0x3 
+ .rodata        0x000000000000090c       0x18 /tmp/ccKbxY6C.o
+                0x0000000000000928                . = ALIGN (0x8)
+ *fill*         0x0000000000000924        0x4 
+ *(.rodata.*)
+ .rodata.str1.4
+                0x0000000000000928       0x3a /tmp/ccyNCxd7.o
+                0x0000000000000968                . = ALIGN (0x8)
+ *fill*         0x0000000000000962        0x6 
+
+.rel.dyn        0x0000000000000968        0x0
+ .rel.iplt      0x0000000000000968        0x0 /tmp/ccyNCxd7.o
+
+.preinit_array  0x0000000000000968        0x0
+                0x0000000000000968                PROVIDE (__preinit_array_start = .)
+ *(.preinit_array*)
+                0x0000000000000968                PROVIDE (__preinit_array_end = .)
+
+.init_array     0x0000000000000968        0x0
+                0x0000000000000968                . = ALIGN (0x8)
+                0x0000000000000968                PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array*)
+                0x0000000000000968                PROVIDE (__init_array_end = .)
+
+.fini_array     0x0000000000000968        0x0
+                0x0000000000000968                . = ALIGN (0x8)
+                [!provide]                        PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array*)
+                [!provide]                        PROVIDE (__fini_array_end = .)
+                0x0000000000000968                . = ALIGN (0x8)
+
+.ARM.exidx      0x0000000000000968        0x0
+                0x0000000000000968                __exidx_start = .
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x0000000000000968                __exidx_end = .
+
+.ARM.extab      0x0000000000000968        0x0
+                0x0000000000000968                . = ALIGN (0x8)
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x0000000000000968                . = ALIGN (0x8)
+                0x0000000000000968                __etext = .
+
+.data           0x0000000020200000        0x0 load address 0x0000000000000968
+                0x0000000000000968                __data_load__ = LOADADDR (.data)
+                0x0000000020200000                __data_start__ = .
+ *(.data)
+ .data          0x0000000020200000        0x0 /tmp/ccyNCxd7.o
+ .data          0x0000000020200000        0x0 /tmp/cc96RRYB.o
+ .data          0x0000000020200000        0x0 /tmp/ccxWLUOv.o
+ .data          0x0000000020200000        0x0 /tmp/ccKbxY6C.o
+ .data          0x0000000020200000        0x0 /tmp/ccXPUOuA.o
+ .data          0x0000000020200000        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+ .data          0x0000000020200000        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .data          0x0000000020200000        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+ *(.data*)
+                0x0000000020200000                . = ALIGN (0x8)
+                0x0000000020200000                __data_end__ = .
+
+.igot.plt       0x0000000020200000        0x0 load address 0x0000000000000968
+ .igot.plt      0x0000000020200000        0x0 /tmp/ccyNCxd7.o
+
+.bss            0x0000000020200000       0x58
+                0x0000000020200000                __bss_start__ = .
+ *(.shbss)
+ *(.bss)
+ .bss           0x0000000020200000        0xc /tmp/ccyNCxd7.o
+                0x0000000020200000                gMsTicks
+                0x0000000020200004                gAdcValue
+                0x0000000020200008                gVoltageMv
+ .bss           0x000000002020000c        0x0 /tmp/cc96RRYB.o
+ .bss           0x000000002020000c       0x48 /tmp/ccxWLUOv.o
+ .bss           0x0000000020200054        0x0 /tmp/ccKbxY6C.o
+ .bss           0x0000000020200054        0x0 /tmp/ccXPUOuA.o
+ .bss           0x0000000020200054        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+ .bss           0x0000000020200054        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .bss           0x0000000020200054        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .bss           0x0000000020200054        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .bss           0x0000000020200054        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .bss           0x0000000020200054        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .bss           0x0000000020200054        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .bss           0x0000000020200054        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+ *(.bss.*)
+ *(COMMON)
+                0x0000000020200058                . = ALIGN (0x8)
+ *fill*         0x0000000020200054        0x4 
+                0x0000000020200058                __bss_end__ = .
+
+.noinit         0x0000000020200058        0x0
+ *(*.noinit*)
+                0x0000000020200058                . = ALIGN (0x8)
+
+.heap           0x0000000020200058        0x0
+                0x0000000020200058                __heap_start__ = .
+                0x0000000020200058                end = __heap_start__
+                0x0000000020200058                _end = end
+                0x0000000020200058                __end = end
+ *(.heap)
+                0x0000000020200058                __heap_end__ = .
+                0x0000000020200058                __HeapLimit = __heap_end__
+
+.stack          0x0000000020200058        0x0
+                0x0000000020200058                _stack = .
+ *(.stack)
+
+.BCRConfig
+ *(.BCRConfig)
+
+.BSLConfig
+ *(.BSLConfig)
+                0x0000000020208000                __StackTop = (ORIGIN (REGION_STACK) + LENGTH (REGION_STACK))
+                [!provide]                        PROVIDE (__stack = __StackTop)
+OUTPUT(firmware.elf elf32-littlearm)
+LOAD linker stubs
+
+.debug_info     0x0000000000000000    0x29abd
+ .debug_info    0x0000000000000000     0x587c /tmp/ccyNCxd7.o
+ .debug_info    0x000000000000587c     0x58c5 /tmp/cc96RRYB.o
+ .debug_info    0x000000000000b141     0x5d9d /tmp/ccxWLUOv.o
+ .debug_info    0x0000000000010ede     0x6797 /tmp/ccKbxY6C.o
+ .debug_info    0x0000000000017675      0x1fc /tmp/ccXPUOuA.o
+ .debug_info    0x0000000000017871     0x6127 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+ .debug_info    0x000000000001d998     0x561b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .debug_info    0x0000000000022fb3     0x670b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_info    0x00000000000296be       0x26 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_info    0x00000000000296e4       0x26 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x000000000002970a      0x11a /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .debug_info    0x0000000000029824      0x15c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_info    0x0000000000029980      0x13d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+
+.debug_abbrev   0x0000000000000000     0x1749
+ .debug_abbrev  0x0000000000000000      0x28c /tmp/ccyNCxd7.o
+ .debug_abbrev  0x000000000000028c      0x25b /tmp/cc96RRYB.o
+ .debug_abbrev  0x00000000000004e7      0x38e /tmp/ccxWLUOv.o
+ .debug_abbrev  0x0000000000000875      0x343 /tmp/ccKbxY6C.o
+ .debug_abbrev  0x0000000000000bb8      0x12d /tmp/ccXPUOuA.o
+ .debug_abbrev  0x0000000000000ce5      0x2ef /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+ .debug_abbrev  0x0000000000000fd4      0x166 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .debug_abbrev  0x000000000000113a      0x3a0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_abbrev  0x00000000000014da       0x14 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x00000000000014ee       0x14 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x0000000000001502       0xcc /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .debug_abbrev  0x00000000000015ce       0xc7 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_abbrev  0x0000000000001695       0xb4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+
+.debug_loc      0x0000000000000000     0x2141
+ .debug_loc     0x0000000000000000       0x5d /tmp/ccyNCxd7.o
+ .debug_loc     0x000000000000005d      0x14b /tmp/cc96RRYB.o
+ .debug_loc     0x00000000000001a8      0x5da /tmp/ccxWLUOv.o
+ .debug_loc     0x0000000000000782      0x622 /tmp/ccKbxY6C.o
+ .debug_loc     0x0000000000000da4      0x134 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+ .debug_loc     0x0000000000000ed8      0xad7 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_loc     0x00000000000019af       0x98 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .debug_loc     0x0000000000001a47      0x457 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_loc     0x0000000000001e9e      0x2a3 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+
+.debug_aranges  0x0000000000000000      0x228
+ .debug_aranges
+                0x0000000000000000       0x28 /tmp/ccyNCxd7.o
+ .debug_aranges
+                0x0000000000000028       0x20 /tmp/cc96RRYB.o
+ .debug_aranges
+                0x0000000000000048       0x20 /tmp/ccxWLUOv.o
+ .debug_aranges
+                0x0000000000000068       0x20 /tmp/ccKbxY6C.o
+ .debug_aranges
+                0x0000000000000088       0x20 /tmp/ccXPUOuA.o
+ .debug_aranges
+                0x00000000000000a8       0x28 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+ .debug_aranges
+                0x00000000000000d0       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .debug_aranges
+                0x00000000000000f0       0x98 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_aranges
+                0x0000000000000188       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_aranges
+                0x00000000000001a8       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_aranges
+                0x00000000000001c8       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .debug_aranges
+                0x00000000000001e8       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_aranges
+                0x0000000000000208       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+
+.debug_ranges   0x0000000000000000      0x708
+ .debug_ranges  0x0000000000000000       0x68 /tmp/ccyNCxd7.o
+ .debug_ranges  0x0000000000000068       0x98 /tmp/cc96RRYB.o
+ .debug_ranges  0x0000000000000100       0xa8 /tmp/ccxWLUOv.o
+ .debug_ranges  0x00000000000001a8      0x180 /tmp/ccKbxY6C.o
+ .debug_ranges  0x0000000000000328       0x40 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+ .debug_ranges  0x0000000000000368       0x10 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .debug_ranges  0x0000000000000378      0x390 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+
+.debug_line     0x0000000000000000     0x383d
+ .debug_line    0x0000000000000000      0x53c /tmp/ccyNCxd7.o
+ .debug_line    0x000000000000053c      0x482 /tmp/cc96RRYB.o
+ .debug_line    0x00000000000009be      0x6bf /tmp/ccxWLUOv.o
+ .debug_line    0x000000000000107d      0x810 /tmp/ccKbxY6C.o
+ .debug_line    0x000000000000188d      0x159 /tmp/ccXPUOuA.o
+ .debug_line    0x00000000000019e6      0x5d8 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+ .debug_line    0x0000000000001fbe      0x427 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .debug_line    0x00000000000023e5      0xee2 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_line    0x00000000000032c7       0x6c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_line    0x0000000000003333       0x60 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x0000000000003393      0x127 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .debug_line    0x00000000000034ba      0x1b5 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_line    0x000000000000366f      0x1ce /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+
+.debug_str      0x0000000000000000     0x40bc
+ .debug_str     0x0000000000000000     0x1a4f /tmp/ccyNCxd7.o
+                                       0x1b3d (size before relaxing)
+ .debug_str     0x0000000000001a4f      0x1da /tmp/cc96RRYB.o
+                                       0x1c46 (size before relaxing)
+ .debug_str     0x0000000000001c29      0x395 /tmp/ccxWLUOv.o
+                                       0x1e22 (size before relaxing)
+ .debug_str     0x0000000000001fbe     0x115d /tmp/ccKbxY6C.o
+                                       0x2cd4 (size before relaxing)
+ .debug_str     0x000000000000311b      0x181 /tmp/ccXPUOuA.o
+                                        0x2cf (size before relaxing)
+ .debug_str     0x000000000000329c      0x584 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+                                       0x21e7 (size before relaxing)
+ .debug_str     0x0000000000003820       0xc9 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+                                       0x1b32 (size before relaxing)
+ .debug_str     0x00000000000038e9      0x472 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+                                       0x24b5 (size before relaxing)
+ .debug_str     0x0000000000003d5b       0xa6 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_str     0x0000000000003e01       0xa6 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_str     0x0000000000003e01      0x151 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+                                        0x204 (size before relaxing)
+ .debug_str     0x0000000000003f52       0xcb /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+                                        0x1de (size before relaxing)
+ .debug_str     0x000000000000401d       0x9f /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+                                        0x1b9 (size before relaxing)
+
+.comment        0x0000000000000000       0xac
+ .comment       0x0000000000000000       0x33 /tmp/ccyNCxd7.o
+                                         0x34 (size before relaxing)
+ .comment       0x0000000000000033       0x34 /tmp/cc96RRYB.o
+ .comment       0x0000000000000033       0x34 /tmp/ccxWLUOv.o
+ .comment       0x0000000000000033       0x34 /tmp/ccKbxY6C.o
+ .comment       0x0000000000000033       0x34 /tmp/ccXPUOuA.o
+ .comment       0x0000000000000033       0x79 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+                                         0x7a (size before relaxing)
+ .comment       0x00000000000000ac       0x7a /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .comment       0x00000000000000ac       0x7a /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+
+.ARM.attributes
+                0x0000000000000000       0x2c
+ .ARM.attributes
+                0x0000000000000000       0x2c /tmp/ccyNCxd7.o
+ .ARM.attributes
+                0x000000000000002c       0x2c /tmp/cc96RRYB.o
+ .ARM.attributes
+                0x0000000000000058       0x2c /tmp/ccxWLUOv.o
+ .ARM.attributes
+                0x0000000000000084       0x2c /tmp/ccKbxY6C.o
+ .ARM.attributes
+                0x00000000000000b0       0x2c /tmp/ccXPUOuA.o
+ .ARM.attributes
+                0x00000000000000dc       0x2b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+ .ARM.attributes
+                0x0000000000000107       0x2b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .ARM.attributes
+                0x0000000000000132       0x2b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .ARM.attributes
+                0x000000000000015d       0x1e /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x000000000000017b       0x1e /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x0000000000000199       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .ARM.attributes
+                0x00000000000001c5       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .ARM.attributes
+                0x00000000000001f1       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+
+.debug_frame    0x0000000000000000      0x550
+ .debug_frame   0x0000000000000000       0x44 /tmp/ccyNCxd7.o
+ .debug_frame   0x0000000000000044       0x40 /tmp/cc96RRYB.o
+ .debug_frame   0x0000000000000084      0x134 /tmp/ccxWLUOv.o
+ .debug_frame   0x00000000000001b8       0x98 /tmp/ccKbxY6C.o
+ .debug_frame   0x0000000000000250       0x48 /tmp/ccXPUOuA.o
+ .debug_frame   0x0000000000000298       0x44 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_adc12.o)
+ .debug_frame   0x00000000000002dc       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .debug_frame   0x00000000000002fc      0x1a4 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_frame   0x00000000000004a0       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_frame   0x00000000000004c0       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .debug_frame   0x00000000000004ec       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x0000000000000520       0x30 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
