@@ -1,0 +1,27 @@
+# ESP-IDF and CMake build output
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/compile_commands.json
+/build.ninja
+/.ninja_deps
+/.ninja_log
+
+# ESP-IDF files generated from sdkconfig.defaults and component manifests
+/sdkconfig
+/sdkconfig.old
+/managed_components/
+
+# Python viewer local files
+__pycache__/
+*.py[cod]
+/.venv/
+/venv/
+
+# Editor and operating-system files
+/.vscode/
+/.idea/
+.DS_Store
+Thumbs.db
+

@@ -1,0 +1,29 @@
+# Main firmware and host-test output
+/build/
+/firmware.elf
+/firmware.hex
+/firmware.map
+/firmware.bin
+*.o
+*.d
+
+# Main SysConfig output; regenerate with `make sysconfig`
+/00_generated/
+
+# Standalone example output
+/Examples/*/firmware.elf
+/Examples/*/firmware.hex
+/Examples/*/firmware.map
+/Examples/*/firmware.bin
+/Examples/*/ti_generated/
+
+# SysConfig temporary files
+.sysconfig_tmp/
+.sysconfig_backup/
+
+# Editor and operating-system files
+/.vscode/
+/.idea/
+.DS_Store
+Thumbs.db
+
