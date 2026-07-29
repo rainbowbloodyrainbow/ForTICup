@@ -114,3 +114,21 @@
 - 已建立公共 `modules/mpu6050/mpu6050.c/.h`：提供非阻塞初始化、状态查询、14字节异步读取、六轴原始数据解析、I²C中断处理和当前 ±250 dps 量程换算。第一版内部只保存一套状态，支持一个 MPU6050 独占一路 I²C控制器。
 - `Examples/05_mpu6050` 已改为直接引用公共 `mpu6050` 与 `hc05` 模块；10 ms调度、200次Z轴零偏校准、角度积分、漏采样统计和 `z/r/p` 命令仍属于应用层。工程通过 SysConfig、普通及 `-Wall -Wextra -Werror` 构建，用户烧录确认初始化、连续采样、校准、积分、输出和命令均正常。
 - `myownlib使用说明.md` 已补充 ADC、MPU6050 的接入方法、接口、状态机、SysConfig要求、示例、资源限制、常见问题和硬件验证结果。
+
+## 2026-07-28 21:00（Asia/Shanghai）
+
+- 电赛正式工程将改为一套根目录 `main.c`、Makefile 和 SysConfig；`Examples/` 保留作历史参考，但不参与正式工程构建。长期按 `00_generated`、`01_platform`、`02_device`、`03_algorithm`、`04_control`、`05_robot`、`06_motion`、`07_application` 理解依赖层次。
+- 正式目标板改为采用 MSPM0G3507 LQFP-64 的 80 针“天猛星”；此前 40 针“地猛星”示例中的 LQFP-48 配置不再作为正式工程封装。
+- TB6612 采用标准接法：PA12/TIMG0_C0 接 PWMA，PA13/TIMG0_C1 接 PWMB；PB10、PB11 接 AIN1、AIN2，PB12、PB13 接 BIN1、BIN2；PA7 接 STBY。TB6612 无 FAULT 引脚，原计划的 PA15 已释放。`motor` 只负责执行器输出，轮速闭环放在更高层 `wheel_control`。
+- 编码器暂定左 A/B 为 PB2/PB3、右 A/B 为 PB4/PB5；释放 TIMG6 后，左 A 可用 TIMG6_C0、右 A 可用 TIMA1_C0 做硬件边沿计数，B 相作方向输入。MSPM0G3507 只有一套适合 SysConfig QEI 的 TIMG8，编码器后端需保持可替换，最终解码和测速方式等待实测脉冲频率后确定。
+- 八路 ADC 依次为 PA27/ADC0_A0、PA26/A1、PA25/A2、PA24/A3、PB25/A4、PB24/A5、PB20/A6、PA22/A7；MPU6050 使用 I2C0 的 PA0/PA1；HC-05 使用 UART1 的 PA8/PA9。
+- 预留资源为：串口屏 UART2 的 PB15/PB16；NRF 的 PB17 MOSI、PB18 SCK、PB19 MISO、PB23 CSN、PB26 CE、PB27 IRQ；超声波 PA28 TRIG、PA31 ECHO；转向舵机 PA14/TIMG12_C0。
+- 底盘为双前轮联动转向的阿克曼结构，两只 310 电机驱动后轮；普通尺测得前轮外径约 48 mm、后轮外径约 68 mm、后轮宽约 27 mm、后轮轮距约 168 mm、前后轴距约 124 mm。这些尺寸不视为精确常量，必须作为可修改/可标定参数，后续以实际行驶距离和转角校准；舵机行程、编码器参数、电机死区、前馈和控制器增益同样不得写死。
+
+## 2026-07-29 09:00（Asia/Shanghai）
+
+- H 题当天的八路光电循迹链已按唯一根工程落地：八路 ADC 有限等待采样、毫秒时间、传感器标定与质心、舵机脉宽、PID、丢线判定、TB6612 电机、阿克曼开环底盘、HC-05 命令、应用安全状态和根 `main.c`/Makefile。
+- `motor.c/.h` 经审计后保留并复用；其 TB6612 刹车/滑行真值、STBY、安装反相、最大输出和非阻塞换向均有主机测试，不另建重复电机实现。
+- `hc05`、`mpu6050` 从 `01_platform` 移到 `02_device`；根 Makefile 不编译 `Examples/`。SysConfig 唯一生成目录为 `00_generated/`。
+- 上电保持左右电机制动和舵机中位；HC-05 命令为 `s` 开始、`x` 制动回中、`t` 输出一次八路原始值/归一化强度/位置/错误计数。实际运行前须在 `application_config.h` 实测修正八路黑白值、电机反相、舵机方向与安全脉宽。
+- 主机测试覆盖 `system_time`、`line_sensor`、`pid`、`line_control`、`motor`；SysConfig CLI、`-Wall -Wextra -Werror` 固件构建通过，固件占用为 text 14088 B、bss 504 B。

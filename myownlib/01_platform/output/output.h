@@ -42,4 +42,18 @@ void PwmOutput_Stop(GPTIMER_Regs *timer);
 void PwmOutput_SetDuty(
     GPTIMER_Regs *timer, DL_TIMER_CC_INDEX channel, uint16_t duty);
 
+/*
+ * 设置 PWM 一个完整周期内的有效高电平计数或微秒数。
+ * 返回 false 表示参数无效或请求脉宽超过当前 PWM 周期。
+ */
+bool PwmOutput_SetHighTicks(
+    GPTIMER_Regs *timer,
+    DL_TIMER_CC_INDEX channel,
+    uint32_t highTicks);
+bool PwmOutput_SetPulseUs(
+    GPTIMER_Regs *timer,
+    DL_TIMER_CC_INDEX channel,
+    uint32_t timerClockHz,
+    uint32_t pulseUs);
+
 #endif

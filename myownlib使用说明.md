@@ -2,6 +2,24 @@
 
 `myownlib` 是基于 TI MSPM0 DriverLib 编写的个人应用库，用来把常用的底层外设操作封装成直观、可复用的接口。
 
+> 正式竞赛工程已经改为根目录唯一的 `main.c`、`Makefile`、`all.syscfg`
+> 和 `00_generated/`。`Examples/` 只保留硬件学习记录，不参与根工程构建。
+> 当前正式依赖链为：
+>
+> ```text
+> 01_platform/adc + output + system_time
+> → 02_device/line_sensor + motor + servo + hc05
+> → 03_algorithm/pid
+> → 04_control/line_control
+> → 05_robot/chassis
+> → 07_application/application
+> ```
+>
+> 八路循迹、电机、舵机及 PID 的上车可调参数集中在
+> `myownlib/07_application/application/application_config.h`。本文后面的
+> Example 接入内容记录的是重构前的学习工程路径，正式工程以根 Makefile
+> 为准。
+
 ## 项目概览
 
 ### 适用环境
