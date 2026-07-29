@@ -15,6 +15,7 @@
  */
 
 #include "ti_msp_dl_config.h"
+#include "driver/oled.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -132,6 +133,8 @@ static int32_t g_left_last_count;
 static int32_t g_right_last_count;
 static uint32_t g_speed_last_ms;
 static volatile uint32_t g_millis;
+static uint32_t g_run_started_ms;
+static uint32_t g_run_elapsed_ms;
 
 void SysTick_Handler(void)
 {
@@ -211,6 +214,57 @@ static void uart_i32(int32_t value)
     } else {
         uart_u32((uint32_t)value);
     }
+}
+
+static void timer_format(char text[13], uint32_t elapsed_ms)
+{
+    uint32_t tenths = elapsed_ms / 100U;
+    uint32_t minutes = (tenths / 600U) % 100U;
+    uint32_t seconds = (tenths / 10U) % 60U;
+
+    text[0] = 'T';
+    text[1] = 'I';
+    text[2] = 'M';
+    text[3] = 'E';
+    text[4] = ' ';
+    text[5] = (char)('0' + minutes / 10U);
+    text[6] = (char)('0' + minutes % 10U);
+    text[7] = ':';
+    text[8] = (char)('0' + seconds / 10U);
+    text[9] = (char)('0' + seconds % 10U);
+    text[10] = '.';
+    text[11] = (char)('0' + tenths % 10U);
+    text[12] = '\0';
+}
+
+static void timer_display_init(void)
+{
+    char timer_text[13];
+
+    timer_format(timer_text, 0U);
+    oled_init();
+    oled_clear();
+    oled_string(0U, 0U, "H BALL-BEAM CAR");
+    oled_string(0U, 2U, "READY");
+    oled_string(0U, 4U, timer_text);
+    oled_string(0U, 6U, "B21 RUN / STOP");
+    oled_update();
+}
+
+static void timer_display_state(const char *state)
+{
+    oled_string(0U, 2U, "                ");
+    oled_string(0U, 2U, state);
+    oled_update_page(2U);
+}
+
+static void timer_display_time(uint32_t elapsed_ms)
+{
+    char timer_text[13];
+
+    timer_format(timer_text, elapsed_ms);
+    oled_string(0U, 4U, timer_text);
+    oled_update_page(4U);
 }
 
 static uint8_t encoder_read_left(void)
@@ -796,6 +850,7 @@ int main(void)
     DL_GPIO_initDigitalInputFeatures(
         CAL_KEY_PINCM, DL_GPIO_INVERSION_DISABLE, DL_GPIO_RESISTOR_PULL_UP,
         DL_GPIO_HYSTERESIS_ENABLE, DL_GPIO_WAKEUP_DISABLE);
+    timer_display_init();
 
 #if SPEED_PI_STEP_TEST_MODE
     speed_pi_step_test_loop();
@@ -812,6 +867,7 @@ int main(void)
     encoder_reset_speed_window();
 
     while (1) {
+        static uint32_t display_last_ms = 0U;
         static int32_t tracked_position = 0;
         static int32_t previous_position = 0;
         static int32_t last_search_direction = 0;
@@ -865,6 +921,7 @@ int main(void)
         right_target = DRIVE_BASE_SPEED_TICKS - correction;
         g_line_searching = false;
         if (g_drive_running) {
+            g_run_elapsed_ms = g_millis - g_run_started_ms;
             if (found || (lost_cycles <= LINE_LOST_HOLD_CYCLES)) {
                 motors_set_target_speeds(left_target, right_target);
             } else if ((lost_cycles <= LINE_SEARCH_TIMEOUT_CYCLES) &&
@@ -891,17 +948,29 @@ int main(void)
             report(found, position, strength);
         }
 
+        if ((g_millis - display_last_ms) >= 100U) {
+            display_last_ms = g_millis;
+            timer_display_time(g_run_elapsed_ms);
+        }
+
         if (key_pressed()) {
             delay_ms(30U);
             if (key_pressed()) {
                 g_drive_running = !g_drive_running;
                 if (!g_drive_running) {
+                    g_run_elapsed_ms = g_millis - g_run_started_ms;
                     g_line_searching = false;
                     motors_stop();
+                    timer_display_state("STOPPED");
+                    timer_display_time(g_run_elapsed_ms);
                     uart_puts("DRIVE STOP\r\n");
                 } else {
+                    g_run_started_ms = g_millis;
+                    g_run_elapsed_ms = 0U;
                     previous_position = tracked_position;
                     encoder_reset_speed_window();
+                    timer_display_state("RUNNING");
+                    timer_display_time(0U);
                     uart_puts("DRIVE RUN\r\n");
                 }
                 while (key_pressed()) {
