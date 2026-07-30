@@ -1,11 +1,488 @@
 下面这份可以直接保存为仓库根目录的 `GPT_LOG.md`。它不是开发流水账，而是**项目上下文、已定决策和后续协作规则的交接文档**，新对话先读取它即可继续。
 
+
+
+````markdown
+# GPT_LOG 最新状态覆盖
+
+> 更新时间：2026-07-30
+>
+> 本节优先级高于本文件中更早的硬件、底盘和巡迹方案。
+> 旧日志中涉及“八路灰度传感器”“阿克曼前轮舵机巡迹”
+> “ADC0 八通道序列”的内容已经失效。
+
+---
+
+## 1. 唯一有效工作区
+
+当前 GitHub 仓库存在多条并行开发线。
+
+GPT、Codex 处理本方案时只允许读取和修改：
+
+```text
+ClBrIsWorks/
+```
+
+其他目录：
+
+```text
+TianMengXing_74HC4067/
+VisionTransmit/
+```
+
+约束：
+
+* `TianMengXing_74HC4067` 是队友独立开发的巡迹版本；
+* `VisionTransmit` 是独立图传项目；
+* 两者都不得作为 `ClBrIsWorks` 的代码依赖；
+* 不从两者复制接口、SysConfig 或应用逻辑；
+* 后续提到“当前代码”“正式工程”“现有接口”，默认均指
+  `ClBrIsWorks/`；
+* Codex 只在 `ClBrIsWorks/` 内实施修改。
+
+---
+
+## 2. 传感器规则变化
+
+队伍当前按照老师对题目规则的解释执行：
+
+```text
+允许红外传感器
+不采用灰度传感器
+```
+
+现有红外巡迹模块具有：
+
+```text
+5 路模拟输出
+```
+
+因此废弃原来的八路传感器方案。
+
+巡迹仍然使用模拟量，不退化成五路数字开关：
+
+```text
+ADC 原始值
+→ 每路独立黑白标定
+→ 归一化到 0～1000
+→ 五路加权质心
+→ 连续线位置
+```
+
+---
+
+## 3. 五路红外最终引脚
+
+按传感器物理位置从左到右：
+
+```text
+最左 L2：PA15 / ADC1_A0
+左侧 L1：PA17 / ADC1_A2
+中央 C ：PA18 / ADC1_A3
+右侧 R1：PB18 / ADC1_A5
+最右 R2：PA21 / ADC1_A7
+```
+
+全部使用：
+
+```text
+ADC1 单实例五通道序列
+```
+
+ADC 序列结果顺序：
+
+```c
+raw[0] = PA15;  /* 最左 */
+raw[1] = PA17;
+raw[2] = PA18;  /* 中央 */
+raw[3] = PB18;
+raw[4] = PA21;  /* 最右 */
+```
+
+第一版配置：
+
+```c
+channelMap = {0U, 1U, 2U, 3U, 4U};
+
+positionWeight = {
+    -2000,
+    -1000,
+        0,
+     1000,
+     2000
+};
+```
+
+SysConfig ADC1 序列：
+
+```text
+MEM0：ADC1_A0 / PA15
+MEM1：ADC1_A2 / PA17
+MEM2：ADC1_A3 / PA18
+MEM3：ADC1_A5 / PB18
+MEM4：ADC1_A7 / PA21
+```
+
+约束：
+
+* 不再实现 ADC0 与 ADC1 双序列合并；
+* 保留旧 `ADC_ReadSequence8()`，不破坏历史接口；
+* 新增或泛化五路序列读取接口；
+* `LINE_SENSOR_COUNT` 改为 5；
+* 黑白标定值和总强度阈值必须重新实测；
+* 红外模拟输出进入 MSPM0 前必须确认不超过 3.3V。
+
+---
+
+## 4. 底盘结构变化
+
+废弃当前巡迹运行链中的阿克曼转向。
+
+机械结构改为：
+
+```text
+左后轮：独立直流电机
+右后轮：独立直流电机
+前部：万向轮
+转向：左右轮差速
+```
+
+原阿克曼前轮和转向舵机从底盘拆除。
+
+`servo` 模块源码继续保留，但不再参与巡迹底盘运行链。
+它以后可能用于摆杆、小球水管机构或其他执行器。
+
+---
+
+## 5. 差速底盘控制约定
+
+巡迹控制器输出不再叫舵机转向量，而应表示：
+
+```text
+turnOutput
+```
+
+正方向约定：
+
+```text
+turnOutput > 0：左转
+turnOutput < 0：右转
+```
+
+差速混合：
+
+```c
+leftOutput  = driveOutput - turnOutput;
+rightOutput = driveOutput + turnOutput;
+```
+
+第一阶段禁止自动反转：
+
+```text
+左右输出最低限制为 0
+```
+
+即转弯时允许：
+
+```text
+一侧正常前进
+另一侧减速或停止
+```
+
+暂不允许 PID 直接使一侧轮子反转。
+
+基础巡迹稳定后，才考虑开放小范围反转以通过急弯。
+
+---
+
+## 6. 需要修改的模块
+
+必须修改：
+
+```text
+ClBrIsWorks/all.syscfg
+
+ClBrIsWorks/myownlib/01_platform/adc/
+ClBrIsWorks/myownlib/02_device/line_sensor/
+ClBrIsWorks/myownlib/04_control/line_control/
+ClBrIsWorks/myownlib/05_robot/chassis/
+ClBrIsWorks/myownlib/07_application/application/
+ClBrIsWorks/myownlib/07_application/application/application_config.*
+
+对应 host tests
+```
+
+基本不修改：
+
+```text
+motor
+pid
+system_time
+HC-05 / UART
+MPU6050
+```
+
+退出当前巡迹运行链但保留：
+
+```text
+servo
+阿克曼转向相关配置
+```
+
+---
+
+## 7. 差速 Chassis 推荐接口
+
+推荐新增：
+
+```c
+void Chassis_SetWheelOutputs(
+    Chassis *chassis,
+    int16_t leftOutput,
+    int16_t rightOutput,
+    uint32_t nowMs);
+
+void Chassis_SetDriveTurn(
+    Chassis *chassis,
+    int16_t driveOutput,
+    int16_t turnOutput,
+    uint32_t nowMs);
+```
+
+保留：
+
+```c
+void Chassis_Brake(
+    Chassis *chassis,
+    uint32_t nowMs);
+
+void Chassis_Coast(
+    Chassis *chassis,
+    uint32_t nowMs);
+
+void Chassis_Process(
+    Chassis *chassis,
+    uint32_t nowMs);
+```
+
+`Chassis_Process()` 仍须在每次主循环执行，以推进电机非阻塞换向状态。
+
+---
+
+## 8. 五路 LineSensor 约束
+
+`line_sensor` 仍保持纯数据模块：
+
+```c
+bool LineSensor_ProcessRaw(
+    LineSensor *sensor,
+    const uint16_t adcRaw[5]);
+```
+
+不允许：
+
+* 直接读取 ADC；
+* 绑定 SysConfig 实例；
+* 保存 ADC 错误次数；
+* 操作电机。
+
+无效帧仍须：
+
+```text
+valid = false
+position 保留上一帧有效位置
+```
+
+总强度阈值不能从八路版本按比例猜测，必须根据五路模块重新标定。
+
+---
+
+## 9. 巡迹运行链
+
+最新控制链：
+
+```text
+ADC1 五通道序列
+→ 五路红外独立标定
+→ 加权质心线位置
+→ P / PD 控制
+→ turnOutput
+→ 差速混合
+→ 左右 Motor_SetOutput()
+```
+
+故障链：
+
+```text
+ADC 错误
+或连续丢线
+→ 左右电机短路制动
+→ 进入错误状态
+```
+
+不再执行舵机回中。
+
+---
+
+## 10. 扩展板关键映射
+
+电机 PWM 保持：
+
+```text
+左 PWMA：PA12 / TIMG0_C0
+右 PWMB：PA13 / TIMG0_C1
+```
+
+扩展板 TB6612 方向信号：
+
+```text
+AIN1：PB17
+AIN2：PB19
+BIN1：PA16
+BIN2：PB24
+```
+
+TB6612 STBY 在扩展板上固定使能，因此：
+
+```text
+Chassis_Config.standby 允许为 NULL
+```
+
+不能继续把 PA7 当作 STBY，PA7 在扩展板上连接蜂鸣器。
+
+HC-05：
+
+```text
+UART1_TX：PB6
+UART1_RX：PB7
+```
+
+MPU6050：
+
+```text
+I2C0_SDA：PA0
+I2C0_SCL：PA1
+```
+
+未来编码器接口预计：
+
+```text
+左编码器：PA26、PA27
+右编码器：PA25、PA14
+```
+
+编码器正式启用前必须重新核对 GPIOA 中断、A/B 顺序和电平。
+
+---
+
+## 11. 下一阶段优先级
+
+五路开环巡迹跑通后：
+
+```text
+编码器 x4 解码
+→ PPS
+→ 输出轴每圈计数标定
+→ 左右轮速度 PI
+→ 差速目标轮速
+→ 巡迹控制输出目标速度差
+```
+
+差速底盘中，左右轮速度本身决定转向，因此编码器闭环的优先级高于原阿克曼方案。
+
+---
+
+## 12. 小球水管执行器预案
+
+主控仍为：
+
+```text
+MSPM0G3507 / 天猛星
+```
+
+推荐架构：
+
+```text
+天猛星：
+    巡迹
+    任务状态机
+    水管外环位置控制
+    发送目标位置/速度
+
+外部闭环电机驱动器：
+    电流环
+    速度环
+    编码器闭环
+    功率驱动
+```
+
+优先使用具有内部闭环的：
+
+```text
+闭环步进驱动器
+或
+集成 FOC 的无刷伺服驱动器
+```
+
+天猛星只发送：
+
+```text
+STEP/DIR
+UART
+CAN
+或目标 PWM
+```
+
+不建议在比赛期间把三相逆变、电流采样和完整 FOC 内环直接并入巡迹主固件。
+
+最终接口和引脚必须等电机及驱动器型号确定后再锁定，不允许提前猜测。
+
+````
+
+
+
 ````markdown
 # GPT 项目上下文日志
 
-> 最后更新：2026-07-29  
+## 2026-07-30 当前决策覆盖
+
+本节覆盖下方 2026-07-29 的阿克曼八路巡迹规划；下方内容保留为历史背景。
+
+当前机械与巡迹链已经改为：
+
+```text
+五路模拟红外传感器
+→ ADC1 单实例 MEM0～MEM4 序列
+→ 五路归一化和加权质心
+→ line_control 输出 turn
+→ 左右后轮差速混合
+→ 前部万向轮
+```
+
+五路物理顺序和引脚固定为：
+
+```text
+L2  PA15 / ADC1_A0 / MEM0
+L1  PA17 / ADC1_A2 / MEM1
+C   PA18 / ADC1_A3 / MEM2
+R1  PB18 / ADC1_A5 / MEM3
+R2  PA21 / ADC1_A7 / MEM4
+```
+
+`PB14/TIMG12` 和 `servo` 模块保留给摆杆或其他 PWM 执行器，但不进入
+巡迹底盘运行链；PA22 也不用于巡迹。当前差速混合禁止车轮反转：
+
+```text
+left  = clamp(drive - turn, 0, maximumDriveOutput)
+right = clamp(drive + turn, 0, maximumDriveOutput)
+```
+
+红外模拟输出接入前必须确认不超过 3.3 V。扩展板接口旁存在 +5 V
+不能作为模拟信号对 MSPM0 ADC 安全的依据。
+
+> 最后更新：2026-07-30  
 > 项目：全国大学生电子设计竞赛 H 题  
-> 当前目标：阿克曼小车，先完成八路模拟光电巡迹，后续加入摆杆控制  
+> 当前目标：两轮差速小车，先完成五路模拟红外巡迹，后续加入摆杆控制  
 > 仓库：`rainbowbloodyrainbow/ForTICup`
 
 ---

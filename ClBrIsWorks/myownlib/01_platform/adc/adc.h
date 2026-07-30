@@ -5,6 +5,7 @@
 
 #include <ti/driverlib/dl_adc12.h>
 
+#define ADC_SEQUENCE5_COUNT (5U)
 #define ADC_SEQUENCE8_COUNT (8U)
 
 typedef enum {
@@ -36,5 +37,13 @@ uint32_t ADC_RawToMillivolts(
 ADC_Status ADC_ReadSequence8(
     ADC12_Regs *adc,
     uint16_t result[ADC_SEQUENCE8_COUNT]);
+
+/*
+ * 软件触发一次 ADCMEM0～ADCMEM4 序列转换。result[0]～result[4]
+ * 依次对应 SysConfig 中 MEM0～MEM4 的物理通道。
+ */
+ADC_Status ADC_ReadSequence5(
+    ADC12_Regs *adc,
+    uint16_t result[ADC_SEQUENCE5_COUNT]);
 
 #endif

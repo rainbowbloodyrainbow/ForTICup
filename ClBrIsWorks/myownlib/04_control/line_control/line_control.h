@@ -15,17 +15,17 @@ typedef enum {
 } LineControl_Status;
 
 typedef struct {
-    PID_Config steeringPid;
+    PID_Config turnPid;
     float positionFullScale;
-    int16_t maximumSteeringCommand;
-    bool steeringInverted;
+    int16_t maximumTurnCommand;
+    bool turnInverted;
     uint8_t maximumInvalidFrames;
 } LineControl_Config;
 
 typedef struct {
     LineControl_Config config;
-    PID steeringPid;
-    int16_t steeringCommand;
+    PID turnPid;
+    int16_t turnCommand;
     uint8_t consecutiveInvalidFrames;
     LineControl_Status status;
     bool initialized;
@@ -39,7 +39,7 @@ LineControl_Status LineControl_Update(
     LineControl *control,
     const LineSensor_Result *line,
     float dtSeconds);
-int16_t LineControl_GetSteeringCommand(
+int16_t LineControl_GetTurnCommand(
     const LineControl *control);
 LineControl_Status LineControl_GetStatus(
     const LineControl *control);

@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define LINE_SENSOR_COUNT (8U)
+#define LINE_SENSOR_COUNT (5U)
 #define LINE_SENSOR_STRENGTH_MAX (1000U)
 
 typedef struct {

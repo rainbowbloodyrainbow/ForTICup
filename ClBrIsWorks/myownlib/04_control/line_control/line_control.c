@@ -9,16 +9,16 @@ static bool LineControl_IsConfigValid(
     return (config != NULL) &&
         isfinite(config->positionFullScale) &&
         (config->positionFullScale > 0.0f) &&
-        (config->maximumSteeringCommand > 0) &&
+        (config->maximumTurnCommand > 0) &&
         (config->maximumInvalidFrames > 0U);
 }
 
-static int16_t LineControl_ClampSteering(
+static int16_t LineControl_ClampTurn(
     const LineControl *control, int32_t command)
 {
     int32_t maximum;
 
-    maximum = control->config.maximumSteeringCommand;
+    maximum = control->config.maximumTurnCommand;
     if (command > maximum) {
         command = maximum;
     } else if (command < -maximum) {
@@ -28,7 +28,7 @@ static int16_t LineControl_ClampSteering(
     return (int16_t) command;
 }
 
-static int16_t LineControl_OutputToCommand(
+static int16_t LineControl_OutputToTurnCommand(
     const LineControl *control, float pidOutput)
 {
     float scaled;
@@ -36,18 +36,18 @@ static int16_t LineControl_OutputToCommand(
 
     scaled =
         pidOutput *
-        control->config.maximumSteeringCommand;
+        control->config.maximumTurnCommand;
     if (scaled >= 0.0f) {
         command = (int32_t) (scaled + 0.5f);
     } else {
         command = (int32_t) (scaled - 0.5f);
     }
 
-    if (control->config.steeringInverted) {
+    if (control->config.turnInverted) {
         command = -command;
     }
 
-    return LineControl_ClampSteering(control, command);
+    return LineControl_ClampTurn(control, command);
 }
 
 bool LineControl_Init(
@@ -61,8 +61,8 @@ bool LineControl_Init(
 
     control->config = *config;
     if (!PID_Init(
-            &control->steeringPid,
-            &config->steeringPid)) {
+            &control->turnPid,
+            &config->turnPid)) {
         return false;
     }
 
@@ -77,8 +77,8 @@ void LineControl_Reset(LineControl *control)
         return;
     }
 
-    PID_Reset(&control->steeringPid);
-    control->steeringCommand = 0;
+    PID_Reset(&control->turnPid);
+    control->turnCommand = 0;
     control->consecutiveInvalidFrames = 0U;
     control->status = LINE_CONTROL_TRACKING;
 }
@@ -111,7 +111,7 @@ LineControl_Status LineControl_Update(
 
         if (control->consecutiveInvalidFrames >=
             control->config.maximumInvalidFrames) {
-            control->steeringCommand = 0;
+            control->turnCommand = 0;
             control->status = LINE_CONTROL_LINE_LOST;
         } else {
             control->status = LINE_CONTROL_HOLDING;
@@ -125,21 +125,22 @@ LineControl_Status LineControl_Update(
         control->config.positionFullScale;
     error = -normalizedPosition;
     pidOutput = PID_UpdateError(
-        &control->steeringPid, error, dtSeconds);
-    control->steeringCommand =
-        LineControl_OutputToCommand(control, pidOutput);
+        &control->turnPid, error, dtSeconds);
+    control->turnCommand =
+        LineControl_OutputToTurnCommand(
+            control, pidOutput);
     control->status = LINE_CONTROL_TRACKING;
 
     return control->status;
 }
 
-int16_t LineControl_GetSteeringCommand(
+int16_t LineControl_GetTurnCommand(
     const LineControl *control)
 {
     if ((control == NULL) || !control->initialized) {
         return 0;
     }
-    return control->steeringCommand;
+    return control->turnCommand;
 }
 
 LineControl_Status LineControl_GetStatus(

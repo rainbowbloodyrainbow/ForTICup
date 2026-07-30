@@ -136,6 +136,15 @@ host-test:
 		myownlib/02_device/motor/motor.c \
 		-o $(HOST_BUILD_DIR)/test_motor
 	$(HOST_BUILD_DIR)/test_motor
+	$(HOST_CC) -std=c11 -Wall -Wextra -Werror -pedantic \
+		-Itests/host/chassis/fakes \
+		-Imyownlib/02_device/motor \
+		-Imyownlib/05_robot/chassis \
+		tests/host/chassis/test_chassis.c \
+		myownlib/02_device/motor/motor.c \
+		myownlib/05_robot/chassis/chassis.c \
+		-o $(HOST_BUILD_DIR)/test_chassis
+	$(HOST_BUILD_DIR)/test_chassis
 
 clean:
 	rm -rf $(GEN_DIR) $(BUILD_DIR)

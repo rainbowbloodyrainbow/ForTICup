@@ -8,14 +8,16 @@
 >
 > ```text
 > 01_platform/adc + output + system_time
-> → 02_device/line_sensor + motor + servo + hc05
+> → 02_device/line_sensor + motor + hc05
 > → 03_algorithm/pid
 > → 04_control/line_control
 > → 05_robot/chassis
 > → 07_application/application
 > ```
 >
-> 八路循迹、电机、舵机及 PID 的上车可调参数集中在
+> 当前巡迹使用 ADC1 单实例五通道模拟红外阵列和两后轮差速转向。
+> `servo` 源码与 PB14/TIMG12 配置保留，但不进入巡迹运行链。五路标定、
+> 电机、差速输出及 PID 的上车可调参数集中在
 > `myownlib/07_application/application/application_config.h`。本文后面的
 > Example 接入内容记录的是重构前的学习工程路径，正式工程以根 Makefile
 > 为准。

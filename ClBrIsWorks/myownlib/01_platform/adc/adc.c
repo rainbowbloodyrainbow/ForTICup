@@ -3,13 +3,13 @@
 #include <stddef.h>
 
 #define ADC_12_BIT_MAX_VALUE (4095U)
-#define ADC_SEQUENCE8_TIMEOUT_ITERATIONS (100000U)
+#define ADC_SEQUENCE_TIMEOUT_ITERATIONS (100000U)
 
-static void ADC_ClearSequenceStatus(ADC12_Regs *adc)
+static void ADC_ClearSequenceStatus(
+    ADC12_Regs *adc, uint32_t completionInterrupt)
 {
     DL_ADC12_clearInterruptStatus(
-        adc,
-        DL_ADC12_INTERRUPT_MEM7_RESULT_LOADED);
+        adc, completionInterrupt);
 }
 
 static void ADC_StartSequence(ADC12_Regs *adc)
@@ -17,23 +17,62 @@ static void ADC_StartSequence(ADC12_Regs *adc)
     DL_ADC12_startConversion(adc);
 }
 
-static bool ADC_IsSequenceComplete(ADC12_Regs *adc)
+static bool ADC_IsSequenceComplete(
+    ADC12_Regs *adc, uint32_t completionInterrupt)
 {
     return DL_ADC12_getRawInterruptStatus(
-               adc,
-               DL_ADC12_INTERRUPT_MEM7_RESULT_LOADED) != 0U;
+               adc, completionInterrupt) != 0U;
 }
 
-static void ADC_ReadSequence8Results(
+static void ADC_ReadSequenceResults(
     ADC12_Regs *adc,
-    uint16_t result[ADC_SEQUENCE8_COUNT])
+    uint16_t *result,
+    uint32_t resultCount)
 {
     uint32_t index;
 
-    for (index = 0U; index < ADC_SEQUENCE8_COUNT; index++) {
+    for (index = 0U; index < resultCount; index++) {
         result[index] = DL_ADC12_getMemResult(
             adc, (DL_ADC12_MEM_IDX) index);
     }
+}
+
+static ADC_Status ADC_ReadSequence(
+    ADC12_Regs *adc,
+    uint16_t *result,
+    uint32_t resultCount,
+    uint32_t completionInterrupt)
+{
+    uint32_t remaining;
+
+    if ((adc == NULL) ||
+        (result == NULL) ||
+        (resultCount == 0U)) {
+        return ADC_STATUS_INVALID_ARGUMENT;
+    }
+
+    ADC_ClearSequenceStatus(adc, completionInterrupt);
+    ADC_StartSequence(adc);
+
+    remaining = ADC_SEQUENCE_TIMEOUT_ITERATIONS;
+    while (!ADC_IsSequenceComplete(
+        adc, completionInterrupt)) {
+        if (remaining == 0U) {
+            DL_ADC12_stopConversion(adc);
+            DL_ADC12_enableConversions(adc);
+            return ADC_STATUS_TIMEOUT;
+        }
+        remaining--;
+    }
+
+    ADC_ReadSequenceResults(adc, result, resultCount);
+    ADC_ClearSequenceStatus(adc, completionInterrupt);
+
+    /*
+     * 非重复序列结束后重新使能 ENC，允许下一次软件触发。
+     */
+    DL_ADC12_enableConversions(adc);
+    return ADC_STATUS_OK;
 }
 
 uint16_t ADC_ReadRaw(ADC12_Regs *adc)
@@ -71,33 +110,20 @@ ADC_Status ADC_ReadSequence8(
     ADC12_Regs *adc,
     uint16_t result[ADC_SEQUENCE8_COUNT])
 {
-    uint32_t remaining;
+    return ADC_ReadSequence(
+        adc,
+        result,
+        ADC_SEQUENCE8_COUNT,
+        DL_ADC12_INTERRUPT_MEM7_RESULT_LOADED);
+}
 
-    if ((adc == NULL) || (result == NULL)) {
-        return ADC_STATUS_INVALID_ARGUMENT;
-    }
-
-    ADC_ClearSequenceStatus(adc);
-    ADC_StartSequence(adc);
-
-    remaining = ADC_SEQUENCE8_TIMEOUT_ITERATIONS;
-    while (!ADC_IsSequenceComplete(adc)) {
-        if (remaining == 0U) {
-            DL_ADC12_stopConversion(adc);
-            DL_ADC12_enableConversions(adc);
-            return ADC_STATUS_TIMEOUT;
-        }
-        remaining--;
-    }
-
-    ADC_ReadSequence8Results(adc, result);
-    ADC_ClearSequenceStatus(adc);
-
-    /*
-     * 非重复序列完成后 ENC 会被硬件清除。TI 的序列转换示例同样在每次
-     * 读取后重新使能，以便下一次软件触发。
-     */
-    DL_ADC12_enableConversions(adc);
-
-    return ADC_STATUS_OK;
+ADC_Status ADC_ReadSequence5(
+    ADC12_Regs *adc,
+    uint16_t result[ADC_SEQUENCE5_COUNT])
+{
+    return ADC_ReadSequence(
+        adc,
+        result,
+        ADC_SEQUENCE5_COUNT,
+        DL_ADC12_INTERRUPT_MEM4_RESULT_LOADED);
 }

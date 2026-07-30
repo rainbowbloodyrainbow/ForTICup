@@ -9,57 +9,81 @@ static bool Chassis_IsConfigValid(
         (config->leftMotor == NULL) ||
         (config->rightMotor == NULL) ||
         (config->leftMotor == config->rightMotor) ||
-        (config->standby == NULL) ||
-        (config->steeringServo == NULL)) {
+        (config->standby == NULL)) {
         return false;
     }
 
     return Motor_IsInitialized(config->leftMotor) &&
         Motor_IsInitialized(config->rightMotor) &&
         config->standby->initialized &&
-        config->steeringServo->initialized &&
         (config->maximumDriveOutput <= MOTOR_OUTPUT_MAX) &&
-        (config->maximumSteeringCommand <=
-            SERVO_COMMAND_MAX) &&
+        (config->maximumTurnOutput <=
+            config->maximumDriveOutput) &&
         (config->leftOpenLoopScalePermille <= 1000U) &&
         (config->rightOpenLoopScalePermille <= 1000U);
 }
 
-static int16_t Chassis_ClampDrive(
+static int16_t Chassis_ClampForwardOutput(
     const Chassis *chassis, int32_t output)
 {
     int32_t maximum = chassis->config.maximumDriveOutput;
 
-    if (output > maximum) {
+    if (output < 0) {
+        output = 0;
+    } else if (output > maximum) {
         output = maximum;
-    } else if (output < -maximum) {
-        output = -maximum;
     }
     return (int16_t) output;
 }
 
-static int16_t Chassis_ClampSteering(
-    const Chassis *chassis, int32_t command)
+static int16_t Chassis_ClampTurn(
+    const Chassis *chassis, int32_t output)
 {
-    int32_t maximum =
-        chassis->config.maximumSteeringCommand;
+    int32_t maximum = chassis->config.maximumTurnOutput;
 
-    if (command > maximum) {
-        command = maximum;
-    } else if (command < -maximum) {
-        command = -maximum;
+    if (output < -maximum) {
+        output = -maximum;
+    } else if (output > maximum) {
+        output = maximum;
     }
-    return (int16_t) command;
+    return (int16_t) output;
 }
 
 static int16_t Chassis_ApplyOpenLoopScale(
     int16_t output, uint16_t scalePermille)
 {
-    int32_t scaled;
+    return (int16_t)
+        (((int32_t) output * scalePermille) / 1000);
+}
 
-    scaled =
-        ((int32_t) output * scalePermille) / 1000;
-    return (int16_t) scaled;
+static void Chassis_ApplyWheelOutputs(
+    Chassis *chassis,
+    int32_t leftOutput,
+    int32_t rightOutput,
+    uint32_t nowMs)
+{
+    int16_t limitedLeft;
+    int16_t limitedRight;
+    int16_t scaledLeft;
+    int16_t scaledRight;
+
+    limitedLeft =
+        Chassis_ClampForwardOutput(chassis, leftOutput);
+    limitedRight =
+        Chassis_ClampForwardOutput(chassis, rightOutput);
+    scaledLeft = Chassis_ApplyOpenLoopScale(
+        limitedLeft,
+        chassis->config.leftOpenLoopScalePermille);
+    scaledRight = Chassis_ApplyOpenLoopScale(
+        limitedRight,
+        chassis->config.rightOpenLoopScalePermille);
+
+    Motor_SetOutput(
+        chassis->config.leftMotor, scaledLeft, nowMs);
+    Motor_SetOutput(
+        chassis->config.rightMotor, scaledRight, nowMs);
+    chassis->leftOutput = scaledLeft;
+    chassis->rightOutput = scaledRight;
 }
 
 bool Chassis_Init(
@@ -72,7 +96,9 @@ bool Chassis_Init(
 
     chassis->config = *config;
     chassis->driveOutput = 0;
-    chassis->steeringCommand = 0;
+    chassis->turnOutput = 0;
+    chassis->leftOutput = 0;
+    chassis->rightOutput = 0;
     chassis->enabled = false;
     chassis->initialized = true;
     return true;
@@ -88,10 +114,6 @@ bool Chassis_Enable(
 
     Motor_Brake(chassis->config.leftMotor, nowMs);
     Motor_Brake(chassis->config.rightMotor, nowMs);
-    if (!Servo_Center(chassis->config.steeringServo) ||
-        !Servo_Enable(chassis->config.steeringServo)) {
-        return false;
-    }
 
     PwmOutput_Start(
         chassis->config.leftMotor->config.pwmTimer);
@@ -103,7 +125,9 @@ bool Chassis_Enable(
 
     Motor_StandbyEnable(chassis->config.standby);
     chassis->driveOutput = 0;
-    chassis->steeringCommand = 0;
+    chassis->turnOutput = 0;
+    chassis->leftOutput = 0;
+    chassis->rightOutput = 0;
     chassis->enabled =
         Motor_StandbyIsEnabled(chassis->config.standby);
     return chassis->enabled;
@@ -118,7 +142,6 @@ void Chassis_Disable(
 
     Motor_Brake(chassis->config.leftMotor, nowMs);
     Motor_Brake(chassis->config.rightMotor, nowMs);
-    Chassis_CenterSteering(chassis);
     Motor_StandbyDisable(chassis->config.standby);
     PwmOutput_Stop(
         chassis->config.leftMotor->config.pwmTimer);
@@ -127,22 +150,21 @@ void Chassis_Disable(
         PwmOutput_Stop(
             chassis->config.rightMotor->config.pwmTimer);
     }
-    Servo_Disable(chassis->config.steeringServo);
     chassis->driveOutput = 0;
-    chassis->steeringCommand = 0;
+    chassis->turnOutput = 0;
+    chassis->leftOutput = 0;
+    chassis->rightOutput = 0;
     chassis->enabled = false;
 }
 
-void Chassis_SetOpenLoop(
+void Chassis_SetDriveTurn(
     Chassis *chassis,
     int16_t driveOutput,
-    int16_t steeringCommand,
+    int16_t turnOutput,
     uint32_t nowMs)
 {
     int16_t limitedDrive;
-    int16_t limitedSteering;
-    int16_t leftOutput;
-    int16_t rightOutput;
+    int16_t limitedTurn;
 
     if ((chassis == NULL) ||
         !chassis->initialized ||
@@ -151,25 +173,45 @@ void Chassis_SetOpenLoop(
     }
 
     limitedDrive =
-        Chassis_ClampDrive(chassis, driveOutput);
-    limitedSteering =
-        Chassis_ClampSteering(chassis, steeringCommand);
-    leftOutput = Chassis_ApplyOpenLoopScale(
-        limitedDrive,
-        chassis->config.leftOpenLoopScalePermille);
-    rightOutput = Chassis_ApplyOpenLoopScale(
-        limitedDrive,
-        chassis->config.rightOpenLoopScalePermille);
-
-    Motor_SetOutput(
-        chassis->config.leftMotor, leftOutput, nowMs);
-    Motor_SetOutput(
-        chassis->config.rightMotor, rightOutput, nowMs);
-    (void) Servo_SetNormalized(
-        chassis->config.steeringServo, limitedSteering);
-
+        Chassis_ClampForwardOutput(chassis, driveOutput);
+    limitedTurn =
+        Chassis_ClampTurn(chassis, turnOutput);
+    Chassis_ApplyWheelOutputs(
+        chassis,
+        (int32_t) limitedDrive - limitedTurn,
+        (int32_t) limitedDrive + limitedTurn,
+        nowMs);
     chassis->driveOutput = limitedDrive;
-    chassis->steeringCommand = limitedSteering;
+    chassis->turnOutput = limitedTurn;
+}
+
+void Chassis_SetWheelOutputs(
+    Chassis *chassis,
+    int16_t leftOutput,
+    int16_t rightOutput,
+    uint32_t nowMs)
+{
+    int16_t limitedLeft;
+    int16_t limitedRight;
+
+    if ((chassis == NULL) ||
+        !chassis->initialized ||
+        !chassis->enabled) {
+        return;
+    }
+
+    limitedLeft =
+        Chassis_ClampForwardOutput(chassis, leftOutput);
+    limitedRight =
+        Chassis_ClampForwardOutput(chassis, rightOutput);
+    Chassis_ApplyWheelOutputs(
+        chassis, limitedLeft, limitedRight, nowMs);
+    chassis->driveOutput =
+        (int16_t) (((int32_t) limitedLeft +
+            limitedRight) / 2);
+    chassis->turnOutput =
+        (int16_t) (((int32_t) limitedRight -
+            limitedLeft) / 2);
 }
 
 void Chassis_Brake(
@@ -182,6 +224,9 @@ void Chassis_Brake(
     Motor_Brake(chassis->config.leftMotor, nowMs);
     Motor_Brake(chassis->config.rightMotor, nowMs);
     chassis->driveOutput = 0;
+    chassis->turnOutput = 0;
+    chassis->leftOutput = 0;
+    chassis->rightOutput = 0;
 }
 
 void Chassis_Coast(
@@ -194,16 +239,9 @@ void Chassis_Coast(
     Motor_Coast(chassis->config.leftMotor, nowMs);
     Motor_Coast(chassis->config.rightMotor, nowMs);
     chassis->driveOutput = 0;
-}
-
-void Chassis_CenterSteering(Chassis *chassis)
-{
-    if ((chassis == NULL) || !chassis->initialized) {
-        return;
-    }
-
-    (void) Servo_Center(chassis->config.steeringServo);
-    chassis->steeringCommand = 0;
+    chassis->turnOutput = 0;
+    chassis->leftOutput = 0;
+    chassis->rightOutput = 0;
 }
 
 void Chassis_Process(

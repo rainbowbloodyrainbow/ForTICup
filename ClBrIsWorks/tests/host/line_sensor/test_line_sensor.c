@@ -7,8 +7,7 @@
 static LineSensor_Config MakeConfig(bool inversePolarity)
 {
     static const int16_t weights[LINE_SENSOR_COUNT] = {
-        -3500, -2500, -1500, -500,
-        500, 1500, 2500, 3500
+        -2000, -1000, 0, 1000, 2000
     };
     LineSensor_Config config;
     uint32_t index;
@@ -40,7 +39,7 @@ static void TestConfigurationValidation(void)
 {
     LineSensor_Config config = MakeConfig(false);
 
-    config.channelMap[7] = config.channelMap[6];
+    config.channelMap[4] = config.channelMap[3];
     assert(!LineSensor_IsConfigValid(&config));
 
     config = MakeConfig(false);
@@ -71,14 +70,14 @@ static void TestBothPolaritiesAndSaturation(void)
     config = MakeConfig(true);
     assert(LineSensor_Init(&sensor, &config));
     Fill(raw, 3000U);
-    raw[7] = 2000U;
+    raw[4] = 2000U;
     assert(LineSensor_ProcessRaw(&sensor, raw));
     result = LineSensor_GetResult(&sensor);
-    assert(result->strength[7] == 500U);
+    assert(result->strength[4] == 500U);
 
-    raw[7] = 0U;
+    raw[4] = 0U;
     assert(LineSensor_ProcessRaw(&sensor, raw));
-    assert(result->strength[7] ==
+    assert(result->strength[4] ==
         LINE_SENSOR_STRENGTH_MAX);
 }
 
@@ -92,8 +91,7 @@ static void TestPositionsAndInvalidRetention(void)
     assert(LineSensor_Init(&sensor, &config));
 
     Fill(raw, 1000U);
-    raw[3] = 3000U;
-    raw[4] = 3000U;
+    raw[2] = 3000U;
     assert(LineSensor_ProcessRaw(&sensor, raw));
     result = LineSensor_GetResult(&sensor);
     assert(result->valid);
@@ -103,17 +101,17 @@ static void TestPositionsAndInvalidRetention(void)
     raw[0] = 3000U;
     assert(LineSensor_ProcessRaw(&sensor, raw));
     assert(result->valid);
-    assert(result->position == -3500);
+    assert(result->position == -2000);
 
     Fill(raw, 1000U);
     assert(LineSensor_ProcessRaw(&sensor, raw));
     assert(!result->valid);
-    assert(result->position == -3500);
+    assert(result->position == -2000);
 
-    raw[7] = 3000U;
+    raw[4] = 3000U;
     assert(LineSensor_ProcessRaw(&sensor, raw));
     assert(result->valid);
-    assert(result->position == 3500);
+    assert(result->position == 2000);
 }
 
 static void TestChannelMapping(void)
@@ -125,15 +123,15 @@ static void TestChannelMapping(void)
     uint8_t temporary;
 
     temporary = config.channelMap[0];
-    config.channelMap[0] = config.channelMap[7];
-    config.channelMap[7] = temporary;
+    config.channelMap[0] = config.channelMap[4];
+    config.channelMap[4] = temporary;
     assert(LineSensor_Init(&sensor, &config));
 
     Fill(raw, 1000U);
-    raw[7] = 3000U;
+    raw[4] = 3000U;
     assert(LineSensor_ProcessRaw(&sensor, raw));
     result = LineSensor_GetResult(&sensor);
-    assert(result->position == -3500);
+    assert(result->position == -2000);
 }
 
 int main(void)

@@ -11,7 +11,6 @@
 #include "line_control.h"
 #include "line_sensor.h"
 #include "motor.h"
-#include "servo.h"
 #include "system_time.h"
 #include "ti_msp_dl_config.h"
 
@@ -28,7 +27,6 @@ static int16_t gDriveOutput;
 static Motor gLeftMotor;
 static Motor gRightMotor;
 static Motor_Standby gMotorStandby;
-static Servo gSteeringServo;
 static LineSensor gLineSensor;
 static LineControl gLineControl;
 static Chassis gChassis;
@@ -42,7 +40,6 @@ static void Application_EnterState(
 static void Application_ApplySafeState(uint32_t nowMs)
 {
     Chassis_Brake(&gChassis, nowMs);
-    Chassis_CenterSteering(&gChassis);
 }
 
 static void Application_HandleMissedControlCycles(
@@ -59,7 +56,7 @@ static void Application_HandleMissedControlCycles(
 static void Application_RunLineFollowing(uint32_t nowMs)
 {
     LineControl_Status status;
-    int16_t steering;
+    int16_t turn;
 
     status = LineControl_Update(
         &gLineControl,
@@ -77,19 +74,19 @@ static void Application_RunLineFollowing(uint32_t nowMs)
         return;
     }
 
-    steering =
-        LineControl_GetSteeringCommand(&gLineControl);
-    Chassis_SetOpenLoop(
-        &gChassis, gDriveOutput, steering, nowMs);
+    turn =
+        LineControl_GetTurnCommand(&gLineControl);
+    Chassis_SetDriveTurn(
+        &gChassis, gDriveOutput, turn, nowMs);
 }
 
 static void Application_RunControlStep(uint32_t nowMs)
 {
-    uint16_t raw[ADC_SEQUENCE8_COUNT];
+    uint16_t raw[ADC_SEQUENCE5_COUNT];
     ADC_Status adcStatus;
 
     adcStatus =
-        ADC_ReadSequence8(LINE_ADC_INST, raw);
+        ADC_ReadSequence5(LINE_ADC_INST, raw);
     if (adcStatus != ADC_STATUS_OK) {
         gAdcErrorCount++;
         Application_EnterState(APPLICATION_ADC_ERROR);
@@ -224,18 +221,6 @@ void Application_Init(void)
         .reversalDelayMs =
             APPLICATION_MOTOR_REVERSAL_DELAY_MS
     };
-    const Servo_Config servoConfig = {
-        .pwmTimer = SERVO_PWM_INST,
-        .pwmChannel = GPIO_SERVO_PWM_C1_IDX,
-        .timerClockHz = SERVO_PWM_INST_CLK_FREQ,
-        .minimumPulseUs =
-            APPLICATION_SERVO_MINIMUM_PULSE_US,
-        .centerPulseUs =
-            APPLICATION_SERVO_CENTER_PULSE_US,
-        .maximumPulseUs =
-            APPLICATION_SERVO_MAXIMUM_PULSE_US,
-        .inverted = APPLICATION_SERVO_INVERTED
-    };
     const LineSensor_Config lineSensorConfig = {
         .channelMap = APPLICATION_LINE_CHANNEL_MAP,
         .backgroundValue =
@@ -249,10 +234,10 @@ void Application_Init(void)
             APPLICATION_LINE_MINIMUM_TOTAL_STRENGTH
     };
     const LineControl_Config lineControlConfig = {
-        .steeringPid = {
-            .kp = APPLICATION_STEERING_KP,
-            .ki = APPLICATION_STEERING_KI,
-            .kd = APPLICATION_STEERING_KD,
+        .turnPid = {
+            .kp = APPLICATION_TURN_KP,
+            .ki = APPLICATION_TURN_KI,
+            .kd = APPLICATION_TURN_KD,
             .integralMinimum = -1.0f,
             .integralMaximum = 1.0f,
             .outputMinimum = -1.0f,
@@ -260,10 +245,10 @@ void Application_Init(void)
             .derivativeFilterCoefficient =
                 APPLICATION_DERIVATIVE_FILTER_COEFFICIENT
         },
-        .positionFullScale = 3500.0f,
-        .maximumSteeringCommand =
-            APPLICATION_MAXIMUM_STEERING_COMMAND,
-        .steeringInverted = false,
+        .positionFullScale = 2000.0f,
+        .maximumTurnCommand =
+            APPLICATION_MAXIMUM_TURN_OUTPUT,
+        .turnInverted = APPLICATION_TURN_INVERTED,
         .maximumInvalidFrames =
             APPLICATION_MAXIMUM_INVALID_FRAMES
     };
@@ -271,11 +256,10 @@ void Application_Init(void)
         .leftMotor = &gLeftMotor,
         .rightMotor = &gRightMotor,
         .standby = &gMotorStandby,
-        .steeringServo = &gSteeringServo,
         .maximumDriveOutput =
             APPLICATION_MOTOR_MAXIMUM_OUTPUT,
-        .maximumSteeringCommand =
-            APPLICATION_MAXIMUM_STEERING_COMMAND,
+        .maximumTurnOutput =
+            APPLICATION_MAXIMUM_TURN_OUTPUT,
         .leftOpenLoopScalePermille =
             APPLICATION_LEFT_OPEN_LOOP_SCALE,
         .rightOpenLoopScalePermille =
@@ -302,7 +286,6 @@ void Application_Init(void)
             &gLeftMotor, &leftMotorConfig, nowMs) &&
         Motor_Init(
             &gRightMotor, &rightMotorConfig, nowMs) &&
-        Servo_Init(&gSteeringServo, &servoConfig) &&
         LineSensor_Init(
             &gLineSensor, &lineSensorConfig) &&
         LineControl_Init(
