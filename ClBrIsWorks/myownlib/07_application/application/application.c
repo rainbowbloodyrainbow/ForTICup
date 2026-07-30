@@ -23,6 +23,7 @@ static uint32_t gMissedControlCycles;
 static uint32_t gAdcErrorCount;
 static uint32_t gLastTelemetryMs;
 static bool gTelemetryRequested;
+static bool gRawStreamingEnabled;
 static int16_t gDriveOutput;
 
 static Motor gLeftMotor;
@@ -131,6 +132,17 @@ static void Application_ProcessOneCommand(
             gTelemetryRequested = true;
             break;
 
+        case (uint8_t) 'v':
+            gRawStreamingEnabled =
+                !gRawStreamingEnabled;
+            gLastTelemetryMs = nowMs;
+            HC05_SendString(
+                HC05_UART_INST,
+                gRawStreamingEnabled ?
+                "raw-stream=on\r\n" :
+                "raw-stream=off\r\n");
+            break;
+
         default:
             break;
     }
@@ -208,6 +220,17 @@ static void Application_PublishTelemetry(uint32_t nowMs)
             "strength=", line->strength);
     }
 
+    gLastTelemetryMs = nowMs;
+}
+
+static void Application_PublishRawValues(uint32_t nowMs)
+{
+    const LineSensor_Result *line;
+
+    line = LineSensor_GetResult(&gLineSensor);
+    if (line != NULL) {
+        Application_SendArray("raw=", line->raw);
+    }
     gLastTelemetryMs = nowMs;
 }
 
@@ -292,6 +315,7 @@ void Application_Init(void)
     gAdcErrorCount = 0U;
     gLastTelemetryMs = nowMs;
     gTelemetryRequested = false;
+    gRawStreamingEnabled = false;
     gDriveOutput = 0;
 
     HC05_ResetReceiver();
@@ -320,7 +344,8 @@ void Application_Init(void)
     NVIC_EnableIRQ(HC05_UART_INST_INT_IRQN);
     HC05_SendString(
         HC05_UART_INST,
-        "ready: s=start, x=brake, t=telemetry\r\n");
+        "ready: s=start, x=brake, t=telemetry, "
+        "v=raw-stream\r\n");
 }
 
 void Application_Process(void)
@@ -347,6 +372,13 @@ void Application_Process(void)
     if (gTelemetryRequested) {
         gTelemetryRequested = false;
         Application_PublishTelemetry(nowMs);
+    }
+
+    if (gRawStreamingEnabled &&
+        (SystemTime_ElapsedMs(
+            nowMs, gLastTelemetryMs) >=
+            APPLICATION_RAW_STREAM_PERIOD_MS)) {
+        Application_PublishRawValues(nowMs);
     }
 }
 
