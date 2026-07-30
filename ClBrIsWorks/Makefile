@@ -55,6 +55,7 @@ SOURCES = \
 	myownlib/03_algorithm/pid/pid.c \
 	myownlib/04_control/line_control/line_control.c \
 	myownlib/05_robot/chassis/chassis.c \
+	myownlib/07_application/application/application_policy.c \
 	myownlib/07_application/application/application.c \
 	$(GEN_DIR)/ti_msp_dl_config.c
 
@@ -145,6 +146,12 @@ host-test:
 		myownlib/05_robot/chassis/chassis.c \
 		-o $(HOST_BUILD_DIR)/test_chassis
 	$(HOST_BUILD_DIR)/test_chassis
+	$(HOST_CC) -std=c11 -Wall -Wextra -Werror -pedantic \
+		-Imyownlib/07_application/application \
+		tests/host/application/test_application_policy.c \
+		myownlib/07_application/application/application_policy.c \
+		-o $(HOST_BUILD_DIR)/test_application_policy
+	$(HOST_BUILD_DIR)/test_application_policy
 
 clean:
 	rm -rf $(GEN_DIR) $(BUILD_DIR)

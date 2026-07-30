@@ -9,6 +9,10 @@
 typedef struct {
     Motor *leftMotor;
     Motor *rightMotor;
+    /*
+     * 为 NULL 表示驱动板已在硬件上固定使能；非 NULL 时由 chassis 按安全
+     * 顺序控制公共 STBY。Motor 层的 STBY 能力仍保留给其他硬件配置。
+     */
     Motor_Standby *standby;
     uint16_t maximumDriveOutput;
     uint16_t maximumTurnOutput;
@@ -38,8 +42,9 @@ void Chassis_Disable(
  *     left = drive - turn
  *     right = drive + turn
  *
- * 当前巡迹安全策略禁止车轮反转。混合结果小于 0 时按 0 输出，
- * 大于 maximumDriveOutput 时按 maximumDriveOutput 输出。
+ * driveOutput 和 turnOutput 都是有符号量。混合结果超出允许幅值时，两侧
+ * 按相同比例缩放，从而保留差速比例。是否允许巡迹时倒车由 Application
+ * 的运行策略决定，不在通用 chassis 中写死。
  */
 void Chassis_SetDriveTurn(
     Chassis *chassis,
@@ -48,7 +53,7 @@ void Chassis_SetDriveTurn(
     uint32_t nowMs);
 
 /*
- * 用于悬空调试左右轮。两个输入同样只允许 0～maximumDriveOutput。
+ * 用于悬空调试或上层直接给定有符号左右轮输出。超限时按相同比例缩放。
  */
 void Chassis_SetWheelOutputs(
     Chassis *chassis,
@@ -62,5 +67,10 @@ void Chassis_Coast(
     Chassis *chassis, uint32_t nowMs);
 void Chassis_Process(
     Chassis *chassis, uint32_t nowMs);
+
+int16_t Chassis_GetDriveOutput(const Chassis *chassis);
+int16_t Chassis_GetTurnOutput(const Chassis *chassis);
+int16_t Chassis_GetLeftOutput(const Chassis *chassis);
+int16_t Chassis_GetRightOutput(const Chassis *chassis);
 
 #endif

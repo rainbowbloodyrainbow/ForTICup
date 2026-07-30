@@ -21,6 +21,25 @@
 > `myownlib/07_application/application/application_config.h`。本文后面的
 > Example 接入内容记录的是重构前的学习工程路径，正式工程以根 Makefile
 > 为准。
+>
+> 当前正式硬件映射如下；本文后面出现的 UART1、PA8/PA9、旧电机通道、
+> 八路 ADC 和阿克曼配置只属于历史 Example，不能用于正式工程：
+>
+> ```text
+> 五路巡迹：ADC1，PA15、PA17、PA18、PB18、PA21
+> 右轮电机：TIMG0_C0/PA12 + AIN1/PA16 + AIN2/PB24
+> 左轮电机：TIMG0_C1/PA13 + BIN1/PB17 + BIN2/PB19
+> TB6612 STBY：扩展板固定使能，Chassis_Config.standby = NULL
+> 调试串口：UART2，TX/PA23，RX/PA24
+> 左编码器：A/PA14，B/PA25
+> 右编码器：A/PA26，B/PA27
+> MPU6050：I2C0，SDA/PA0，SCL/PA1
+> OLED 软件 I2C：SCL/PA31，SDA/PA28，开漏语义
+> 摆杆舵机资源：TIMG12_C1/PB14
+> ```
+>
+> 正式代码通过 `HC05_UART_INST`、`GPIO_ENCODER_*` 这类 SysConfig
+> 生成宏访问硬件，不把 UART2 或 GPIOA 写成业务代码字面量。
 
 ## 项目概览
 

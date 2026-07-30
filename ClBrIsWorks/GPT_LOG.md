@@ -99,7 +99,7 @@ raw[3] = PB18;
 raw[4] = PA21;  /* 最右 */
 ```
 
-第一版配置：
+当前默认配置：
 
 ```c
 channelMap = {0U, 1U, 2U, 3U, 4U};
@@ -149,8 +149,8 @@ MEM4：ADC1_A7 / PA21
 
 原阿克曼前轮和转向舵机从底盘拆除。
 
-`servo` 模块源码继续保留，但不再参与巡迹底盘运行链。
-它以后可能用于摆杆、小球水管机构或其他执行器。
+`servo` 模块源码与 PB14/TIMG12 配置继续保留，但不再参与巡迹底盘
+运行链；该资源留给 H 题摆杆执行器。
 
 ---
 
@@ -176,64 +176,60 @@ leftOutput  = driveOutput - turnOutput;
 rightOutput = driveOutput + turnOutput;
 ```
 
-第一阶段禁止自动反转：
+`chassis` 是通用有符号差速层，允许左右轮正反转。混合结果超过
+`maximumDriveOutput` 时，两侧按相同比例缩放，保留转弯曲率。
 
-```text
-左右输出最低限制为 0
+当前巡迹的“不倒转”属于 Application 策略：
+
+```c
+turnOutput = Clamp(
+    turnOutput,
+    -Abs(driveOutput),
+     Abs(driveOutput));
 ```
 
-即转弯时允许：
-
-```text
-一侧正常前进
-另一侧减速或停止
-```
-
-暂不允许 PID 直接使一侧轮子反转。
-
-基础巡迹稳定后，才考虑开放小范围反转以通过急弯。
+因此巡迹运行时只会出现两轮前进，或者一侧停止、另一侧前进；原地转向和
+倒车能力仍保留在通用 chassis 中。
 
 ---
 
-## 6. 需要修改的模块
+## 6. 当前实施状态
 
-必须修改：
+已经完成：
 
 ```text
-ClBrIsWorks/all.syscfg
-
-ClBrIsWorks/myownlib/01_platform/adc/
-ClBrIsWorks/myownlib/02_device/line_sensor/
-ClBrIsWorks/myownlib/04_control/line_control/
-ClBrIsWorks/myownlib/05_robot/chassis/
-ClBrIsWorks/myownlib/07_application/application/
-ClBrIsWorks/myownlib/07_application/application/application_config.*
-
-对应 host tests
+ADC_ReadSequence5()
+五路 line_sensor
+line_control 的 turnOutput 语义
+有符号差速 chassis 与等比例饱和
+Application 巡迹前进限制
+有 STBY / 无 STBY 兼容
+五路、PID、Motor、Chassis、Application 策略主机测试
 ```
 
-基本不修改：
+保持通用且不写死硬件实例：
 
 ```text
 motor
 pid
 system_time
-HC-05 / UART
+HC-05 / UART（使用 HC05_UART_INST 生成宏）
 MPU6050
 ```
 
-退出当前巡迹运行链但保留：
+不进入当前巡迹底盘运行链但保留：
 
 ```text
-servo
-阿克曼转向相关配置
+servo 与 PB14/TIMG12
+编码器 GPIOA 资源
+OLED 软件开漏 I2C 资源
 ```
 
 ---
 
 ## 7. 差速 Chassis 推荐接口
 
-推荐新增：
+当前接口：
 
 ```c
 void Chassis_SetWheelOutputs(
@@ -326,20 +322,11 @@ ADC 错误
 
 ## 10. 扩展板关键映射
 
-电机 PWM 保持：
+电机整路绑定：
 
 ```text
-左 PWMA：PA12 / TIMG0_C0
-右 PWMB：PA13 / TIMG0_C1
-```
-
-扩展板 TB6612 方向信号：
-
-```text
-AIN1：PB17
-AIN2：PB19
-BIN1：PA16
-BIN2：PB24
+右轮：PA12 / TIMG0_C0 + AIN1 / PA16 + AIN2 / PB24
+左轮：PA13 / TIMG0_C1 + BIN1 / PB17 + BIN2 / PB19
 ```
 
 TB6612 STBY 在扩展板上固定使能，因此：
@@ -350,11 +337,12 @@ Chassis_Config.standby 允许为 NULL
 
 不能继续把 PA7 当作 STBY，PA7 在扩展板上连接蜂鸣器。
 
-HC-05：
+HC-05 / 调试串口：
 
 ```text
-UART1_TX：PB6
-UART1_RX：PB7
+UART2_TX：PA23
+UART2_RX：PA24
+代码只使用 HC05_UART_INST 生成宏
 ```
 
 MPU6050：
@@ -364,14 +352,26 @@ I2C0_SDA：PA0
 I2C0_SCL：PA1
 ```
 
-未来编码器接口预计：
+编码器资源：
 
 ```text
-左编码器：PA26、PA27
-右编码器：PA25、PA14
+左编码器 A：PA14
+左编码器 B：PA25
+右编码器 A：PA26
+右编码器 B：PA27
 ```
 
-编码器正式启用前必须重新核对 GPIOA 中断、A/B 顺序和电平。
+四路均属于 GPIOA，共用 `GROUP1_IRQHandler()`。编码器模块尚未实现；
+实现时必须使用 `GPIO_ENCODER_*` 生成宏，并实测核对 A/B 顺序和计数方向。
+
+OLED 软件 I2C：
+
+```text
+SCL：PA31
+SDA：PA28
+```
+
+高电平必须通过输入/高阻释放，低电平才切换为输出并拉低，禁止推挽输出高。
 
 ---
 

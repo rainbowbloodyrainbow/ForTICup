@@ -8,14 +8,14 @@ static bool Chassis_IsConfigValid(
     if ((config == NULL) ||
         (config->leftMotor == NULL) ||
         (config->rightMotor == NULL) ||
-        (config->leftMotor == config->rightMotor) ||
-        (config->standby == NULL)) {
+        (config->leftMotor == config->rightMotor)) {
         return false;
     }
 
     return Motor_IsInitialized(config->leftMotor) &&
         Motor_IsInitialized(config->rightMotor) &&
-        config->standby->initialized &&
+        ((config->standby == NULL) ||
+            config->standby->initialized) &&
         (config->maximumDriveOutput <= MOTOR_OUTPUT_MAX) &&
         (config->maximumTurnOutput <=
             config->maximumDriveOutput) &&
@@ -23,13 +23,13 @@ static bool Chassis_IsConfigValid(
         (config->rightOpenLoopScalePermille <= 1000U);
 }
 
-static int16_t Chassis_ClampForwardOutput(
+static int16_t Chassis_ClampDrive(
     const Chassis *chassis, int32_t output)
 {
     int32_t maximum = chassis->config.maximumDriveOutput;
 
-    if (output < 0) {
-        output = 0;
+    if (output < -maximum) {
+        output = -maximum;
     } else if (output > maximum) {
         output = maximum;
     }
@@ -56,26 +56,55 @@ static int16_t Chassis_ApplyOpenLoopScale(
         (((int32_t) output * scalePermille) / 1000);
 }
 
+static int32_t Chassis_Absolute(int32_t value)
+{
+    return (value < 0) ? -value : value;
+}
+
+static void Chassis_NormalizeWheelOutputs(
+    const Chassis *chassis,
+    int32_t *leftOutput,
+    int32_t *rightOutput)
+{
+    int32_t leftMagnitude;
+    int32_t rightMagnitude;
+    int32_t maximumMagnitude;
+    int32_t maximumOutput;
+
+    leftMagnitude = Chassis_Absolute(*leftOutput);
+    rightMagnitude = Chassis_Absolute(*rightOutput);
+    maximumMagnitude =
+        (leftMagnitude > rightMagnitude) ?
+        leftMagnitude : rightMagnitude;
+    maximumOutput = chassis->config.maximumDriveOutput;
+
+    if ((maximumMagnitude > maximumOutput) &&
+        (maximumMagnitude != 0)) {
+        *leftOutput =
+            (*leftOutput * maximumOutput) /
+            maximumMagnitude;
+        *rightOutput =
+            (*rightOutput * maximumOutput) /
+            maximumMagnitude;
+    }
+}
+
 static void Chassis_ApplyWheelOutputs(
     Chassis *chassis,
     int32_t leftOutput,
     int32_t rightOutput,
     uint32_t nowMs)
 {
-    int16_t limitedLeft;
-    int16_t limitedRight;
     int16_t scaledLeft;
     int16_t scaledRight;
 
-    limitedLeft =
-        Chassis_ClampForwardOutput(chassis, leftOutput);
-    limitedRight =
-        Chassis_ClampForwardOutput(chassis, rightOutput);
+    Chassis_NormalizeWheelOutputs(
+        chassis, &leftOutput, &rightOutput);
     scaledLeft = Chassis_ApplyOpenLoopScale(
-        limitedLeft,
+        (int16_t) leftOutput,
         chassis->config.leftOpenLoopScalePermille);
     scaledRight = Chassis_ApplyOpenLoopScale(
-        limitedRight,
+        (int16_t) rightOutput,
         chassis->config.rightOpenLoopScalePermille);
 
     Motor_SetOutput(
@@ -123,12 +152,15 @@ bool Chassis_Enable(
             chassis->config.rightMotor->config.pwmTimer);
     }
 
-    Motor_StandbyEnable(chassis->config.standby);
+    if (chassis->config.standby != NULL) {
+        Motor_StandbyEnable(chassis->config.standby);
+    }
     chassis->driveOutput = 0;
     chassis->turnOutput = 0;
     chassis->leftOutput = 0;
     chassis->rightOutput = 0;
     chassis->enabled =
+        (chassis->config.standby == NULL) ||
         Motor_StandbyIsEnabled(chassis->config.standby);
     return chassis->enabled;
 }
@@ -142,7 +174,9 @@ void Chassis_Disable(
 
     Motor_Brake(chassis->config.leftMotor, nowMs);
     Motor_Brake(chassis->config.rightMotor, nowMs);
-    Motor_StandbyDisable(chassis->config.standby);
+    if (chassis->config.standby != NULL) {
+        Motor_StandbyDisable(chassis->config.standby);
+    }
     PwmOutput_Stop(
         chassis->config.leftMotor->config.pwmTimer);
     if (chassis->config.rightMotor->config.pwmTimer !=
@@ -173,7 +207,7 @@ void Chassis_SetDriveTurn(
     }
 
     limitedDrive =
-        Chassis_ClampForwardOutput(chassis, driveOutput);
+        Chassis_ClampDrive(chassis, driveOutput);
     limitedTurn =
         Chassis_ClampTurn(chassis, turnOutput);
     Chassis_ApplyWheelOutputs(
@@ -191,8 +225,8 @@ void Chassis_SetWheelOutputs(
     int16_t rightOutput,
     uint32_t nowMs)
 {
-    int16_t limitedLeft;
-    int16_t limitedRight;
+    int32_t normalizedLeft;
+    int32_t normalizedRight;
 
     if ((chassis == NULL) ||
         !chassis->initialized ||
@@ -200,18 +234,18 @@ void Chassis_SetWheelOutputs(
         return;
     }
 
-    limitedLeft =
-        Chassis_ClampForwardOutput(chassis, leftOutput);
-    limitedRight =
-        Chassis_ClampForwardOutput(chassis, rightOutput);
+    normalizedLeft = leftOutput;
+    normalizedRight = rightOutput;
+    Chassis_NormalizeWheelOutputs(
+        chassis, &normalizedLeft, &normalizedRight);
     Chassis_ApplyWheelOutputs(
-        chassis, limitedLeft, limitedRight, nowMs);
+        chassis, normalizedLeft, normalizedRight, nowMs);
     chassis->driveOutput =
-        (int16_t) (((int32_t) limitedLeft +
-            limitedRight) / 2);
+        (int16_t) ((normalizedLeft +
+            normalizedRight) / 2);
     chassis->turnOutput =
-        (int16_t) (((int32_t) limitedRight -
-            limitedLeft) / 2);
+        (int16_t) ((normalizedRight -
+            normalizedLeft) / 2);
 }
 
 void Chassis_Brake(
@@ -253,4 +287,36 @@ void Chassis_Process(
 
     Motor_Process(chassis->config.leftMotor, nowMs);
     Motor_Process(chassis->config.rightMotor, nowMs);
+}
+
+int16_t Chassis_GetDriveOutput(const Chassis *chassis)
+{
+    if ((chassis == NULL) || !chassis->initialized) {
+        return 0;
+    }
+    return chassis->driveOutput;
+}
+
+int16_t Chassis_GetTurnOutput(const Chassis *chassis)
+{
+    if ((chassis == NULL) || !chassis->initialized) {
+        return 0;
+    }
+    return chassis->turnOutput;
+}
+
+int16_t Chassis_GetLeftOutput(const Chassis *chassis)
+{
+    if ((chassis == NULL) || !chassis->initialized) {
+        return 0;
+    }
+    return chassis->leftOutput;
+}
+
+int16_t Chassis_GetRightOutput(const Chassis *chassis)
+{
+    if ((chassis == NULL) || !chassis->initialized) {
+        return 0;
+    }
+    return chassis->rightOutput;
 }

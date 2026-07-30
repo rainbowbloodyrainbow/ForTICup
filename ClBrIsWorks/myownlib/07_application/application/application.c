@@ -1,4 +1,5 @@
 #include "application.h"
+#include "application_policy.h"
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -26,7 +27,6 @@ static int16_t gDriveOutput;
 
 static Motor gLeftMotor;
 static Motor gRightMotor;
-static Motor_Standby gMotorStandby;
 static LineSensor gLineSensor;
 static LineControl gLineControl;
 static Chassis gChassis;
@@ -76,6 +76,8 @@ static void Application_RunLineFollowing(uint32_t nowMs)
 
     turn =
         LineControl_GetTurnCommand(&gLineControl);
+    turn = ApplicationPolicy_LimitTurnForForwardDrive(
+        gDriveOutput, turn);
     Chassis_SetDriveTurn(
         &gChassis, gDriveOutput, turn, nowMs);
 }
@@ -182,6 +184,22 @@ static void Application_PublishTelemetry(uint32_t nowMs)
     HC05_SendString(HC05_UART_INST, ",missed=");
     HC05_SendUint32(
         HC05_UART_INST, gMissedControlCycles);
+    HC05_SendString(HC05_UART_INST, ",drive=");
+    HC05_SendInt32(
+        HC05_UART_INST,
+        Chassis_GetDriveOutput(&gChassis));
+    HC05_SendString(HC05_UART_INST, ",turn=");
+    HC05_SendInt32(
+        HC05_UART_INST,
+        Chassis_GetTurnOutput(&gChassis));
+    HC05_SendString(HC05_UART_INST, ",left=");
+    HC05_SendInt32(
+        HC05_UART_INST,
+        Chassis_GetLeftOutput(&gChassis));
+    HC05_SendString(HC05_UART_INST, ",right=");
+    HC05_SendInt32(
+        HC05_UART_INST,
+        Chassis_GetRightOutput(&gChassis));
     HC05_SendString(HC05_UART_INST, "\r\n");
 
     if (line != NULL) {
@@ -197,11 +215,11 @@ void Application_Init(void)
 {
     const Motor_Config leftMotorConfig = {
         .pwmTimer = MOTOR_PWM_INST,
-        .pwmChannel = GPIO_MOTOR_PWM_C0_IDX,
-        .in1Port = MOTOR_CONTROL_AIN1_PORT,
-        .in1Pin = MOTOR_CONTROL_AIN1_PIN,
-        .in2Port = MOTOR_CONTROL_AIN2_PORT,
-        .in2Pin = MOTOR_CONTROL_AIN2_PIN,
+        .pwmChannel = GPIO_MOTOR_PWM_C1_IDX,
+        .in1Port = MOTOR_CONTROL_BIN1_PORT,
+        .in1Pin = MOTOR_CONTROL_BIN1_PIN,
+        .in2Port = MOTOR_CONTROL_BIN2_PORT,
+        .in2Pin = MOTOR_CONTROL_BIN2_PIN,
         .maximumOutput =
             APPLICATION_MOTOR_MAXIMUM_OUTPUT,
         .inverted = APPLICATION_LEFT_MOTOR_INVERTED,
@@ -210,11 +228,11 @@ void Application_Init(void)
     };
     const Motor_Config rightMotorConfig = {
         .pwmTimer = MOTOR_PWM_INST,
-        .pwmChannel = GPIO_MOTOR_PWM_C1_IDX,
-        .in1Port = MOTOR_CONTROL_BIN1_PORT,
-        .in1Pin = MOTOR_CONTROL_BIN1_PIN,
-        .in2Port = MOTOR_CONTROL_BIN2_PORT,
-        .in2Pin = MOTOR_CONTROL_BIN2_PIN,
+        .pwmChannel = GPIO_MOTOR_PWM_C0_IDX,
+        .in1Port = MOTOR_CONTROL_AIN1_PORT,
+        .in1Pin = MOTOR_CONTROL_AIN1_PIN,
+        .in2Port = MOTOR_CONTROL_AIN2_PORT,
+        .in2Pin = MOTOR_CONTROL_AIN2_PIN,
         .maximumOutput =
             APPLICATION_MOTOR_MAXIMUM_OUTPUT,
         .inverted = APPLICATION_RIGHT_MOTOR_INVERTED,
@@ -255,7 +273,7 @@ void Application_Init(void)
     const Chassis_Config chassisConfig = {
         .leftMotor = &gLeftMotor,
         .rightMotor = &gRightMotor,
-        .standby = &gMotorStandby,
+        .standby = NULL,
         .maximumDriveOutput =
             APPLICATION_MOTOR_MAXIMUM_OUTPUT,
         .maximumTurnOutput =
@@ -278,10 +296,6 @@ void Application_Init(void)
 
     HC05_ResetReceiver();
     initialized =
-        Motor_StandbyInit(
-            &gMotorStandby,
-            MOTOR_CONTROL_STBY_PORT,
-            MOTOR_CONTROL_STBY_PIN) &&
         Motor_Init(
             &gLeftMotor, &leftMotorConfig, nowMs) &&
         Motor_Init(
@@ -294,7 +308,7 @@ void Application_Init(void)
         Chassis_Enable(&gChassis, nowMs);
 
     if (!initialized) {
-        Motor_StandbyDisable(&gMotorStandby);
+        Chassis_Disable(&gChassis, nowMs);
         return;
     }
 
