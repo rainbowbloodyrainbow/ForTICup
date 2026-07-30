@@ -1,0 +1,1536 @@
+Archive member included to satisfy reference by file (symbol)
+
+/home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+                              /tmp/ccg0VGCe.o (DL_Common_delayCycles)
+/home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+                              /tmp/ccgay3jh.o (DL_I2C_setClockConfig)
+/home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+                              /tmp/ccgay3jh.o (DL_Timer_setClockConfig)
+/home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+                              /tmp/ccgay3jh.o (DL_UART_init)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+                              /tmp/ccBAz2GS.o (cosf)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+                              /tmp/ccBAz2GS.o (sinf)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+                              /tmp/ccBAz2GS.o (fmodf)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o) (__ieee754_fmodf)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o) (__ieee754_rem_pio2f)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o) (__kernel_cosf)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o) (__kernel_rem_pio2f)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o) (__kernel_sinf)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-s_lib_ver.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o) (__fdlib_version)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o) (fabsf)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o) (floorf)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o) (scalbnf)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+                              /tmp/cc9rQobc.o (__aeabi_uidiv)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o)
+                              /tmp/cc9rQobc.o (__aeabi_idivmod)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o)
+                              /tmp/ccN1BM5A.o (__aeabi_fcmpeq)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+                              /tmp/ccBAz2GS.o (__aeabi_f2uiz)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+                              /tmp/ccg0VGCe.o (__aeabi_fadd)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+                              /tmp/ccSbW8dM.o (__aeabi_fdiv)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o) (__eqsf2)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o) (__gesf2)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o) (__lesf2)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+                              /tmp/ccg0VGCe.o (__aeabi_fmul)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+                              /tmp/ccg0VGCe.o (__aeabi_fsub)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+                              /tmp/ccg0VGCe.o (__aeabi_fcmpun)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o) (__aeabi_f2iz)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+                              /tmp/ccg0VGCe.o (__aeabi_i2f)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+                              /tmp/ccSbW8dM.o (__aeabi_ui2f)
+/usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_clzsi2.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o) (__clzsi2)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o) (__errno)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
+                              /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o) (_impure_ptr)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+                              /tmp/ccuF8wEd.o (__libc_init_array)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+                              /tmp/ccuF8wEd.o (memcpy)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+                              /tmp/ccg0VGCe.o (memset)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+                              /tmp/cc9rQobc.o (strlen)
+/usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
+                              /tmp/cc9rQobc.o (strncmp)
+
+Discarded input sections
+
+ .text.as5600_read_status
+                0x0000000000000000       0x10 /tmp/ccg0VGCe.o
+ .text.as5600_read_raw
+                0x0000000000000000       0x2c /tmp/ccg0VGCe.o
+ .text.as5600_get_angle_rad
+                0x0000000000000000        0xc /tmp/ccg0VGCe.o
+ .text.as5600_get_consecutive_failures
+                0x0000000000000000        0xc /tmp/ccg0VGCe.o
+ .text.motor_control_reset
+                0x0000000000000000       0x24 /tmp/ccN1BM5A.o
+ .text.motor_control_get_position_kp
+                0x0000000000000000        0xc /tmp/ccN1BM5A.o
+ .text.motor_control_get_velocity_kp
+                0x0000000000000000        0xc /tmp/ccN1BM5A.o
+ .text.motor_control_get_velocity_ki
+                0x0000000000000000        0xc /tmp/ccN1BM5A.o
+ .text.motor_control_get_velocity_limit
+                0x0000000000000000        0xc /tmp/ccN1BM5A.o
+ .text.SYSCFG_DL_saveConfiguration
+                0x0000000000000000       0x14 /tmp/ccgay3jh.o
+ .text.SYSCFG_DL_restoreConfiguration
+                0x0000000000000000       0x18 /tmp/ccgay3jh.o
+ .text.DL_I2C_getClockConfig
+                0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .text.DL_I2C_fillTargetTXFIFO
+                0x0000000000000000       0x4c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .text.DL_I2C_flushTargetTXFIFO
+                0x0000000000000000       0x34 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .text.DL_I2C_flushTargetRXFIFO
+                0x0000000000000000       0x30 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .text.DL_I2C_transmitTargetDataBlocking
+                0x0000000000000000       0x24 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .text.DL_I2C_transmitTargetDataCheck
+                0x0000000000000000       0x24 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .text.DL_I2C_receiveTargetDataBlocking
+                0x0000000000000000       0x18 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .text.DL_I2C_receiveTargetDataCheck
+                0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .text.DL_Timer_getInChanConfig
+                0x0000000000000000       0x4c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getClockConfig
+                0x0000000000000000       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_initCaptureMode
+                0x0000000000000000      0x110 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .rodata.DL_Timer_initCaptureMode
+                0x0000000000000000       0x18 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_initCaptureTriggerMode
+                0x0000000000000000       0x90 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_initCaptureCombinedMode
+                0x0000000000000000       0xe0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_initCompareMode
+                0x0000000000000000       0xac /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_initCompareTriggerMode
+                0x0000000000000000       0x78 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getCaptureCompareValue
+                0x0000000000000000       0x14 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_setCaptureCompareCtl
+                0x0000000000000000       0x24 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getCaptureCompareCtl
+                0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_setSecondCompSrcDn
+                0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getSecondCompSrcDn
+                0x0000000000000000       0x18 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_setSecondCompSrcUp
+                0x0000000000000000       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getSecondCompSrcUp
+                0x0000000000000000       0x18 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_setSecondCompActionDn
+                0x0000000000000000       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getSecondCompActionDn
+                0x0000000000000000       0x18 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_setSecondCompActionUp
+                0x0000000000000000       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getSecondCompActionUp
+                0x0000000000000000       0x18 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_enableSuppressionOfCompEvent
+                0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_disableSuppressionOfCompEvent
+                0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getCaptCompUpdateMethod
+                0x0000000000000000       0x18 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_setCaptCompActUpdateMethod
+                0x0000000000000000       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getCaptCompActUpdateMethod
+                0x0000000000000000       0x18 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getCaptureCompareOutCtl
+                0x0000000000000000       0x14 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_setCaptureCompareAction
+                0x0000000000000000       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getCaptureCompareAction
+                0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_overrideCCPOut
+                0x0000000000000000       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_setCaptureCompareInput
+                0x0000000000000000       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getCaptureCompareInput
+                0x0000000000000000       0x14 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_setCaptureCompareInputFilter
+                0x0000000000000000       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getCaptureCompareInputFilter
+                0x0000000000000000       0x18 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_enableCaptureCompareInputFilter
+                0x0000000000000000       0x18 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_disableCaptureCompareInputFilter
+                0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_isCaptureCompareInputFilterEnabled
+                0x0000000000000000       0x14 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_saveConfiguration
+                0x0000000000000000      0x1a4 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_restoreConfiguration
+                0x0000000000000000      0x1c0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_setFaultSourceConfig
+                0x0000000000000000       0x2c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_getFaultSourceConfig
+                0x0000000000000000       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_TimerA_saveConfiguration
+                0x0000000000000000      0x1e0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_TimerA_restoreConfiguration
+                0x0000000000000000      0x1dc /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_Timer_configQEIHallInputMode
+                0x0000000000000000       0x30 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .rodata.CSWTCH.78
+                0x0000000000000000        0x4 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text.DL_UART_getClockConfig
+                0x0000000000000000       0x14 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_configBaudRate
+                0x0000000000000000       0xb0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_configIrDAMode
+                0x0000000000000000       0x40 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_setIrDAPulseLength
+                0x0000000000000000       0x34 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_receiveDataBlocking
+                0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_transmitDataBlocking
+                0x0000000000000000       0x24 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_receiveDataCheck
+                0x0000000000000000       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_transmitDataCheck
+                0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_drainRXFIFO
+                0x0000000000000000       0x2c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_fillTXFIFO
+                0x0000000000000000       0x2c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_Main_saveConfiguration
+                0x0000000000000000       0x84 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_Main_restoreConfiguration
+                0x0000000000000000       0x90 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_Extend_saveConfiguration
+                0x0000000000000000       0xa8 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text.DL_UART_Extend_restoreConfiguration
+                0x0000000000000000       0xc0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .rodata        0x0000000000000000        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x0000000000000000 0x0000000000020000 xr
+SRAM             0x0000000020200000 0x0000000000008000 xrw
+BCR_CONFIG       0x0000000041c00000 0x00000000000000ff r
+BSL_CONFIG       0x0000000041c00100 0x0000000000000080 r
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /tmp/ccSbW8dM.o
+LOAD /tmp/ccg0VGCe.o
+LOAD /tmp/ccBAz2GS.o
+LOAD /tmp/ccN1BM5A.o
+LOAD /tmp/cc9rQobc.o
+LOAD /tmp/ccgay3jh.o
+LOAD /tmp/ccuF8wEd.o
+LOAD /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc_nano.a
+END GROUP
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc_nano.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a
+END GROUP
+START GROUP
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc_nano.a
+LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a
+END GROUP
+                0x0000000000000000                _Min_Heap_Size = 0x0
+                0x0000000000000080                _Min_Stack_Size = 0x80
+                0x0000000000000000                PROVIDE (_intvecs_base_address = DEFINED (_intvecs_base_address)?_intvecs_base_address:0x0)
+
+.intvecs        0x0000000000000000       0xc0
+ *(.intvecs)
+ .intvecs       0x0000000000000000       0xc0 /tmp/ccuF8wEd.o
+                0x0000000000000000                interruptVectors
+                0x0000000020200000                PROVIDE (_vtable_base_address = DEFINED (_vtable_base_address)?_vtable_base_address:0x20200000)
+
+.vtable
+ *(.vtable)
+
+.text           0x00000000000000c0     0x4d08
+ CREATE_OBJECT_SYMBOLS
+ *(.text)
+ .text          0x00000000000000c0        0x0 /tmp/ccSbW8dM.o
+ .text          0x00000000000000c0        0x0 /tmp/ccg0VGCe.o
+ .text          0x00000000000000c0        0x0 /tmp/ccBAz2GS.o
+ .text          0x00000000000000c0        0x0 /tmp/ccN1BM5A.o
+ .text          0x00000000000000c0        0x0 /tmp/cc9rQobc.o
+ .text          0x00000000000000c0        0x0 /tmp/ccgay3jh.o
+ .text          0x00000000000000c0        0x0 /tmp/ccuF8wEd.o
+ .text          0x00000000000000c0        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .text          0x00000000000000c0        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .text          0x00000000000000c0        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .text          0x00000000000000c0        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .text          0x00000000000000c0       0x78 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+                0x00000000000000c0                cosf
+ .text          0x0000000000000138       0x7c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+                0x0000000000000138                sinf
+ .text          0x00000000000001b4       0x4c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+                0x00000000000001b4                fmodf
+ .text          0x0000000000000200      0x110 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+                0x0000000000000200                __ieee754_fmodf
+ .text          0x0000000000000310      0x2f4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+                0x0000000000000310                __ieee754_rem_pio2f
+ .text          0x0000000000000604      0x190 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+                0x0000000000000604                __kernel_cosf
+ .text          0x0000000000000794      0x73c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+                0x0000000000000794                __kernel_rem_pio2f
+ .text          0x0000000000000ed0       0xf0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+                0x0000000000000ed0                __kernel_sinf
+ .text          0x0000000000000fc0        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-s_lib_ver.o)
+ .text          0x0000000000000fc0        0x8 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+                0x0000000000000fc0                fabsf
+ .text          0x0000000000000fc8       0x98 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+                0x0000000000000fc8                floorf
+ .text          0x0000000000001060       0xbc /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+                0x0000000000001060                scalbnf
+ .text          0x000000000000111c      0x114 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+                0x000000000000111c                __udivsi3
+                0x000000000000111c                __aeabi_uidiv
+                0x0000000000001228                __aeabi_uidivmod
+ .text          0x0000000000001230      0x1d4 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o)
+                0x0000000000001230                __aeabi_idiv
+                0x0000000000001230                __divsi3
+                0x00000000000013fc                __aeabi_idivmod
+ .text          0x0000000000001404        0x4 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+                0x0000000000001404                __aeabi_ldiv0
+                0x0000000000001404                __aeabi_idiv0
+ .text          0x0000000000001408       0x74 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o)
+                0x0000000000001408                __aeabi_cfrcmple
+                0x0000000000001410                __aeabi_cfcmple
+                0x0000000000001410                __aeabi_cfcmpeq
+                0x0000000000001420                __aeabi_fcmpeq
+                0x000000000000142c                __aeabi_fcmplt
+                0x0000000000001440                __aeabi_fcmple
+                0x0000000000001454                __aeabi_fcmpgt
+                0x0000000000001468                __aeabi_fcmpge
+ .text          0x000000000000147c       0x30 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+                0x000000000000147c                __aeabi_f2uiz
+                0x000000000000147c                __fixunssfsi
+ .text          0x00000000000014ac      0x33c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+                0x00000000000014ac                __aeabi_fadd
+ .text          0x00000000000017e8      0x230 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+                0x00000000000017e8                __aeabi_fdiv
+ .text          0x0000000000001a18       0x4c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+                0x0000000000001a18                __nesf2
+                0x0000000000001a18                __eqsf2
+ .text          0x0000000000001a64       0x8c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+                0x0000000000001a64                __gtsf2
+                0x0000000000001a64                __gesf2
+ .text          0x0000000000001af0       0x88 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+                0x0000000000001af0                __lesf2
+                0x0000000000001af0                __ltsf2
+ .text          0x0000000000001b78      0x24c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+                0x0000000000001b78                __aeabi_fmul
+ .text          0x0000000000001dc4      0x35c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+                0x0000000000001dc4                __aeabi_fsub
+ .text          0x0000000000002120       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+                0x0000000000002120                __aeabi_fcmpun
+ .text          0x000000000000214c       0x40 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+                0x000000000000214c                __aeabi_f2iz
+ .text          0x000000000000218c       0x9c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+                0x000000000000218c                __aeabi_i2f
+ .text          0x0000000000002228       0x84 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+                0x0000000000002228                __aeabi_ui2f
+ .text          0x00000000000022ac       0x3c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_clzsi2.o)
+                0x00000000000022ac                __clzsi2
+ .text          0x00000000000022e8        0xc /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
+                0x00000000000022e8                __errno
+ .text          0x00000000000022f4        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
+ .text          0x00000000000022f4       0x44 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+                0x00000000000022f4                __libc_init_array
+ .text          0x0000000000002338       0xa4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+                0x0000000000002338                memcpy
+ .text          0x00000000000023dc       0xa8 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+                0x00000000000023dc                memset
+ .text          0x0000000000002484       0x5c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+                0x0000000000002484                strlen
+ .text          0x00000000000024e0       0x74 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
+                0x00000000000024e0                strncmp
+                0x0000000000002558                . = ALIGN (0x8)
+ *fill*         0x0000000000002554        0x4 
+ *(.text.*)
+ .text.startup.main
+                0x0000000000002558       0xd0 /tmp/ccSbW8dM.o
+                0x0000000000002558                main
+ .text.TIMG0_IRQHandler
+                0x0000000000002628       0x2c /tmp/ccSbW8dM.o
+                0x0000000000002628                TIMG0_IRQHandler
+ .text.UART1_IRQHandler
+                0x0000000000002654        0x8 /tmp/ccSbW8dM.o
+                0x0000000000002654                UART1_IRQHandler
+ .text.read_registers
+                0x000000000000265c      0x1d8 /tmp/ccg0VGCe.o
+ .text.as5600_init
+                0x0000000000002834       0x80 /tmp/ccg0VGCe.o
+                0x0000000000002834                as5600_init
+ .text.as5600_update
+                0x00000000000028b4      0x184 /tmp/ccg0VGCe.o
+                0x00000000000028b4                as5600_update
+ .text.as5600_get_unwrapped_angle_rad
+                0x0000000000002a38        0xc /tmp/ccg0VGCe.o
+                0x0000000000002a38                as5600_get_unwrapped_angle_rad
+ .text.as5600_get_velocity_rad_s
+                0x0000000000002a44        0xc /tmp/ccg0VGCe.o
+                0x0000000000002a44                as5600_get_velocity_rad_s
+ .text.as5600_get_raw
+                0x0000000000002a50        0xc /tmp/ccg0VGCe.o
+                0x0000000000002a50                as5600_get_raw
+ .text.as5600_get_status
+                0x0000000000002a5c        0xc /tmp/ccg0VGCe.o
+                0x0000000000002a5c                as5600_get_status
+ .text.as5600_magnet_ok
+                0x0000000000002a68       0x10 /tmp/ccg0VGCe.o
+                0x0000000000002a68                as5600_magnet_ok
+ .text.as5600_is_healthy
+                0x0000000000002a78       0x20 /tmp/ccg0VGCe.o
+                0x0000000000002a78                as5600_is_healthy
+ .text.normalize_angle_0_2pi
+                0x0000000000002a98       0x50 /tmp/ccBAz2GS.o
+                0x0000000000002a98                normalize_angle_0_2pi
+ .text.foc_pwm_enable
+                0x0000000000002ae8       0x24 /tmp/ccBAz2GS.o
+                0x0000000000002ae8                foc_pwm_enable
+ .text.foc_pwm_stop
+                0x0000000000002b0c       0xd0 /tmp/ccBAz2GS.o
+                0x0000000000002b0c                foc_pwm_stop
+ .text.foc_pwm_set_phase_duty
+                0x0000000000002bdc      0x290 /tmp/ccBAz2GS.o
+                0x0000000000002bdc                foc_pwm_set_phase_duty
+ .text.foc_set_phase_voltage
+                0x0000000000002e6c      0x100 /tmp/ccBAz2GS.o
+                0x0000000000002e6c                foc_set_phase_voltage
+ .text.foc_pwm_init
+                0x0000000000002f6c       0x3c /tmp/ccBAz2GS.o
+                0x0000000000002f6c                foc_pwm_init
+ .text.foc_pwm_last_write_ok
+                0x0000000000002fa8        0xc /tmp/ccBAz2GS.o
+                0x0000000000002fa8                foc_pwm_last_write_ok
+ .text.motor_control_force_fault
+                0x0000000000002fb4       0x30 /tmp/ccN1BM5A.o
+                0x0000000000002fb4                motor_control_force_fault
+ .text.motor_control_init
+                0x0000000000002fe4       0xb0 /tmp/ccN1BM5A.o
+                0x0000000000002fe4                motor_control_init
+ .text.motor_control_try_enable
+                0x0000000000003094       0x70 /tmp/ccN1BM5A.o
+                0x0000000000003094                motor_control_try_enable
+ .text.motor_control_enable
+                0x0000000000003104       0x28 /tmp/ccN1BM5A.o
+                0x0000000000003104                motor_control_enable
+ .text.motor_control_take_enable_grace
+                0x000000000000312c       0x10 /tmp/ccN1BM5A.o
+                0x000000000000312c                motor_control_take_enable_grace
+ .text.motor_control_calibrate
+                0x000000000000313c      0x19c /tmp/ccN1BM5A.o
+                0x000000000000313c                motor_control_calibrate
+ .text.motor_control_update
+                0x00000000000032d8      0x3b8 /tmp/ccN1BM5A.o
+                0x00000000000032d8                motor_control_update
+ .text.motor_control_set_target_deg
+                0x0000000000003690       0x60 /tmp/ccN1BM5A.o
+                0x0000000000003690                motor_control_set_target_deg
+ .text.motor_control_zero_here
+                0x00000000000036f0       0x3c /tmp/ccN1BM5A.o
+                0x00000000000036f0                motor_control_zero_here
+ .text.motor_control_clear_fault
+                0x000000000000372c       0x54 /tmp/ccN1BM5A.o
+                0x000000000000372c                motor_control_clear_fault
+ .text.motor_control_get_state
+                0x0000000000003780        0x8 /tmp/ccN1BM5A.o
+                0x0000000000003780                motor_control_get_state
+ .text.motor_control_get_voltage_limit
+                0x0000000000003788        0xc /tmp/ccN1BM5A.o
+                0x0000000000003788                motor_control_get_voltage_limit
+ .text.motor_control_set_position_kp
+                0x0000000000003794       0x50 /tmp/ccN1BM5A.o
+                0x0000000000003794                motor_control_set_position_kp
+ .text.motor_control_set_velocity_kp
+                0x00000000000037e4       0x50 /tmp/ccN1BM5A.o
+                0x00000000000037e4                motor_control_set_velocity_kp
+ .text.motor_control_set_velocity_ki
+                0x0000000000003834       0x5c /tmp/ccN1BM5A.o
+                0x0000000000003834                motor_control_set_velocity_ki
+ .text.motor_control_set_voltage_limit
+                0x0000000000003890       0x5c /tmp/ccN1BM5A.o
+                0x0000000000003890                motor_control_set_voltage_limit
+ .text.motor_control_set_velocity_limit
+                0x00000000000038ec       0x50 /tmp/ccN1BM5A.o
+                0x00000000000038ec                motor_control_set_velocity_limit
+ .text.motor_control_set_pole_pairs
+                0x000000000000393c       0x20 /tmp/ccN1BM5A.o
+                0x000000000000393c                motor_control_set_pole_pairs
+ .text.motor_control_set_sensor_direction
+                0x000000000000395c       0x40 /tmp/ccN1BM5A.o
+                0x000000000000395c                motor_control_set_sensor_direction
+ .text.motor_control_fault_name
+                0x000000000000399c       0x18 /tmp/ccN1BM5A.o
+                0x000000000000399c                motor_control_fault_name
+ .text.parse_float.part.0
+                0x00000000000039b4       0xe4 /tmp/cc9rQobc.o
+ .text.parse_int.part.0
+                0x0000000000003a98       0x70 /tmp/cc9rQobc.o
+ .text.command_argument.constprop.0
+                0x0000000000003b08       0x40 /tmp/cc9rQobc.o
+ .text.uart_command_send_string.part.0
+                0x0000000000003b48       0xc4 /tmp/cc9rQobc.o
+ .text.send_ok  0x0000000000003c0c       0x34 /tmp/cc9rQobc.o
+ .text.send_error
+                0x0000000000003c40       0x20 /tmp/cc9rQobc.o
+ .text.uart_send_byte
+                0x0000000000003c60       0x98 /tmp/cc9rQobc.o
+ .text.send_uint32
+                0x0000000000003cf8       0x68 /tmp/cc9rQobc.o
+ .text.send_float3
+                0x0000000000003d60       0xe4 /tmp/cc9rQobc.o
+ .text.uart_command_send_string
+                0x0000000000003e44        0xc /tmp/cc9rQobc.o
+                0x0000000000003e44                uart_command_send_string
+ .text.uart_command_init
+                0x0000000000003e50       0x38 /tmp/cc9rQobc.o
+                0x0000000000003e50                uart_command_init
+ .text.uart_command_handle_rx_interrupt
+                0x0000000000003e88       0x94 /tmp/cc9rQobc.o
+                0x0000000000003e88                uart_command_handle_rx_interrupt
+ .text.uart_command_process
+                0x0000000000003f1c      0x734 /tmp/cc9rQobc.o
+                0x0000000000003f1c                uart_command_process
+ .text.SYSCFG_DL_initPower
+                0x0000000000004650       0x5c /tmp/ccgay3jh.o
+                0x0000000000004650                SYSCFG_DL_initPower
+ .text.SYSCFG_DL_GPIO_init
+                0x00000000000046ac       0x88 /tmp/ccgay3jh.o
+                0x00000000000046ac                SYSCFG_DL_GPIO_init
+ .text.SYSCFG_DL_SYSCTL_init
+                0x0000000000004734       0x38 /tmp/ccgay3jh.o
+                0x0000000000004734                SYSCFG_DL_SYSCTL_init
+ .text.SYSCFG_DL_FOC_PWM_init
+                0x000000000000476c       0xb8 /tmp/ccgay3jh.o
+                0x000000000000476c                SYSCFG_DL_FOC_PWM_init
+ .text.SYSCFG_DL_CONTROL_TICK_init
+                0x0000000000004824       0x38 /tmp/ccgay3jh.o
+                0x0000000000004824                SYSCFG_DL_CONTROL_TICK_init
+ .text.SYSCFG_DL_AS5600_I2C_init
+                0x000000000000485c       0x70 /tmp/ccgay3jh.o
+                0x000000000000485c                SYSCFG_DL_AS5600_I2C_init
+ .text.SYSCFG_DL_CMD_UART_init
+                0x00000000000048cc       0x88 /tmp/ccgay3jh.o
+                0x00000000000048cc                SYSCFG_DL_CMD_UART_init
+ .text.SYSCFG_DL_init
+                0x0000000000004954       0x2c /tmp/ccgay3jh.o
+                0x0000000000004954                SYSCFG_DL_init
+ .text.Default_Handler
+                0x0000000000004980        0x4 /tmp/ccuF8wEd.o
+                0x0000000000004980                TIMG6_IRQHandler
+                0x0000000000004980                TIMG8_IRQHandler
+                0x0000000000004980                I2C0_IRQHandler
+                0x0000000000004980                HardFault_Handler
+                0x0000000000004980                SysTick_Handler
+                0x0000000000004980                PendSV_Handler
+                0x0000000000004980                NMI_Handler
+                0x0000000000004980                I2C1_IRQHandler
+                0x0000000000004980                TIMA1_IRQHandler
+                0x0000000000004980                UART0_IRQHandler
+                0x0000000000004980                ADC0_IRQHandler
+                0x0000000000004980                SPI1_IRQHandler
+                0x0000000000004980                ADC1_IRQHandler
+                0x0000000000004980                GROUP1_IRQHandler
+                0x0000000000004980                RTC_IRQHandler
+                0x0000000000004980                GROUP0_IRQHandler
+                0x0000000000004980                UART2_IRQHandler
+                0x0000000000004980                Default_Handler
+                0x0000000000004980                SVC_Handler
+                0x0000000000004980                TIMG12_IRQHandler
+                0x0000000000004980                DAC0_IRQHandler
+                0x0000000000004980                TIMG7_IRQHandler
+                0x0000000000004980                SPI0_IRQHandler
+                0x0000000000004980                AES_IRQHandler
+                0x0000000000004980                DMA_IRQHandler
+                0x0000000000004980                TIMA0_IRQHandler
+                0x0000000000004980                UART3_IRQHandler
+                0x0000000000004980                CANFD0_IRQHandler
+ .text.Reset_Handler
+                0x0000000000004984       0x78 /tmp/ccuF8wEd.o
+                0x0000000000004984                Reset_Handler
+ .text.initStub
+                0x00000000000049fc        0x4 /tmp/ccuF8wEd.o
+                0x00000000000049fc                _init
+                0x00000000000049fc                initStub
+ .text.DL_Common_delayCycles
+                0x0000000000004a00        0xc /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+                0x0000000000004a00                DL_Common_delayCycles
+ .text.DL_I2C_setClockConfig
+                0x0000000000004a0c       0x28 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+                0x0000000000004a0c                DL_I2C_setClockConfig
+ .text.DL_I2C_fillControllerTXFIFO
+                0x0000000000004a34       0x48 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+                0x0000000000004a34                DL_I2C_fillControllerTXFIFO
+ .text.DL_I2C_flushControllerTXFIFO
+                0x0000000000004a7c       0x34 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+                0x0000000000004a7c                DL_I2C_flushControllerTXFIFO
+ .text.DL_I2C_flushControllerRXFIFO
+                0x0000000000004ab0       0x30 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+                0x0000000000004ab0                DL_I2C_flushControllerRXFIFO
+ .text.DL_Timer_setClockConfig
+                0x0000000000004ae0       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+                0x0000000000004ae0                DL_Timer_setClockConfig
+ .text.DL_Timer_initTimerMode
+                0x0000000000004afc       0x8c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+                0x0000000000004afc                DL_Timer_initTimerMode
+ .text.DL_Timer_setCaptureCompareValue
+                0x0000000000004b88       0x14 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+                0x0000000000004b88                DL_Timer_setCaptureCompareValue
+ .text.DL_Timer_setCaptCompUpdateMethod
+                0x0000000000004b9c       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+                0x0000000000004b9c                DL_Timer_setCaptCompUpdateMethod
+ .text.DL_Timer_setCaptureCompareOutCtl
+                0x0000000000004bbc       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+                0x0000000000004bbc                DL_Timer_setCaptureCompareOutCtl
+ .text.DL_Timer_initFourCCPWMMode
+                0x0000000000004bd8      0x190 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+                0x0000000000004bd8                DL_Timer_initFourCCPWMMode
+ .text.DL_UART_init
+                0x0000000000004d68       0x48 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+                0x0000000000004d68                DL_UART_init
+ .text.DL_UART_setClockConfig
+                0x0000000000004db0       0x14 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+                0x0000000000004db0                DL_UART_setClockConfig
+                0x0000000000004dc8                . = ALIGN (0x8)
+ *fill*         0x0000000000004dc4        0x4 
+ *(.ctors)
+                0x0000000000004dc8                . = ALIGN (0x8)
+ *(.dtors)
+                0x0000000000004dc8                . = ALIGN (0x8)
+ *(.init)
+                0x0000000000004dc8                . = ALIGN (0x8)
+ *(.fini*)
+                0x0000000000004dc8                . = ALIGN (0x8)
+
+.glue_7         0x0000000000004dc8        0x0
+ .glue_7        0x0000000000004dc8        0x0 linker stubs
+
+.glue_7t        0x0000000000004dc8        0x0
+ .glue_7t       0x0000000000004dc8        0x0 linker stubs
+
+.vfp11_veneer   0x0000000000004dc8        0x0
+ .vfp11_veneer  0x0000000000004dc8        0x0 linker stubs
+
+.v4_bx          0x0000000000004dc8        0x0
+ .v4_bx         0x0000000000004dc8        0x0 linker stubs
+
+.iplt           0x0000000000004dc8        0x0
+ .iplt          0x0000000000004dc8        0x0 /tmp/ccSbW8dM.o
+
+.ramfunc        0x0000000020200000        0x0 load address 0x0000000000004dc8
+                0x0000000000004dc8                __ramfunct_load__ = LOADADDR (.ramfunc)
+                0x0000000020200000                __ramfunct_start__ = .
+ *(.ramfunc)
+                0x0000000020200000                . = ALIGN (0x8)
+                0x0000000020200000                __ramfunct_end__ = .
+
+.rodata         0x0000000000004dc8      0x9f8
+ *(.rodata)
+ .rodata        0x0000000000004dc8        0x8 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+ .rodata        0x0000000000004dd0      0x398 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+ .rodata        0x0000000000005168       0x38 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+ .rodata        0x00000000000051a0       0x80 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+ .rodata        0x0000000000005220       0x40 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+                0x0000000000005260                . = ALIGN (0x8)
+ *(.rodata.*)
+ .rodata.main.str1.4
+                0x0000000000005260       0xb1 /tmp/ccSbW8dM.o
+ *fill*         0x0000000000005311        0x3 
+ .rodata.motor_control_fault_name.str1.4
+                0x0000000000005314        0x8 /tmp/ccN1BM5A.o
+ .rodata.str1.4
+                0x000000000000531c       0x40 /tmp/ccN1BM5A.o
+ .rodata.CSWTCH.45
+                0x000000000000535c       0x20 /tmp/ccN1BM5A.o
+ .rodata.send_ok.str1.4
+                0x000000000000537c        0x6 /tmp/cc9rQobc.o
+                                          0xb (size before relaxing)
+ *fill*         0x0000000000005382        0x2 
+ .rodata.send_error.str1.4
+                0x0000000000005384        0x5 /tmp/cc9rQobc.o
+ *fill*         0x0000000000005389        0x3 
+ .rodata.send_float3.str1.4
+                0x000000000000538c        0xd /tmp/cc9rQobc.o
+ *fill*         0x0000000000005399        0x3 
+ .rodata.uart_command_process.str1.4
+                0x000000000000539c      0x346 /tmp/cc9rQobc.o
+                                        0x34e (size before relaxing)
+ *fill*         0x00000000000056e2        0x2 
+ .rodata.hex.0  0x00000000000056e4       0x11 /tmp/cc9rQobc.o
+ *fill*         0x00000000000056f5        0x3 
+ .rodata.gAS5600_I2CClockConfig
+                0x00000000000056f8        0x2 /tmp/ccgay3jh.o
+ *fill*         0x00000000000056fa        0x2 
+ .rodata.gCMD_UARTClockConfig
+                0x00000000000056fc        0x2 /tmp/ccgay3jh.o
+ *fill*         0x00000000000056fe        0x2 
+ .rodata.gCMD_UARTConfig
+                0x0000000000005700        0xa /tmp/ccgay3jh.o
+ *fill*         0x000000000000570a        0x2 
+ .rodata.gCONTROL_TICKClockConfig
+                0x000000000000570c        0x3 /tmp/ccgay3jh.o
+ *fill*         0x000000000000570f        0x1 
+ .rodata.gCONTROL_TICKTimerConfig
+                0x0000000000005710       0x14 /tmp/ccgay3jh.o
+ .rodata.gFOC_PWMClockConfig
+                0x0000000000005724        0x3 /tmp/ccgay3jh.o
+ *fill*         0x0000000000005727        0x1 
+ .rodata.gFOC_PWMConfig
+                0x0000000000005728        0x8 /tmp/ccgay3jh.o
+ .rodata.DL_Timer_initTimerMode
+                0x0000000000005730       0x8c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+                0x00000000000057c0                . = ALIGN (0x8)
+ *fill*         0x00000000000057bc        0x4 
+
+.rel.dyn        0x00000000000057c0        0x0
+ .rel.iplt      0x00000000000057c0        0x0 /tmp/ccSbW8dM.o
+
+.preinit_array  0x00000000000057c0        0x0
+                0x00000000000057c0                PROVIDE (__preinit_array_start = .)
+ *(.preinit_array*)
+                0x00000000000057c0                PROVIDE (__preinit_array_end = .)
+
+.init_array     0x00000000000057c0        0x0
+                0x00000000000057c0                . = ALIGN (0x8)
+                0x00000000000057c0                PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ *(.init_array*)
+                0x00000000000057c0                PROVIDE (__init_array_end = .)
+
+.fini_array     0x00000000000057c0        0x0
+                0x00000000000057c0                . = ALIGN (0x8)
+                [!provide]                        PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array*)
+                [!provide]                        PROVIDE (__fini_array_end = .)
+                0x00000000000057c0                . = ALIGN (0x8)
+
+.ARM.exidx      0x00000000000057c0        0x0
+                0x00000000000057c0                __exidx_start = .
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x00000000000057c0                __exidx_end = .
+
+.ARM.extab      0x00000000000057c0        0x0
+                0x00000000000057c0                . = ALIGN (0x8)
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x00000000000057c0                . = ALIGN (0x8)
+                0x00000000000057c0                __etext = .
+
+.data           0x0000000020200000       0x68 load address 0x00000000000057c0
+                0x00000000000057c0                __data_load__ = LOADADDR (.data)
+                0x0000000020200000                __data_start__ = .
+ *(.data)
+ .data          0x0000000020200000        0x0 /tmp/ccSbW8dM.o
+ .data          0x0000000020200000        0x0 /tmp/ccg0VGCe.o
+ .data          0x0000000020200000        0x0 /tmp/ccBAz2GS.o
+ .data          0x0000000020200000        0x0 /tmp/ccN1BM5A.o
+ .data          0x0000000020200000        0x0 /tmp/cc9rQobc.o
+ .data          0x0000000020200000        0x0 /tmp/ccgay3jh.o
+ .data          0x0000000020200000        0x0 /tmp/ccuF8wEd.o
+ .data          0x0000000020200000        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .data          0x0000000020200000        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .data          0x0000000020200000        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .data          0x0000000020200000        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+ .data          0x0000000020200000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+ .data          0x0000000020200000        0x1 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-s_lib_ver.o)
+                0x0000000020200000                __fdlib_version
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_clzsi2.o)
+ .data          0x0000000020200001        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
+ *fill*         0x0000000020200001        0x3 
+ .data          0x0000000020200004       0x64 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
+                0x0000000020200004                _impure_ptr
+ .data          0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .data          0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .data          0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+ .data          0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+ .data          0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
+ *(.data*)
+                0x0000000020200068                . = ALIGN (0x8)
+                0x0000000020200068                __data_end__ = .
+
+.igot.plt       0x0000000020200068        0x0 load address 0x0000000000005828
+ .igot.plt      0x0000000020200068        0x0 /tmp/ccSbW8dM.o
+
+.bss            0x0000000020200068      0x608
+                0x0000000020200068                __bss_start__ = .
+ *(.shbss)
+ *(.bss)
+ .bss           0x0000000020200068        0x0 /tmp/ccSbW8dM.o
+ .bss           0x0000000020200068        0x0 /tmp/ccg0VGCe.o
+ .bss           0x0000000020200068        0x0 /tmp/ccBAz2GS.o
+ .bss           0x0000000020200068        0x0 /tmp/ccN1BM5A.o
+ .bss           0x0000000020200068        0x0 /tmp/cc9rQobc.o
+ .bss           0x0000000020200068        0x0 /tmp/ccgay3jh.o
+ .bss           0x0000000020200068        0x0 /tmp/ccuF8wEd.o
+ .bss           0x0000000020200068        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .bss           0x0000000020200068        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .bss           0x0000000020200068        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .bss           0x0000000020200068        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-s_lib_ver.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_clzsi2.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+ .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
+ *(.bss.*)
+ .bss.g_controlTicks
+                0x0000000020200068        0x4 /tmp/ccSbW8dM.o
+ .bss.g_as5600  0x000000002020006c       0x18 /tmp/ccg0VGCe.o
+ .bss.g_lastWriteOk
+                0x0000000020200084        0x1 /tmp/ccBAz2GS.o
+ .bss.g_enableGrace
+                0x0000000020200085        0x1 /tmp/ccN1BM5A.o
+ *fill*         0x0000000020200086        0x2 
+ .bss.g_motor   0x0000000020200088       0x30 /tmp/ccN1BM5A.o
+ .bss.g_positionKp
+                0x00000000202000b8        0x4 /tmp/ccN1BM5A.o
+ .bss.g_velocityIntegral
+                0x00000000202000bc        0x4 /tmp/ccN1BM5A.o
+ .bss.g_velocityKi
+                0x00000000202000c0        0x4 /tmp/ccN1BM5A.o
+ .bss.g_velocityKp
+                0x00000000202000c4        0x4 /tmp/ccN1BM5A.o
+ .bss.g_velocityLimit
+                0x00000000202000c8        0x4 /tmp/ccN1BM5A.o
+ .bss.g_voltageLimit
+                0x00000000202000cc        0x4 /tmp/ccN1BM5A.o
+ .bss.g_zeroPositionRad
+                0x00000000202000d0        0x4 /tmp/ccN1BM5A.o
+ .bss.g_line    0x00000000202000d4       0x50 /tmp/cc9rQobc.o
+ .bss.g_lineLength
+                0x0000000020200124        0x2 /tmp/cc9rQobc.o
+ .bss.g_rxHead  0x0000000020200126        0x2 /tmp/cc9rQobc.o
+ .bss.g_rxOverflow
+                0x0000000020200128        0x1 /tmp/cc9rQobc.o
+ *fill*         0x0000000020200129        0x3 
+ .bss.g_rxRing  0x000000002020012c       0x80 /tmp/cc9rQobc.o
+ .bss.g_rxTail  0x00000000202001ac        0x2 /tmp/cc9rQobc.o
+ .bss.g_txHead  0x00000000202001ae        0x2 /tmp/cc9rQobc.o
+ .bss.g_txRing  0x00000000202001b0      0x400 /tmp/cc9rQobc.o
+ .bss.g_txTail  0x00000000202005b0        0x2 /tmp/cc9rQobc.o
+ *fill*         0x00000000202005b2        0x2 
+ .bss.gFOC_PWMBackup
+                0x00000000202005b4       0xbc /tmp/ccgay3jh.o
+                0x00000000202005b4                gFOC_PWMBackup
+ *(COMMON)
+                0x0000000020200670                . = ALIGN (0x8)
+                0x0000000020200670                __bss_end__ = .
+
+.noinit         0x0000000020200670        0x0
+ *(*.noinit*)
+                0x0000000020200670                . = ALIGN (0x8)
+
+.heap           0x0000000020200670        0x0
+                0x0000000020200670                __heap_start__ = .
+                0x0000000020200670                end = __heap_start__
+                0x0000000020200670                _end = end
+                0x0000000020200670                __end = end
+ *(.heap)
+                0x0000000020200670                __heap_end__ = .
+                0x0000000020200670                __HeapLimit = __heap_end__
+
+.stack          0x0000000020200670        0x0
+                0x0000000020200670                _stack = .
+ *(.stack)
+
+.BCRConfig
+ *(.BCRConfig)
+
+.BSLConfig
+ *(.BSLConfig)
+                0x0000000020208000                __StackTop = (ORIGIN (REGION_STACK) + LENGTH (REGION_STACK))
+                [!provide]                        PROVIDE (__stack = __StackTop)
+OUTPUT(firmware.elf elf32-littlearm)
+LOAD linker stubs
+
+.debug_info     0x0000000000000000    0x49266
+ .debug_info    0x0000000000000000     0x5e6d /tmp/ccSbW8dM.o
+ .debug_info    0x0000000000005e6d     0x646e /tmp/ccg0VGCe.o
+ .debug_info    0x000000000000c2db     0x6259 /tmp/ccBAz2GS.o
+ .debug_info    0x0000000000012534     0x6854 /tmp/ccN1BM5A.o
+ .debug_info    0x0000000000018d88     0x81b9 /tmp/cc9rQobc.o
+ .debug_info    0x0000000000020f41     0x7a85 /tmp/ccgay3jh.o
+ .debug_info    0x00000000000289c6      0x1fc /tmp/ccuF8wEd.o
+ .debug_info    0x0000000000028bc2     0x561b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .debug_info    0x000000000002e1dd     0x5f7e /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .debug_info    0x000000000003415b     0x9259 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .debug_info    0x000000000003d3b4     0x670b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_info    0x0000000000043abf      0x1fe /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+ .debug_info    0x0000000000043cbd      0x204 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+ .debug_info    0x0000000000043ec1      0x17a /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+ .debug_info    0x000000000004403b      0x288 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+ .debug_info    0x00000000000442c3      0x609 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+ .debug_info    0x00000000000448cc      0x3b9 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+ .debug_info    0x0000000000044c85      0x5d8 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+ .debug_info    0x000000000004525d      0x2f8 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+ .debug_info    0x0000000000045555       0xbb /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-s_lib_ver.o)
+ .debug_info    0x0000000000045610      0x143 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+ .debug_info    0x0000000000045753      0x1d8 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+ .debug_info    0x000000000004592b      0x257 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+ .debug_info    0x0000000000045b82       0x26 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_info    0x0000000000045ba8       0x26 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o)
+ .debug_info    0x0000000000045bce       0x26 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x0000000000045bf4       0x26 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o)
+ .debug_info    0x0000000000045c1a      0x31e /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+ .debug_info    0x0000000000045f38      0x343 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+ .debug_info    0x000000000004627b      0x376 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+ .debug_info    0x00000000000465f1      0x22c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+ .debug_info    0x000000000004681d      0x24a /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+ .debug_info    0x0000000000046a67      0x24a /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+ .debug_info    0x0000000000046cb1      0x3ff /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+ .debug_info    0x00000000000470b0      0x363 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+ .debug_info    0x0000000000047413      0x21a /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+ .debug_info    0x000000000004762d      0x1c0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+ .debug_info    0x00000000000477ed      0x24f /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+ .debug_info    0x0000000000047a3c      0x242 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+ .debug_info    0x0000000000047c7e       0x26 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_clzsi2.o)
+ .debug_info    0x0000000000047ca4      0x7ae /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
+ .debug_info    0x0000000000048452      0x863 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
+ .debug_info    0x0000000000048cb5      0x11a /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .debug_info    0x0000000000048dcf      0x15c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_info    0x0000000000048f2b      0x13d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+ .debug_info    0x0000000000049068       0xee /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+ .debug_info    0x0000000000049156      0x110 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
+
+.debug_abbrev   0x0000000000000000     0x4792
+ .debug_abbrev  0x0000000000000000      0x35d /tmp/ccSbW8dM.o
+ .debug_abbrev  0x000000000000035d      0x47b /tmp/ccg0VGCe.o
+ .debug_abbrev  0x00000000000007d8      0x362 /tmp/ccBAz2GS.o
+ .debug_abbrev  0x0000000000000b3a      0x440 /tmp/ccN1BM5A.o
+ .debug_abbrev  0x0000000000000f7a      0x43f /tmp/cc9rQobc.o
+ .debug_abbrev  0x00000000000013b9      0x3b5 /tmp/ccgay3jh.o
+ .debug_abbrev  0x000000000000176e      0x12d /tmp/ccuF8wEd.o
+ .debug_abbrev  0x000000000000189b      0x166 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .debug_abbrev  0x0000000000001a01      0x2f1 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .debug_abbrev  0x0000000000001cf2      0x3dd /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .debug_abbrev  0x00000000000020cf      0x3a0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_abbrev  0x000000000000246f      0x143 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+ .debug_abbrev  0x00000000000025b2      0x14e /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+ .debug_abbrev  0x0000000000002700       0xee /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+ .debug_abbrev  0x00000000000027ee      0x127 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+ .debug_abbrev  0x0000000000002915      0x180 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+ .debug_abbrev  0x0000000000002a95      0x104 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+ .debug_abbrev  0x0000000000002b99      0x15d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+ .debug_abbrev  0x0000000000002cf6      0x10c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+ .debug_abbrev  0x0000000000002e02       0x6f /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-s_lib_ver.o)
+ .debug_abbrev  0x0000000000002e71       0xd2 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+ .debug_abbrev  0x0000000000002f43      0x113 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+ .debug_abbrev  0x0000000000003056      0x104 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+ .debug_abbrev  0x000000000000315a       0x14 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x000000000000316e       0x14 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o)
+ .debug_abbrev  0x0000000000003182       0x14 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x0000000000003196       0x14 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o)
+ .debug_abbrev  0x00000000000031aa       0xed /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+ .debug_abbrev  0x0000000000003297      0x166 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+ .debug_abbrev  0x00000000000033fd      0x155 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+ .debug_abbrev  0x0000000000003552      0x140 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+ .debug_abbrev  0x0000000000003692      0x156 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+ .debug_abbrev  0x00000000000037e8      0x156 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+ .debug_abbrev  0x000000000000393e      0x164 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+ .debug_abbrev  0x0000000000003aa2      0x166 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+ .debug_abbrev  0x0000000000003c08      0x12f /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+ .debug_abbrev  0x0000000000003d37      0x154 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+ .debug_abbrev  0x0000000000003e8b      0x173 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+ .debug_abbrev  0x0000000000003ffe      0x173 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+ .debug_abbrev  0x0000000000004171       0x14 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_clzsi2.o)
+ .debug_abbrev  0x0000000000004185      0x157 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
+ .debug_abbrev  0x00000000000042dc      0x151 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
+ .debug_abbrev  0x000000000000442d       0xcc /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .debug_abbrev  0x00000000000044f9       0xc7 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_abbrev  0x00000000000045c0       0xb4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+ .debug_abbrev  0x0000000000004674       0x8f /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+ .debug_abbrev  0x0000000000004703       0x8f /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
+
+.debug_loc      0x0000000000000000     0xea23
+ .debug_loc     0x0000000000000000      0x199 /tmp/ccSbW8dM.o
+ .debug_loc     0x0000000000000199      0x9ca /tmp/ccg0VGCe.o
+ .debug_loc     0x0000000000000b63      0x973 /tmp/ccBAz2GS.o
+ .debug_loc     0x00000000000014d6      0x874 /tmp/ccN1BM5A.o
+ .debug_loc     0x0000000000001d4a     0x1b6a /tmp/cc9rQobc.o
+ .debug_loc     0x00000000000038b4      0xc5a /tmp/ccgay3jh.o
+ .debug_loc     0x000000000000450e      0x473 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .debug_loc     0x0000000000004981     0x3114 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .debug_loc     0x0000000000007a95      0xad7 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_loc     0x000000000000856c       0xcd /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+ .debug_loc     0x0000000000008639       0xcd /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+ .debug_loc     0x0000000000008706       0xb1 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+ .debug_loc     0x00000000000087b7      0x4e0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+ .debug_loc     0x0000000000008c97      0x739 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+ .debug_loc     0x00000000000093d0      0x22f /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+ .debug_loc     0x00000000000095ff      0xe26 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+ .debug_loc     0x000000000000a425      0x1c6 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+ .debug_loc     0x000000000000a5eb       0x81 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+ .debug_loc     0x000000000000a66c      0x1cb /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+ .debug_loc     0x000000000000a837      0x30e /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+ .debug_loc     0x000000000000ab45       0x41 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+ .debug_loc     0x000000000000ab86      0xaa3 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+ .debug_loc     0x000000000000b629      0x7e5 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+ .debug_loc     0x000000000000be0e       0xc9 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+ .debug_loc     0x000000000000bed7      0x253 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+ .debug_loc     0x000000000000c12a      0x240 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+ .debug_loc     0x000000000000c36a      0x98f /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+ .debug_loc     0x000000000000ccf9      0xd5b /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+ .debug_loc     0x000000000000da54       0x92 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+ .debug_loc     0x000000000000dae6       0xfa /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+ .debug_loc     0x000000000000dbe0      0x21a /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+ .debug_loc     0x000000000000ddfa      0x267 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+ .debug_loc     0x000000000000e061       0x98 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .debug_loc     0x000000000000e0f9      0x457 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_loc     0x000000000000e550      0x2a3 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+ .debug_loc     0x000000000000e7f3       0x90 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+ .debug_loc     0x000000000000e883      0x1a0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
+
+.debug_aranges  0x0000000000000000      0xa28
+ .debug_aranges
+                0x0000000000000000       0x30 /tmp/ccSbW8dM.o
+ .debug_aranges
+                0x0000000000000030       0x80 /tmp/ccg0VGCe.o
+ .debug_aranges
+                0x00000000000000b0       0x50 /tmp/ccBAz2GS.o
+ .debug_aranges
+                0x0000000000000100       0xe0 /tmp/ccN1BM5A.o
+ .debug_aranges
+                0x00000000000001e0       0x80 /tmp/cc9rQobc.o
+ .debug_aranges
+                0x0000000000000260       0x68 /tmp/ccgay3jh.o
+ .debug_aranges
+                0x00000000000002c8       0x30 /tmp/ccuF8wEd.o
+ .debug_aranges
+                0x00000000000002f8       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .debug_aranges
+                0x0000000000000318       0x78 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .debug_aranges
+                0x0000000000000390      0x190 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .debug_aranges
+                0x0000000000000520       0x98 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_aranges
+                0x00000000000005b8       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+ .debug_aranges
+                0x00000000000005d8       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+ .debug_aranges
+                0x00000000000005f8       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+ .debug_aranges
+                0x0000000000000618       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+ .debug_aranges
+                0x0000000000000638       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+ .debug_aranges
+                0x0000000000000658       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+ .debug_aranges
+                0x0000000000000678       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+ .debug_aranges
+                0x0000000000000698       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+ .debug_aranges
+                0x00000000000006b8       0x18 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-s_lib_ver.o)
+ .debug_aranges
+                0x00000000000006d0       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+ .debug_aranges
+                0x00000000000006f0       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+ .debug_aranges
+                0x0000000000000710       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+ .debug_aranges
+                0x0000000000000730       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_aranges
+                0x0000000000000750       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o)
+ .debug_aranges
+                0x0000000000000770       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_aranges
+                0x0000000000000790       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o)
+ .debug_aranges
+                0x00000000000007b0       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+ .debug_aranges
+                0x00000000000007d0       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+ .debug_aranges
+                0x00000000000007f0       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+ .debug_aranges
+                0x0000000000000810       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+ .debug_aranges
+                0x0000000000000830       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+ .debug_aranges
+                0x0000000000000850       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+ .debug_aranges
+                0x0000000000000870       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+ .debug_aranges
+                0x0000000000000890       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+ .debug_aranges
+                0x00000000000008b0       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+ .debug_aranges
+                0x00000000000008d0       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+ .debug_aranges
+                0x00000000000008f0       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+ .debug_aranges
+                0x0000000000000910       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+ .debug_aranges
+                0x0000000000000930       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_clzsi2.o)
+ .debug_aranges
+                0x0000000000000950       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
+ .debug_aranges
+                0x0000000000000970       0x18 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
+ .debug_aranges
+                0x0000000000000988       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .debug_aranges
+                0x00000000000009a8       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_aranges
+                0x00000000000009c8       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+ .debug_aranges
+                0x00000000000009e8       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+ .debug_aranges
+                0x0000000000000a08       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
+
+.debug_ranges   0x0000000000000000     0x2aa8
+ .debug_ranges  0x0000000000000000       0x98 /tmp/ccSbW8dM.o
+ .debug_ranges  0x0000000000000098      0x3f0 /tmp/ccg0VGCe.o
+ .debug_ranges  0x0000000000000488      0x228 /tmp/ccBAz2GS.o
+ .debug_ranges  0x00000000000006b0      0x3c0 /tmp/ccN1BM5A.o
+ .debug_ranges  0x0000000000000a70      0x420 /tmp/cc9rQobc.o
+ .debug_ranges  0x0000000000000e90      0x308 /tmp/ccgay3jh.o
+ .debug_ranges  0x0000000000001198       0x20 /tmp/ccuF8wEd.o
+ .debug_ranges  0x00000000000011b8       0x10 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .debug_ranges  0x00000000000011c8      0x318 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .debug_ranges  0x00000000000014e0      0x8b0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .debug_ranges  0x0000000000001d90      0x390 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_ranges  0x0000000000002120       0x10 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+ .debug_ranges  0x0000000000002130       0x10 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+ .debug_ranges  0x0000000000002140       0x40 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+ .debug_ranges  0x0000000000002180       0x38 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+ .debug_ranges  0x00000000000021b8       0x28 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+ .debug_ranges  0x00000000000021e0       0x10 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+ .debug_ranges  0x00000000000021f0       0x10 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+ .debug_ranges  0x0000000000002200       0x18 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+ .debug_ranges  0x0000000000002218       0x48 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+ .debug_ranges  0x0000000000002260      0x200 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+ .debug_ranges  0x0000000000002460       0xb8 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+ .debug_ranges  0x0000000000002518       0x40 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+ .debug_ranges  0x0000000000002558       0x58 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+ .debug_ranges  0x00000000000025b0       0x58 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+ .debug_ranges  0x0000000000002608       0xc0 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+ .debug_ranges  0x00000000000026c8      0x260 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+ .debug_ranges  0x0000000000002928       0x30 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+ .debug_ranges  0x0000000000002958       0x30 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+ .debug_ranges  0x0000000000002988       0x90 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+ .debug_ranges  0x0000000000002a18       0x90 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+
+.debug_line     0x0000000000000000     0xe6a9
+ .debug_line    0x0000000000000000      0x64a /tmp/ccSbW8dM.o
+ .debug_line    0x000000000000064a      0xc6e /tmp/ccg0VGCe.o
+ .debug_line    0x00000000000012b8      0x967 /tmp/ccBAz2GS.o
+ .debug_line    0x0000000000001c1f     0x1298 /tmp/ccN1BM5A.o
+ .debug_line    0x0000000000002eb7     0x16b5 /tmp/cc9rQobc.o
+ .debug_line    0x000000000000456c      0xcb9 /tmp/ccgay3jh.o
+ .debug_line    0x0000000000005225      0x16e /tmp/ccuF8wEd.o
+ .debug_line    0x0000000000005393      0x427 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .debug_line    0x00000000000057ba      0xaae /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .debug_line    0x0000000000006268     0x24f6 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .debug_line    0x000000000000875e      0xee2 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_line    0x0000000000009640      0x1d4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+ .debug_line    0x0000000000009814      0x1d4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+ .debug_line    0x00000000000099e8      0x171 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+ .debug_line    0x0000000000009b59      0x31d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+ .debug_line    0x0000000000009e76      0x533 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+ .debug_line    0x000000000000a3a9      0x218 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+ .debug_line    0x000000000000a5c1      0xb05 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+ .debug_line    0x000000000000b0c6      0x1ba /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+ .debug_line    0x000000000000b280       0x97 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-s_lib_ver.o)
+ .debug_line    0x000000000000b317      0x152 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+ .debug_line    0x000000000000b469      0x23b /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+ .debug_line    0x000000000000b6a4      0x212 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+ .debug_line    0x000000000000b8b6       0x6c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_line    0x000000000000b922       0x73 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o)
+ .debug_line    0x000000000000b995       0x60 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x000000000000b9f5       0x75 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o)
+ .debug_line    0x000000000000ba6a       0xb2 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+ .debug_line    0x000000000000bb1c      0x625 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+ .debug_line    0x000000000000c141      0x51b /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+ .debug_line    0x000000000000c65c      0x10c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+ .debug_line    0x000000000000c768      0x160 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+ .debug_line    0x000000000000c8c8      0x157 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+ .debug_line    0x000000000000ca1f      0x556 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+ .debug_line    0x000000000000cf75      0x6ce /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+ .debug_line    0x000000000000d643       0xc5 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+ .debug_line    0x000000000000d708      0x113 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+ .debug_line    0x000000000000d81b      0x22c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+ .debug_line    0x000000000000da47      0x236 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+ .debug_line    0x000000000000dc7d       0x74 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_clzsi2.o)
+ .debug_line    0x000000000000dcf1      0x10f /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
+ .debug_line    0x000000000000de00       0xe4 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
+ .debug_line    0x000000000000dee4      0x127 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .debug_line    0x000000000000e00b      0x1b5 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_line    0x000000000000e1c0      0x1ce /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+ .debug_line    0x000000000000e38e      0x172 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+ .debug_line    0x000000000000e500      0x1a9 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
+
+.debug_str      0x0000000000000000     0x81d9
+ .debug_str     0x0000000000000000     0x20f9 /tmp/ccSbW8dM.o
+                                       0x2246 (size before relaxing)
+ .debug_str     0x00000000000020f9      0x3b7 /tmp/ccg0VGCe.o
+                                       0x1e91 (size before relaxing)
+ .debug_str     0x00000000000024b0      0x1ee /tmp/ccBAz2GS.o
+                                       0x1cef (size before relaxing)
+ .debug_str     0x000000000000269e      0x3a7 /tmp/ccN1BM5A.o
+                                       0x21d9 (size before relaxing)
+ .debug_str     0x0000000000002a45      0x3ec /tmp/cc9rQobc.o
+                                       0x2339 (size before relaxing)
+ .debug_str     0x0000000000002e31     0x2026 /tmp/ccgay3jh.o
+                                       0x3bb5 (size before relaxing)
+ .debug_str     0x0000000000004e57      0x170 /tmp/ccuF8wEd.o
+                                        0x2e7 (size before relaxing)
+ .debug_str     0x0000000000004fc7      0x1ac /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+                                       0x1b32 (size before relaxing)
+ .debug_str     0x0000000000005173      0x3ab /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+                                       0x1feb (size before relaxing)
+ .debug_str     0x000000000000551e     0x11ed /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+                                       0x36ea (size before relaxing)
+ .debug_str     0x000000000000670b      0x435 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+                                       0x24b5 (size before relaxing)
+ .debug_str     0x0000000000006b40      0x153 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+                                        0x218 (size before relaxing)
+ .debug_str     0x0000000000006c93       0x32 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+                                        0x218 (size before relaxing)
+ .debug_str     0x0000000000006cc5       0x89 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+                                        0x223 (size before relaxing)
+ .debug_str     0x0000000000006d4e       0x3d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+                                        0x20b (size before relaxing)
+ .debug_str     0x0000000000006d8b       0xbb /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+                                        0x2ba (size before relaxing)
+ .debug_str     0x0000000000006e46       0x32 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+                                        0x21d (size before relaxing)
+ .debug_str     0x0000000000006e78       0x7e /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+                                        0x262 (size before relaxing)
+ .debug_str     0x0000000000006ef6       0x32 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+                                        0x21d (size before relaxing)
+ .debug_str     0x0000000000006f28      0x10d /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-s_lib_ver.o)
+                                        0x1ed (size before relaxing)
+ .debug_str     0x0000000000007035       0x33 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+                                        0x1d8 (size before relaxing)
+ .debug_str     0x0000000000007068       0xa1 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+                                        0x216 (size before relaxing)
+ .debug_str     0x0000000000007109       0x44 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+                                        0x228 (size before relaxing)
+ .debug_str     0x000000000000714d       0xa6 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_str     0x00000000000071f3       0xa6 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o)
+ .debug_str     0x00000000000071f3       0xa6 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .debug_str     0x00000000000071f3       0x30 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o)
+                                         0xa6 (size before relaxing)
+ .debug_str     0x0000000000007223      0x4fa /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+                                        0x61b (size before relaxing)
+ .debug_str     0x000000000000771d      0x11f /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+                                        0x2ce (size before relaxing)
+ .debug_str     0x000000000000783c       0xfd /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+                                        0x2f3 (size before relaxing)
+ .debug_str     0x0000000000007939       0x2f /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+                                        0x1fc (size before relaxing)
+ .debug_str     0x0000000000007968       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+                                        0x220 (size before relaxing)
+ .debug_str     0x000000000000799c       0x10 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+                                        0x220 (size before relaxing)
+ .debug_str     0x00000000000079ac       0x6b /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+                                        0x2f3 (size before relaxing)
+ .debug_str     0x0000000000007a17        0x9 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+                                        0x2ce (size before relaxing)
+ .debug_str     0x0000000000007a20        0xb /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+                                        0x206 (size before relaxing)
+ .debug_str     0x0000000000007a2b       0x1d /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+                                        0x206 (size before relaxing)
+ .debug_str     0x0000000000007a48       0x39 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+                                        0x295 (size before relaxing)
+ .debug_str     0x0000000000007a81        0xe /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+                                        0x291 (size before relaxing)
+ .debug_str     0x0000000000007a8f       0xa6 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_clzsi2.o)
+ .debug_str     0x0000000000007a8f      0x3a2 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
+                                        0x500 (size before relaxing)
+ .debug_str     0x0000000000007e31       0xee /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
+                                        0x557 (size before relaxing)
+ .debug_str     0x0000000000007f1f       0xda /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+                                        0x204 (size before relaxing)
+ .debug_str     0x0000000000007ff9       0xcb /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+                                        0x1de (size before relaxing)
+ .debug_str     0x00000000000080c4       0x9f /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+                                        0x1b9 (size before relaxing)
+ .debug_str     0x0000000000008163       0x41 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+                                        0x1ca (size before relaxing)
+ .debug_str     0x00000000000081a4       0x35 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
+                                        0x1a7 (size before relaxing)
+
+.comment        0x0000000000000000       0xac
+ .comment       0x0000000000000000       0x33 /tmp/ccSbW8dM.o
+                                         0x34 (size before relaxing)
+ .comment       0x0000000000000033       0x34 /tmp/ccg0VGCe.o
+ .comment       0x0000000000000033       0x34 /tmp/ccBAz2GS.o
+ .comment       0x0000000000000033       0x34 /tmp/ccN1BM5A.o
+ .comment       0x0000000000000033       0x34 /tmp/cc9rQobc.o
+ .comment       0x0000000000000033       0x34 /tmp/ccgay3jh.o
+ .comment       0x0000000000000033       0x34 /tmp/ccuF8wEd.o
+ .comment       0x0000000000000033       0x79 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+                                         0x7a (size before relaxing)
+ .comment       0x00000000000000ac       0x7a /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .comment       0x00000000000000ac       0x7a /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .comment       0x00000000000000ac       0x7a /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-s_lib_ver.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+ .comment       0x00000000000000ac       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
+
+.ARM.attributes
+                0x0000000000000000       0x2c
+ .ARM.attributes
+                0x0000000000000000       0x2c /tmp/ccSbW8dM.o
+ .ARM.attributes
+                0x000000000000002c       0x2c /tmp/ccg0VGCe.o
+ .ARM.attributes
+                0x0000000000000058       0x2c /tmp/ccBAz2GS.o
+ .ARM.attributes
+                0x0000000000000084       0x2c /tmp/ccN1BM5A.o
+ .ARM.attributes
+                0x00000000000000b0       0x2c /tmp/cc9rQobc.o
+ .ARM.attributes
+                0x00000000000000dc       0x2c /tmp/ccgay3jh.o
+ .ARM.attributes
+                0x0000000000000108       0x2c /tmp/ccuF8wEd.o
+ .ARM.attributes
+                0x0000000000000134       0x2b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .ARM.attributes
+                0x000000000000015f       0x2b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .ARM.attributes
+                0x000000000000018a       0x2b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .ARM.attributes
+                0x00000000000001b5       0x2b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .ARM.attributes
+                0x00000000000001e0       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+ .ARM.attributes
+                0x000000000000020c       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+ .ARM.attributes
+                0x0000000000000238       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+ .ARM.attributes
+                0x0000000000000264       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+ .ARM.attributes
+                0x0000000000000290       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+ .ARM.attributes
+                0x00000000000002bc       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+ .ARM.attributes
+                0x00000000000002e8       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+ .ARM.attributes
+                0x0000000000000314       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+ .ARM.attributes
+                0x0000000000000340       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-s_lib_ver.o)
+ .ARM.attributes
+                0x000000000000036c       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+ .ARM.attributes
+                0x0000000000000398       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+ .ARM.attributes
+                0x00000000000003c4       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+ .ARM.attributes
+                0x00000000000003f0       0x1e /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x000000000000040e       0x1e /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x000000000000042c       0x1e /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x000000000000044a       0x1e /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o)
+ .ARM.attributes
+                0x0000000000000468       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+ .ARM.attributes
+                0x0000000000000494       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+ .ARM.attributes
+                0x00000000000004c0       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+ .ARM.attributes
+                0x00000000000004ec       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+ .ARM.attributes
+                0x0000000000000518       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+ .ARM.attributes
+                0x0000000000000544       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+ .ARM.attributes
+                0x0000000000000570       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+ .ARM.attributes
+                0x000000000000059c       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+ .ARM.attributes
+                0x00000000000005c8       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+ .ARM.attributes
+                0x00000000000005f4       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+ .ARM.attributes
+                0x0000000000000620       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+ .ARM.attributes
+                0x000000000000064c       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+ .ARM.attributes
+                0x0000000000000678       0x1e /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_clzsi2.o)
+ .ARM.attributes
+                0x0000000000000696       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
+ .ARM.attributes
+                0x00000000000006c2       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000000000006ee       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .ARM.attributes
+                0x000000000000071a       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .ARM.attributes
+                0x0000000000000746       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+ .ARM.attributes
+                0x0000000000000772       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+ .ARM.attributes
+                0x000000000000079e       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
+
+.debug_frame    0x0000000000000000     0x1404
+ .debug_frame   0x0000000000000000       0x58 /tmp/ccSbW8dM.o
+ .debug_frame   0x0000000000000058      0x138 /tmp/ccg0VGCe.o
+ .debug_frame   0x0000000000000190       0xc4 /tmp/ccBAz2GS.o
+ .debug_frame   0x0000000000000254      0x270 /tmp/ccN1BM5A.o
+ .debug_frame   0x00000000000004c4      0x1b4 /tmp/cc9rQobc.o
+ .debug_frame   0x0000000000000678      0x10c /tmp/ccgay3jh.o
+ .debug_frame   0x0000000000000784       0x48 /tmp/ccuF8wEd.o
+ .debug_frame   0x00000000000007cc       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
+ .debug_frame   0x00000000000007ec      0x124 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
+ .debug_frame   0x0000000000000910      0x3d4 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
+ .debug_frame   0x0000000000000ce4      0x1a4 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
+ .debug_frame   0x0000000000000e88       0x28 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
+ .debug_frame   0x0000000000000eb0       0x28 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
+ .debug_frame   0x0000000000000ed8       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
+ .debug_frame   0x0000000000000f04       0x30 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
+ .debug_frame   0x0000000000000f34       0x3c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
+ .debug_frame   0x0000000000000f70       0x38 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_cos.o)
+ .debug_frame   0x0000000000000fa8       0x3c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o)
+ .debug_frame   0x0000000000000fe4       0x38 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_sin.o)
+ .debug_frame   0x000000000000101c       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_fabs.o)
+ .debug_frame   0x000000000000103c       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_floor.o)
+ .debug_frame   0x0000000000001070       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
+ .debug_frame   0x000000000000109c       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_frame   0x00000000000010bc       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o)
+ .debug_frame   0x00000000000010dc       0x28 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
+ .debug_frame   0x0000000000001104       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
+ .debug_frame   0x0000000000001138       0x38 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
+ .debug_frame   0x0000000000001170       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
+ .debug_frame   0x000000000000119c       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
+ .debug_frame   0x00000000000011c8       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
+ .debug_frame   0x00000000000011f4       0x38 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
+ .debug_frame   0x000000000000122c       0x38 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
+ .debug_frame   0x0000000000001264       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
+ .debug_frame   0x0000000000001284       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
+ .debug_frame   0x00000000000012a4       0x30 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
+ .debug_frame   0x00000000000012d4       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
+ .debug_frame   0x0000000000001300       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
+ .debug_frame   0x0000000000001320       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
+ .debug_frame   0x000000000000134c       0x34 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x0000000000001380       0x30 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
+ .debug_frame   0x00000000000013b0       0x28 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
+ .debug_frame   0x00000000000013d8       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
