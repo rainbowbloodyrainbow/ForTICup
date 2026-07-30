@@ -340,10 +340,14 @@ Chassis_Config.standby 允许为 NULL
 HC-05 / 调试串口：
 
 ```text
-UART2_TX：PA23
-UART2_RX：PA24
+UART1_TX：PB6
+UART1_RX：PB7
 代码只使用 HC05_UART_INST 生成宏
 ```
+
+UART2 的 PA23/PA24 接线曾在 115200、8-N-1 下持续收到乱码，已停止作为
+当前调试串口使用。生成代码仍采用 32 MHz BUSCLK、16 倍过采样，业务代码
+没有 UART 实例字面量。
 
 MPU6050：
 

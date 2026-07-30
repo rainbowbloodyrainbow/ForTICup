@@ -30,7 +30,7 @@
 > 右轮电机：TIMG0_C0/PA12 + AIN1/PA16 + AIN2/PB24
 > 左轮电机：TIMG0_C1/PA13 + BIN1/PB17 + BIN2/PB19
 > TB6612 STBY：扩展板固定使能，Chassis_Config.standby = NULL
-> 调试串口：UART2，TX/PA23，RX/PA24
+> 调试串口：UART1，TX/PB6，RX/PB7
 > 左编码器：A/PA14，B/PA25
 > 右编码器：A/PA26，B/PA27
 > MPU6050：I2C0，SDA/PA0，SCL/PA1
@@ -39,7 +39,7 @@
 > ```
 >
 > 正式代码通过 `HC05_UART_INST`、`GPIO_ENCODER_*` 这类 SysConfig
-> 生成宏访问硬件，不把 UART2 或 GPIOA 写成业务代码字面量。
+> 生成宏访问硬件，不把 UART1 或 GPIOA 写成业务代码字面量。
 
 ## 项目概览
 
