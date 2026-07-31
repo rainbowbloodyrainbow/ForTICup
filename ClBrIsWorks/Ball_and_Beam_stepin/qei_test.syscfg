@@ -1,0 +1,55 @@
+/**
+ * Minimal MS42CG quadrature-encoder test for the Dimengxing MSPM0G3507.
+ *
+ * QEI phase A: PA1 / PINCM2 / TIMG8_CCP0
+ * QEI phase B: PA0 / PINCM1 / TIMG8_CCP1
+ * Debug UART TX: PA10 / PINCM21 / UART0_TX, 115200 8-N-1
+ */
+//@cliArgs --device "MSPM0G350X" --part "Default" --package "LQFP-64(PM)" --product "mspm0_sdk@2.11.00.07"
+//@v2CliArgs --device "MSPM0G3507" --package "LQFP-64(PM)" --product "mspm0_sdk@2.11.00.07"
+
+const Board         = scripting.addModule("/ti/driverlib/Board");
+const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1         = GPIO.addInstance();
+const QEI           = scripting.addModule("/ti/driverlib/QEI", {}, false);
+const QEI1          = QEI.addInstance();
+const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
+const UART          = scripting.addModule("/ti/driverlib/UART", {}, false);
+const UART1         = UART.addInstance();
+const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+
+QEI1.$name                      = "ENCODER_QEI";
+QEI1.enableIndexInput           = false;
+QEI1.loadValue                  = 0xFFFF;
+QEI1.peripheral.$assign         = "TIMG8";
+QEI1.peripheral.ccp0Pin.$assign = "PA1";
+QEI1.peripheral.ccp1Pin.$assign = "PA0";
+
+GPIO1.$name                          = "MOTOR_GPIO";
+GPIO1.associatedPins.create(3);
+GPIO1.associatedPins[0].$name        = "STEP";
+GPIO1.associatedPins[0].initialValue = "CLEARED";
+GPIO1.associatedPins[0].pin.$assign  = "PB2";
+GPIO1.associatedPins[1].$name        = "DIR";
+GPIO1.associatedPins[1].initialValue = "CLEARED";
+GPIO1.associatedPins[1].pin.$assign  = "PB3";
+GPIO1.associatedPins[2].$name        = "EN";
+GPIO1.associatedPins[2].initialValue = "CLEARED";
+GPIO1.associatedPins[2].pin.$assign  = "PB6";
+
+SYSCTL.forceDefaultClkConfig = true;
+
+UART1.$name                    = "DEBUG_UART";
+UART1.direction                = "TX_RX";
+UART1.targetBaudRate           = 115200;
+UART1.enableFIFO               = true;
+UART1.peripheral.$assign       = "UART0";
+UART1.peripheral.txPin.$assign = "PA10";
+UART1.peripheral.rxPin.$assign = "PA11";
+
+ProjectConfig.compiler = "gcc";
+
+Board.peripheral.$suggestSolution          = "DEBUGSS";
+Board.peripheral.swclkPin.$suggestSolution = "PA20";
+Board.peripheral.swdioPin.$suggestSolution = "PA19";
+SYSCTL.peripheral.$suggestSolution         = "SYSCTL";

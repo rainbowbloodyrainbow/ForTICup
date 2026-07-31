@@ -1,0 +1,11 @@
+"./empty.o"
+"./ti_msp_dl_config.o"
+"./startup_mspm0g350x_ticlang.o"
+"./Control/app_demo.o"
+"./Control/closed_loop.o"
+"./Hardware/board.o"
+"./Hardware/encoder.o"
+"./Hardware/motor.o"
+"../device_linker.cmd"
+-ldevice.cmd.genlibs
+-llibc.a
