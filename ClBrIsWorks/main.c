@@ -6,14 +6,14 @@
 
 #define LINE_PRINT_PERIOD_MS (100U)
 
-#define MOTOR_MAXIMUM_OUTPUT (350U)
-#define DRIVE_STRAIGHT_OUTPUT (220)
-#define DRIVE_CORRECTION_OUTPUT (200)
-#define TURN_CORRECTION_OUTPUT (80)
-#define DRIVE_SHARP_OUTPUT (180)
-#define TURN_SHARP_OUTPUT (140)
-#define DRIVE_SEARCH_OUTPUT (110)
-#define TURN_SEARCH_OUTPUT (110)
+#define MOTOR_MAXIMUM_OUTPUT (100U)
+#define DRIVE_STRAIGHT_OUTPUT (80)
+#define DRIVE_CORRECTION_OUTPUT (70)
+#define TURN_CORRECTION_OUTPUT (10)
+#define DRIVE_SHARP_OUTPUT (60)
+#define TURN_SHARP_OUTPUT (20)
+#define DRIVE_SEARCH_OUTPUT (30)
+#define TURN_SEARCH_OUTPUT (20)
 
 static uint16_t adc_line[ADC_SEQUENCE5_COUNT];
 static uint8_t line_state[ADC_SEQUENCE5_COUNT];
@@ -27,7 +27,7 @@ static int8_t last_line_direction;
  * ADC 值大于等于对应阈值时判定为黑线。
  */
 static const uint16_t line_threshold[ADC_SEQUENCE5_COUNT] = {
-    288U, 265U, 262U, 275U, 535U
+    380U, 320U, 320U, 350U, 600U
 };
 
 static ADC_Status read_line_sensor(void)
@@ -164,6 +164,12 @@ static void print_line_state(void)
            (unsigned int) line_state[2],
            (unsigned int) line_state[3],
            (unsigned int) line_state[4]);
+    printf("%u %u %u %u %u\n",
+           (unsigned int) adc_line[0],
+           (unsigned int) adc_line[1],
+           (unsigned int) adc_line[2],
+           (unsigned int) adc_line[3],
+           (unsigned int) adc_line[4]);
 }
 
 int main(void)
@@ -172,6 +178,7 @@ int main(void)
     uint32_t last_print_ms;
 
     SYSCFG_DL_init();
+    printf("01debug\n");
 
     if (!init_chassis()) {
         printf("chassis init failed\n");
