@@ -6,14 +6,14 @@
 
 #define LINE_PRINT_PERIOD_MS (100U)
 
-#define MOTOR_MAXIMUM_OUTPUT (100U)
-#define DRIVE_STRAIGHT_OUTPUT (80)
-#define DRIVE_CORRECTION_OUTPUT (70)
-#define TURN_CORRECTION_OUTPUT (10)
-#define DRIVE_SHARP_OUTPUT (60)
-#define TURN_SHARP_OUTPUT (20)
-#define DRIVE_SEARCH_OUTPUT (30)
-#define TURN_SEARCH_OUTPUT (20)
+#define MOTOR_MAXIMUM_OUTPUT (200U)
+#define WHEEL_STRAIGHT_OUTPUT (170)
+#define WHEEL_CORRECTION_SLOW_OUTPUT (140)
+#define WHEEL_CORRECTION_FAST_OUTPUT (180)
+#define WHEEL_SHARP_SLOW_OUTPUT (110)
+#define WHEEL_SHARP_FAST_OUTPUT (190)
+#define WHEEL_SEARCH_SLOW_OUTPUT (110)
+#define WHEEL_SEARCH_FAST_OUTPUT (170)
 
 static uint16_t adc_line[ADC_SEQUENCE5_COUNT];
 static uint8_t line_state[ADC_SEQUENCE5_COUNT];
@@ -27,7 +27,7 @@ static int8_t last_line_direction;
  * ADC 值大于等于对应阈值时判定为黑线。
  */
 static const uint16_t line_threshold[ADC_SEQUENCE5_COUNT] = {
-    380U, 320U, 320U, 350U, 600U
+    330U, 295U, 290U, 300U, 500U
 };
 
 static ADC_Status read_line_sensor(void)
@@ -49,17 +49,6 @@ static bool init_chassis(void)
 {
     const Motor_Config left_motor_config = {
         .pwmTimer = MOTOR_PWM_INST,
-        .pwmChannel = GPIO_MOTOR_PWM_C0_IDX,
-        .in1Port = MOTOR_CONTROL_AIN1_PORT,
-        .in1Pin = MOTOR_CONTROL_AIN1_PIN,
-        .in2Port = MOTOR_CONTROL_AIN2_PORT,
-        .in2Pin = MOTOR_CONTROL_AIN2_PIN,
-        .maximumOutput = MOTOR_MAXIMUM_OUTPUT,
-        .inverted = false,
-        .reversalDelayMs = 5U
-    };
-    const Motor_Config right_motor_config = {
-        .pwmTimer = MOTOR_PWM_INST,
         .pwmChannel = GPIO_MOTOR_PWM_C1_IDX,
         .in1Port = MOTOR_CONTROL_BIN1_PORT,
         .in1Pin = MOTOR_CONTROL_BIN1_PIN,
@@ -69,12 +58,23 @@ static bool init_chassis(void)
         .inverted = false,
         .reversalDelayMs = 5U
     };
+    const Motor_Config right_motor_config = {
+        .pwmTimer = MOTOR_PWM_INST,
+        .pwmChannel = GPIO_MOTOR_PWM_C0_IDX,
+        .in1Port = MOTOR_CONTROL_AIN1_PORT,
+        .in1Pin = MOTOR_CONTROL_AIN1_PIN,
+        .in2Port = MOTOR_CONTROL_AIN2_PORT,
+        .in2Pin = MOTOR_CONTROL_AIN2_PIN,
+        .maximumOutput = MOTOR_MAXIMUM_OUTPUT,
+        .inverted = false,
+        .reversalDelayMs = 5U
+    };
     const Chassis_Config chassis_config = {
         .leftMotor = &left_motor,
         .rightMotor = &right_motor,
         .standby = NULL,
         .maximumDriveOutput = MOTOR_MAXIMUM_OUTPUT,
-        .maximumTurnOutput = DRIVE_SHARP_OUTPUT,
+        .maximumTurnOutput = MOTOR_MAXIMUM_OUTPUT,
         .leftOpenLoopScalePermille = 1000U,
         .rightOpenLoopScalePermille = 1000U
     };
@@ -96,8 +96,8 @@ static void follow_line(uint32_t now_ms)
 {
     int32_t error;
     uint32_t active_count;
-    int16_t drive;
-    int16_t turn;
+    int16_t left_output;
+    int16_t right_output;
 
     error =
         2 * (int32_t) line_state[0] +
@@ -113,16 +113,16 @@ static void follow_line(uint32_t now_ms)
 
     if (active_count == 0U) {
         if (last_line_direction > 0) {
-            Chassis_SetDriveTurn(
+            Chassis_SetWheelOutputs(
                 &chassis,
-                DRIVE_SEARCH_OUTPUT,
-                TURN_SEARCH_OUTPUT,
+                WHEEL_SEARCH_SLOW_OUTPUT,
+                WHEEL_SEARCH_FAST_OUTPUT,
                 now_ms);
         } else if (last_line_direction < 0) {
-            Chassis_SetDriveTurn(
+            Chassis_SetWheelOutputs(
                 &chassis,
-                DRIVE_SEARCH_OUTPUT,
-                -TURN_SEARCH_OUTPUT,
+                WHEEL_SEARCH_FAST_OUTPUT,
+                WHEEL_SEARCH_SLOW_OUTPUT,
                 now_ms);
         } else {
             Chassis_Brake(&chassis, now_ms);
@@ -137,23 +137,24 @@ static void follow_line(uint32_t now_ms)
     }
 
     if (error >= 2) {
-        drive = DRIVE_SHARP_OUTPUT;
-        turn = TURN_SHARP_OUTPUT;
+        left_output = WHEEL_SHARP_SLOW_OUTPUT;
+        right_output = WHEEL_SHARP_FAST_OUTPUT;
     } else if (error == 1) {
-        drive = DRIVE_CORRECTION_OUTPUT;
-        turn = TURN_CORRECTION_OUTPUT;
+        left_output = WHEEL_CORRECTION_SLOW_OUTPUT;
+        right_output = WHEEL_CORRECTION_FAST_OUTPUT;
     } else if (error == -1) {
-        drive = DRIVE_CORRECTION_OUTPUT;
-        turn = -TURN_CORRECTION_OUTPUT;
+        left_output = WHEEL_CORRECTION_FAST_OUTPUT;
+        right_output = WHEEL_CORRECTION_SLOW_OUTPUT;
     } else if (error <= -2) {
-        drive = DRIVE_SHARP_OUTPUT;
-        turn = -TURN_SHARP_OUTPUT;
+        left_output = WHEEL_SHARP_FAST_OUTPUT;
+        right_output = WHEEL_SHARP_SLOW_OUTPUT;
     } else {
-        drive = DRIVE_STRAIGHT_OUTPUT;
-        turn = 0;
+        left_output = WHEEL_STRAIGHT_OUTPUT;
+        right_output = WHEEL_STRAIGHT_OUTPUT;
     }
 
-    Chassis_SetDriveTurn(&chassis, drive, turn, now_ms);
+    Chassis_SetWheelOutputs(
+        &chassis, left_output, right_output, now_ms);
 }
 
 static void print_line_state(void)
@@ -178,7 +179,7 @@ int main(void)
     uint32_t last_print_ms;
 
     SYSCFG_DL_init();
-    printf("01debug\n");
+    printf("04debug\n");
 
     if (!init_chassis()) {
         printf("chassis init failed\n");
