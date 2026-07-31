@@ -5,15 +5,16 @@
 #include <stdio.h>
 
 #define LINE_PRINT_PERIOD_MS (100U)
+#define STOP_ENABLE_DELAY_MS (16000U)
 
-#define MOTOR_MAXIMUM_OUTPUT (250U)
-#define WHEEL_STRAIGHT_OUTPUT (215)
-#define WHEEL_CORRECTION_SLOW_OUTPUT (50)
-#define WHEEL_CORRECTION_FAST_OUTPUT (210)
-#define WHEEL_SHARP_SLOW_OUTPUT (40)
-#define WHEEL_SHARP_FAST_OUTPUT (240)
+#define MOTOR_MAXIMUM_OUTPUT (390U)
+#define WHEEL_STRAIGHT_OUTPUT (275)
+#define WHEEL_CORRECTION_SLOW_OUTPUT (180)
+#define WHEEL_CORRECTION_FAST_OUTPUT (270)
+#define WHEEL_SHARP_SLOW_OUTPUT (60)
+#define WHEEL_SHARP_FAST_OUTPUT (270)
 #define WHEEL_SEARCH_SLOW_OUTPUT (120)
-#define WHEEL_SEARCH_FAST_OUTPUT (180)
+#define WHEEL_SEARCH_FAST_OUTPUT (240)
 
 static uint16_t adc_line[ADC_SEQUENCE5_COUNT];
 static uint8_t line_state[ADC_SEQUENCE5_COUNT];
@@ -21,6 +22,7 @@ static Motor left_motor;
 static Motor right_motor;
 static Chassis chassis;
 static int8_t last_line_direction;
+static bool permanently_stopped;
 
 /*
  * 五路阈值分别取白底和黑线实测值的中点。
@@ -100,11 +102,18 @@ static void follow_line(uint32_t now_ms)
     int16_t left_output;
     int16_t right_output;
 
+    if (permanently_stopped) {
+        Chassis_Brake(&chassis, now_ms);
+        return;
+    }
+
     middle_black_count =
         (uint32_t) line_state[1] +
         (uint32_t) line_state[2] +
         (uint32_t) line_state[3];
-    if (middle_black_count >= 2U) {
+    if ((now_ms > STOP_ENABLE_DELAY_MS) &&
+        (middle_black_count >= 2U)) {
+        permanently_stopped = true;
         Chassis_Brake(&chassis, now_ms);
         return;
     }
@@ -169,6 +178,11 @@ static void follow_line(uint32_t now_ms)
 
 static void print_line_state(void)
 {
+    if (permanently_stopped) {
+        printf("stopped\n");
+        return;
+    }
+
     printf("%u %u %u %u %u\n",
            (unsigned int) line_state[0],
            (unsigned int) line_state[1],
@@ -189,7 +203,7 @@ int main(void)
     uint32_t last_print_ms;
 
     SYSCFG_DL_init();
-    printf("06debug\n");
+    printf("07debug\n");
 
     if (!init_chassis()) {
         printf("chassis init failed\n");
