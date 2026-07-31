@@ -6,14 +6,14 @@
 
 #define LINE_PRINT_PERIOD_MS (100U)
 
-#define MOTOR_MAXIMUM_OUTPUT (200U)
-#define WHEEL_STRAIGHT_OUTPUT (170)
+#define MOTOR_MAXIMUM_OUTPUT (300U)
+#define WHEEL_STRAIGHT_OUTPUT (220)
 #define WHEEL_CORRECTION_SLOW_OUTPUT (140)
-#define WHEEL_CORRECTION_FAST_OUTPUT (180)
+#define WHEEL_CORRECTION_FAST_OUTPUT (210)
 #define WHEEL_SHARP_SLOW_OUTPUT (110)
-#define WHEEL_SHARP_FAST_OUTPUT (190)
+#define WHEEL_SHARP_FAST_OUTPUT (230)
 #define WHEEL_SEARCH_SLOW_OUTPUT (110)
-#define WHEEL_SEARCH_FAST_OUTPUT (170)
+#define WHEEL_SEARCH_FAST_OUTPUT (230)
 
 static uint16_t adc_line[ADC_SEQUENCE5_COUNT];
 static uint8_t line_state[ADC_SEQUENCE5_COUNT];
@@ -99,6 +99,13 @@ static void follow_line(uint32_t now_ms)
     int16_t left_output;
     int16_t right_output;
 
+    if ((line_state[1] != 0U) &&
+        (line_state[2] != 0U) &&
+        (line_state[3] != 0U)) {
+        Chassis_Brake(&chassis, now_ms);
+        return;
+    }
+
     error =
         2 * (int32_t) line_state[0] +
         (int32_t) line_state[1] -
@@ -179,7 +186,7 @@ int main(void)
     uint32_t last_print_ms;
 
     SYSCFG_DL_init();
-    printf("04debug\n");
+    printf("06debug\n");
 
     if (!init_chassis()) {
         printf("chassis init failed\n");
