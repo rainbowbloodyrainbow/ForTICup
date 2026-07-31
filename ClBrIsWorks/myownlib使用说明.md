@@ -42,7 +42,10 @@
 > 生成宏访问硬件，不把 UART0 或 GPIOA 写成业务代码字面量。
 > HC-05 命令 `t` 单次输出完整遥测；`v` 开关每 100 ms 一行的五路
 > `raw` 连续输出；`d` 开关每 200 ms 一行的完整控制快照。`v` 与 `d`
-> 互斥，两个功能上电均默认关闭。
+> 互斥，两个功能上电均默认关闭。天猛星板载 CH340E 固定连接 UART0：
+> CH340 TX 接 PA11/UART0_RX，CH340 RX 接 PA10/UART0_TX。正式固件每秒
+> 主动输出一次 `uart=...rxBytes...`，用于在不依赖接收命令的情况下诊断
+> RX 通路。
 
 ## 项目概览
 
@@ -462,6 +465,7 @@ void HC05_ResetReceiver(void);
 void HC05_HandleRxInterrupt(UART_Regs *uart);
 bool HC05_DataAvailable(void);
 bool HC05_ReadByte(uint8_t *data);
+uint32_t HC05_GetRxByteCount(void);
 bool HC05_RxOverflowed(void);
 void HC05_ClearRxOverflow(void);
 ```
@@ -479,7 +483,8 @@ void HC05_ClearRxOverflow(void);
 - 分配 TX、RX 引脚。
 - 启用 UART RX 中断。
 
-当前示例使用 UART1、115200、8-N-1、PA8 TX 和 PA9 RX。
+正式天猛星工程使用 UART0、115200、8-N-1、PA10 TX 和 PA11 RX。
+文中较早的 Example 仍可能使用 UART1、PA8 TX 和 PA9 RX。
 
 #### 中断接收流程
 
@@ -491,6 +496,7 @@ HC05_ResetReceiver();
 
 NVIC_ClearPendingIRQ(HC05_UART_INST_INT_IRQN);
 NVIC_EnableIRQ(HC05_UART_INST_INT_IRQN);
+__enable_irq();
 ```
 
 应用工程必须保留自己的中断入口，并把接收处理交给模块：
@@ -999,11 +1005,23 @@ PwmOutput_SetDuty(
 
 检查：
 
+- 天猛星板载 CH340E 的 TX 是否到达 PA11/UART0_RX；板载 CH340E 的
+  RX 对应 PA10/UART0_TX。
 - HC-05 TX 是否连接 MSPM0 RX，HC-05 RX 是否连接 MSPM0 TX。
 - 两端是否共地。
 - SysConfig 是否启用了 UART RX 中断。
 - 主函数是否调用 `NVIC_EnableIRQ()`。
 - UART 中断入口是否调用 `HC05_HandleRxInterrupt()`。
+
+正式固件每秒输出：
+
+```text
+uart=ms:1000,rxBytes:0,rxOverflow:0,state:0
+```
+
+发送 `v` 后，如果 `rxBytes` 仍为 0，字节没有进入 PA11/UART0_RX，应检查
+板载串口连接、串口工具当前端口及接收方向。如果 `rxBytes` 增加，说明硬件
+接收和 ISR 正常；有效命令还会立即返回 `cmd=v`。
 
 ### HC-05 接收数据丢失
 

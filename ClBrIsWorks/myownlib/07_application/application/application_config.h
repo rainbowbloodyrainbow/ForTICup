@@ -35,6 +35,13 @@
 #define APPLICATION_DEBUG_STREAM_PERIOD_MS (200U)
 
 /*
+ * 上电后每秒主动报告一次 UART 接收计数。这个诊断不依赖接收命令：
+ * 若发送字符后 rxBytes 仍为 0，说明字节没有到达 UART0 RX/PA11；
+ * 若 rxBytes 增加，则可继续检查命令队列和解析逻辑。
+ */
+#define APPLICATION_UART_DIAGNOSTIC_PERIOD_MS (1000U)
+
+/*
  * 下列数值只是安全启动用的初始标定，必须用本车五路探头在背景和黑线上分别
  * 实测后替换。每个数组从左至右对应 L2、L1、C、R1、R2。
  */

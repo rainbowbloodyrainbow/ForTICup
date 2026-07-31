@@ -31,6 +31,7 @@ void HC05_ResetReceiver(void);
 void HC05_HandleRxInterrupt(UART_Regs *uart);
 bool HC05_DataAvailable(void);
 bool HC05_ReadByte(uint8_t *data);
+uint32_t HC05_GetRxByteCount(void);
 bool HC05_RxOverflowed(void);
 void HC05_ClearRxOverflow(void);
 

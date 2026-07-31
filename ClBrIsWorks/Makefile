@@ -46,6 +46,7 @@ SOURCES = \
 	main.c \
 	myownlib/01_platform/adc/adc.c \
 	myownlib/01_platform/output/output.c \
+	myownlib/01_platform/stdio_redirect/stdio_redirect.c \
 	myownlib/01_platform/system_time/system_time.c \
 	myownlib/02_device/hc05/hc05.c \
 	myownlib/02_device/line_sensor/line_sensor.c \

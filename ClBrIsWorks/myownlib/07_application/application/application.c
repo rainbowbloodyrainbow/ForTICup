@@ -23,6 +23,7 @@ static uint32_t gMissedControlCycles;
 static uint32_t gAdcErrorCount;
 static uint32_t gLastRawStreamMs;
 static uint32_t gLastDebugStreamMs;
+static uint32_t gLastUartDiagnosticMs;
 static bool gTelemetryRequested;
 static bool gRawStreamingEnabled;
 static bool gDebugStreamingEnabled;
@@ -110,11 +111,19 @@ static void Application_RunControlStep(uint32_t nowMs)
     }
 }
 
+static void Application_AcknowledgeCommand(uint8_t command)
+{
+    HC05_SendString(HC05_UART_INST, "cmd=");
+    HC05_SendByte(HC05_UART_INST, command);
+    HC05_SendString(HC05_UART_INST, "\r\n");
+}
+
 static void Application_ProcessOneCommand(
     uint8_t command, uint32_t nowMs)
 {
     switch (command) {
         case (uint8_t) 's':
+            Application_AcknowledgeCommand(command);
             if (gState == APPLICATION_IDLE) {
                 LineControl_Reset(&gLineControl);
                 gDriveOutput =
@@ -125,16 +134,19 @@ static void Application_ProcessOneCommand(
             break;
 
         case (uint8_t) 'x':
+            Application_AcknowledgeCommand(command);
             Application_ApplySafeState(nowMs);
             LineControl_Reset(&gLineControl);
             Application_EnterState(APPLICATION_IDLE);
             break;
 
         case (uint8_t) 't':
+            Application_AcknowledgeCommand(command);
             gTelemetryRequested = true;
             break;
 
         case (uint8_t) 'v':
+            Application_AcknowledgeCommand(command);
             gRawStreamingEnabled =
                 !gRawStreamingEnabled;
             if (gRawStreamingEnabled) {
@@ -149,6 +161,7 @@ static void Application_ProcessOneCommand(
             break;
 
         case (uint8_t) 'd':
+            Application_AcknowledgeCommand(command);
             gDebugStreamingEnabled =
                 !gDebugStreamingEnabled;
             if (gDebugStreamingEnabled) {
@@ -163,6 +176,14 @@ static void Application_ProcessOneCommand(
             break;
 
         default:
+            if ((command != (uint8_t) '\r') &&
+                (command != (uint8_t) '\n')) {
+                HC05_SendString(
+                    HC05_UART_INST, "cmd=0x");
+                HC05_SendHex8(HC05_UART_INST, command);
+                HC05_SendString(
+                    HC05_UART_INST, ",ignored\r\n");
+            }
             break;
     }
 }
@@ -220,6 +241,13 @@ static void Application_PublishTelemetry(uint32_t nowMs)
     HC05_SendString(HC05_UART_INST, ",missed=");
     HC05_SendUint32(
         HC05_UART_INST, gMissedControlCycles);
+    HC05_SendString(HC05_UART_INST, ",rxBytes=");
+    HC05_SendUint32(
+        HC05_UART_INST, HC05_GetRxByteCount());
+    HC05_SendString(HC05_UART_INST, ",rxOverflow=");
+    HC05_SendUint32(
+        HC05_UART_INST,
+        HC05_RxOverflowed() ? 1U : 0U);
     HC05_SendString(HC05_UART_INST, ",drive=");
     HC05_SendInt32(
         HC05_UART_INST,
@@ -257,6 +285,24 @@ static void Application_PublishRawValues(uint32_t nowMs)
     gLastRawStreamMs = nowMs;
 }
 
+static void Application_PublishUartDiagnostic(uint32_t nowMs)
+{
+    HC05_SendString(HC05_UART_INST, "uart=ms:");
+    HC05_SendUint32(HC05_UART_INST, nowMs);
+    HC05_SendString(HC05_UART_INST, ",rxBytes:");
+    HC05_SendUint32(
+        HC05_UART_INST, HC05_GetRxByteCount());
+    HC05_SendString(HC05_UART_INST, ",rxOverflow:");
+    HC05_SendUint32(
+        HC05_UART_INST,
+        HC05_RxOverflowed() ? 1U : 0U);
+    HC05_SendString(HC05_UART_INST, ",state:");
+    HC05_SendUint32(
+        HC05_UART_INST, (uint32_t) gState);
+    HC05_SendString(HC05_UART_INST, "\r\n");
+    gLastUartDiagnosticMs = nowMs;
+}
+
 static void Application_PublishDebugSnapshot(uint32_t nowMs)
 {
     const LineSensor_Result *line;
@@ -271,7 +317,7 @@ static void Application_PublishDebugSnapshot(uint32_t nowMs)
     /*
      * 字段顺序：
      * state,lineStatus,valid,position,totalStrength,drive,turn,left,right,
-     * raw[0..4],strength[0..4],adcErrors,missedCycles
+     * raw[0..4],strength[0..4],adcErrors,missedCycles,rxBytes,rxOverflow
      */
     HC05_SendString(HC05_UART_INST, "dbg=");
     HC05_SendUint32(HC05_UART_INST, (uint32_t) gState);
@@ -319,6 +365,13 @@ static void Application_PublishDebugSnapshot(uint32_t nowMs)
     Application_SendSeparator();
     HC05_SendUint32(
         HC05_UART_INST, gMissedControlCycles);
+    Application_SendSeparator();
+    HC05_SendUint32(
+        HC05_UART_INST, HC05_GetRxByteCount());
+    Application_SendSeparator();
+    HC05_SendUint32(
+        HC05_UART_INST,
+        HC05_RxOverflowed() ? 1U : 0U);
     HC05_SendString(HC05_UART_INST, "\r\n");
     gLastDebugStreamMs = nowMs;
 }
@@ -404,6 +457,7 @@ void Application_Init(void)
     gAdcErrorCount = 0U;
     gLastRawStreamMs = nowMs;
     gLastDebugStreamMs = nowMs;
+    gLastUartDiagnosticMs = nowMs;
     gTelemetryRequested = false;
     gRawStreamingEnabled = false;
     gDebugStreamingEnabled = false;
@@ -433,9 +487,10 @@ void Application_Init(void)
 
     NVIC_ClearPendingIRQ(HC05_UART_INST_INT_IRQN);
     NVIC_EnableIRQ(HC05_UART_INST_INT_IRQN);
+    __enable_irq();
     HC05_SendString(
         HC05_UART_INST,
-        "111ready: s=start, x=brake, t=telemetry, "
+        "112ready: s=start, x=brake, t=telemetry, "
         "v=raw-stream, d=debug-stream\r\n");
 }
 
@@ -477,6 +532,12 @@ void Application_Process(void)
             nowMs, gLastDebugStreamMs) >=
             APPLICATION_DEBUG_STREAM_PERIOD_MS)) {
         Application_PublishDebugSnapshot(nowMs);
+    }
+
+    if (SystemTime_ElapsedMs(
+            nowMs, gLastUartDiagnosticMs) >=
+            APPLICATION_UART_DIAGNOSTIC_PERIOD_MS) {
+        Application_PublishUartDiagnostic(nowMs);
     }
 }
 

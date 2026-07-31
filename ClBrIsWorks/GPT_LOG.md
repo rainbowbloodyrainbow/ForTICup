@@ -452,6 +452,39 @@ CAN
 
 最终接口和引脚必须等电机及驱动器型号确定后再锁定，不允许提前猜测。
 
+---
+
+## 13. 天猛星板载串口与 RX 诊断
+
+天猛星板载 CH340E 使用：
+
+```text
+CH340 TX → PA11 / UART0_RX
+CH340 RX ← PA10 / UART0_TX
+波特率：115200
+数据格式：8-N-1
+```
+
+该映射与 `Ball_and_Beam/ballandbeam.syscfg` 中地猛星的可用 UART 配置
+一致。正式工程的 UART RX 中断处理读取一次 pending 状态后直接排空 RX
+FIFO；应用初始化同时显式启用 UART0 NVIC 和全局中断。
+
+为避免“命令没有反应”时无法判断故障位置，固件具备以下诊断：
+
+```text
+每个有效命令：立即返回 cmd=<字符>
+未知非换行字符：返回 cmd=0xNN,ignored
+每秒主动输出：uart=ms:<时间>,rxBytes:<累计字节>,rxOverflow:<0或1>,state:<状态>
+```
+
+判断方法：
+
+```text
+发送字符后 rxBytes 不增加：字节未到达 PA11/UART0_RX
+发送字符后 rxBytes 增加：UART 硬件和 ISR 正常，继续检查命令内容
+rxOverflow=1：64 字节软件接收队列曾经溢出
+```
+
 ````
 
 

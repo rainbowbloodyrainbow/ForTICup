@@ -11,6 +11,7 @@
 static volatile uint8_t gRxBuffer[HC05_RX_BUFFER_SIZE];
 static volatile uint16_t gRxHead;
 static volatile uint16_t gRxTail;
+static volatile uint32_t gRxByteCount;
 static volatile bool gRxOverflow;
 
 void HC05_SendByte(UART_Regs *uart, uint8_t data)
@@ -94,6 +95,7 @@ void HC05_ResetReceiver(void)
 {
     gRxHead = 0U;
     gRxTail = 0U;
+    gRxByteCount = 0U;
     gRxOverflow = false;
 }
 
@@ -102,24 +104,30 @@ void HC05_HandleRxInterrupt(UART_Regs *uart)
     uint16_t nextHead;
     uint8_t data;
 
-    switch (DL_UART_Main_getPendingInterrupt(uart)) {
-        case DL_UART_MAIN_IIDX_RX:
-            while (DL_UART_Main_isRXFIFOEmpty(uart) != true) {
-                data = DL_UART_Main_receiveData(uart);
-                nextHead = (uint16_t) ((gRxHead + 1U) %
-                    HC05_RX_BUFFER_SIZE);
+    if (uart == NULL) {
+        return;
+    }
 
-                if (nextHead == gRxTail) {
-                    gRxOverflow = true;
-                } else {
-                    gRxBuffer[gRxHead] = data;
-                    gRxHead = nextHead;
-                }
-            }
-            break;
+    /*
+     * 读取 IIDX 会确认当前中断。随后无条件排空 RX FIFO，避免其他 UART
+     * pending 状态使已经到达的字节滞留在硬件 FIFO 中。
+     */
+    (void) DL_UART_Main_getPendingInterrupt(uart);
 
-        default:
-            break;
+    while (DL_UART_Main_isRXFIFOEmpty(uart) != true) {
+        data = DL_UART_Main_receiveData(uart);
+        if (gRxByteCount != UINT32_MAX) {
+            gRxByteCount++;
+        }
+        nextHead = (uint16_t) ((gRxHead + 1U) %
+            HC05_RX_BUFFER_SIZE);
+
+        if (nextHead == gRxTail) {
+            gRxOverflow = true;
+        } else {
+            gRxBuffer[gRxHead] = data;
+            gRxHead = nextHead;
+        }
     }
 }
 
@@ -138,6 +146,11 @@ bool HC05_ReadByte(uint8_t *data)
     gRxTail = (uint16_t) ((gRxTail + 1U) % HC05_RX_BUFFER_SIZE);
 
     return true;
+}
+
+uint32_t HC05_GetRxByteCount(void)
+{
+    return gRxByteCount;
 }
 
 bool HC05_RxOverflowed(void)
