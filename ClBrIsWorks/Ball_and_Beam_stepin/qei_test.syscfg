@@ -7,6 +7,7 @@
  */
 //@cliArgs --device "MSPM0G350X" --part "Default" --package "LQFP-64(PM)" --product "mspm0_sdk@2.11.00.07"
 //@v2CliArgs --device "MSPM0G3507" --package "LQFP-64(PM)" --product "mspm0_sdk@2.11.00.07"
+//@versions {"tool":"1.28.0+4712"}
 
 const Board         = scripting.addModule("/ti/driverlib/Board");
 const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
@@ -16,7 +17,7 @@ const QEI1          = QEI.addInstance();
 const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
 const UART          = scripting.addModule("/ti/driverlib/UART", {}, false);
 const UART1         = UART.addInstance();
-const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+const UART2         = UART.addInstance();
 
 QEI1.$name                      = "ENCODER_QEI";
 QEI1.enableIndexInput           = false;
@@ -47,7 +48,13 @@ UART1.peripheral.$assign       = "UART0";
 UART1.peripheral.txPin.$assign = "PA10";
 UART1.peripheral.rxPin.$assign = "PA11";
 
-ProjectConfig.compiler = "gcc";
+UART2.$name                    = "OPENMV_UART";
+UART2.direction                = "TX_RX";
+UART2.targetBaudRate           = 115200;
+UART2.enableFIFO               = true;
+UART2.peripheral.$assign       = "UART1";
+UART2.peripheral.txPin.$assign = "PA8";
+UART2.peripheral.rxPin.$assign = "PA9";
 
 Board.peripheral.$suggestSolution          = "DEBUGSS";
 Board.peripheral.swclkPin.$suggestSolution = "PA20";

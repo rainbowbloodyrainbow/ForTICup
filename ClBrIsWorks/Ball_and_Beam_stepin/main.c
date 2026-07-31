@@ -21,6 +21,11 @@
 #define FEEDBACK_CHECK_COUNTS        (4)
 #define NO_FEEDBACK_LIMIT_STEPS      (64U)
 #define COMMAND_BUFFER_SIZE          (24U)
+#define OPENMV_BUFFER_SIZE           (12U)
+#define VISION_CENTER_X              (180U)
+#define VISION_LEFT_TARGET_MILLIDEG  (20000L)
+#define VISION_RIGHT_TARGET_MILLIDEG (-40000L)
+#define VISION_STATUS_EVERY_FRAMES   (10U)
 
 typedef enum {
     MOTION_IDLE = 0,
@@ -42,6 +47,11 @@ static uint8_t g_dirInitialized;
 static MotionState g_motionState;
 static char g_commandBuffer[COMMAND_BUFFER_SIZE];
 static uint32_t g_commandLength;
+static char g_openmvBuffer[OPENMV_BUFFER_SIZE];
+static uint32_t g_openmvLength;
+static int8_t g_lastVisionSide;
+static uint8_t g_visionEnabled;
+static uint32_t g_visionStatusFrameCount;
 
 static void uart_putc(char character)
 {
@@ -193,6 +203,8 @@ static void print_status(void)
     uart_puts((g_motionState == MOTION_MOVING) ? "MOVING" :
               ((g_motionState == MOTION_HOLDING) ? "HOLDING" :
                ((g_motionState == MOTION_FAULT) ? "FAULT" : "IDLE")));
+    uart_puts(" vision=");
+    uart_puts((g_visionEnabled != 0U) ? "ON" : "OFF");
     uart_puts(" A=");
     uart_write_u32((DL_GPIO_readPins(GPIOA, DL_GPIO_PIN_1) != 0U) ? 1U : 0U);
     uart_puts(" B=");
@@ -291,6 +303,7 @@ static void handle_command(char *command)
     int32_t targetMillideg;
 
     if (parse_to_command(command, &targetMillideg) != 0U) {
+        g_visionEnabled = 0U;
         start_position_move(targetMillideg);
     } else if ((command[0] == '?' && command[1] == '\0') ||
                ((command[0] == 'S' || command[0] == 's') &&
@@ -298,12 +311,114 @@ static void handle_command(char *command)
         if (command[0] == '?') {
             print_status();
         } else {
+            g_visionEnabled = 0U;
             g_motionState = MOTION_IDLE;
             motor_disable();
-            uart_puts("OK stopped and driver disabled\r\n");
+            uart_puts("OK stopped; driver disabled and vision control OFF\r\n");
         }
+    } else if ((command[0] == 'V' || command[0] == 'v') &&
+               command[1] == '\0') {
+        g_visionEnabled = 1U;
+        g_lastVisionSide = 0;
+        g_visionStatusFrameCount = 0U;
+        uart_puts("OK vision control ON\r\n");
     } else {
-        uart_puts("ERR command; use To30, To-30, ?, or S, then press Enter\r\n");
+        uart_puts("ERR command; use To30, To-30, V, ?, or S, then press Enter\r\n");
+    }
+}
+
+static uint8_t parse_openmv_x(const char *text, uint32_t *x)
+{
+    const char *cursor = text;
+    uint32_t value = 0U;
+    uint8_t haveDigit = 0U;
+
+    if (*cursor != 'X' && *cursor != 'x') return 0U;
+    cursor++;
+    while (*cursor >= '0' && *cursor <= '9') {
+        haveDigit = 1U;
+        value = value * 10U + (uint32_t) (*cursor - '0');
+        if (value > 319U) return 0U;
+        cursor++;
+    }
+    if (haveDigit == 0U || *cursor != '\0') return 0U;
+    *x = value;
+    return 1U;
+}
+
+static void print_vision_status(uint32_t x)
+{
+    uart_puts("VISION_STATUS x=");
+    uart_write_u32(x);
+    uart_puts(" ");
+    print_status();
+}
+
+static void vision_status_tick(uint32_t x)
+{
+    g_visionStatusFrameCount++;
+    if (g_visionStatusFrameCount >= VISION_STATUS_EVERY_FRAMES) {
+        g_visionStatusFrameCount = 0U;
+        print_vision_status(x);
+    }
+}
+
+static void handle_openmv_line(char *line)
+{
+    uint32_t x;
+    int8_t side;
+    int32_t targetMillideg;
+
+    if (line[0] == 'N' && line[1] == '\0') {
+        return; /* No ball: retain and hold the last valid target. */
+    }
+    if (parse_openmv_x(line, &x) == 0U || g_visionEnabled == 0U) {
+        return;
+    }
+
+    if (x < VISION_CENTER_X) {
+        side = -1;
+        targetMillideg = VISION_LEFT_TARGET_MILLIDEG;
+    } else if (x > VISION_CENTER_X) {
+        side = 1;
+        targetMillideg = VISION_RIGHT_TARGET_MILLIDEG;
+    } else {
+        vision_status_tick(x);
+        return;
+    }
+
+    /* Do not restart the same move on every camera frame. */
+    if (side == g_lastVisionSide) {
+        vision_status_tick(x);
+        return;
+    }
+    g_lastVisionSide = side;
+    g_visionStatusFrameCount = 0U;
+
+    uart_puts("VISION x=");
+    uart_write_u32(x);
+    uart_puts((side < 0) ? " -> +20 deg\r\n" : " -> -40 deg\r\n");
+    start_position_move(targetMillideg);
+    print_vision_status(x);
+}
+
+static void poll_openmv_uart(void)
+{
+    while (!DL_UART_Main_isRXFIFOEmpty(OPENMV_UART_INST)) {
+        char character = (char) DL_UART_Main_receiveData(OPENMV_UART_INST);
+
+        if (character == '\r' || character == '\n') {
+            if (g_openmvLength != 0U) {
+                g_openmvBuffer[g_openmvLength] = '\0';
+                handle_openmv_line(g_openmvBuffer);
+                g_openmvLength = 0U;
+            }
+        } else if (g_openmvLength < (OPENMV_BUFFER_SIZE - 1U)) {
+            g_openmvBuffer[g_openmvLength] = character;
+            g_openmvLength++;
+        } else {
+            g_openmvLength = 0U;
+        }
     }
 }
 
@@ -409,15 +524,23 @@ int main(void)
     g_targetMillideg = 0;
     g_motionState = MOTION_IDLE;
     g_commandLength = 0U;
+    g_openmvLength = 0U;
+    g_lastVisionSide = 0;
+    g_visionEnabled = 1U;
+    g_visionStatusFrameCount = 0U;
     g_dirInitialized = 0U;
 
     uart_puts("\r\nMS42CG position control ready\r\n");
     uart_puts("Power-on position=0 deg, CCW=positive, CW=negative\r\n");
     uart_puts("Position remains closed-loop: external displacement is corrected automatically.\r\n");
-    uart_puts("Commands: To30, To-30, To12.5, ?, S (press Enter)\r\n");
+    uart_puts("OpenMV UART1: PA8 TX, PA9 RX; protocol X<pixel> or N\r\n");
+    uart_puts("Vision rule: x<180 -> +20 deg, x>180 -> -40 deg\r\n");
+    uart_puts("VISION_STATUS prints every 10 valid frames and whenever the side changes.\r\n");
+    uart_puts("Commands: V, To30, To-30, To12.5, ?, S (press Enter)\r\n");
 
     while (1) {
         poll_uart();
+        poll_openmv_uart();
         position_control_process();
         if (g_motionState != MOTION_MOVING) {
             (void) encoder_update();
