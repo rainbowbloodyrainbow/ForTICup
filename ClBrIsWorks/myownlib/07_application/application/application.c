@@ -21,9 +21,11 @@ static Application_State gState;
 static uint32_t gProcessedControlSequence;
 static uint32_t gMissedControlCycles;
 static uint32_t gAdcErrorCount;
-static uint32_t gLastTelemetryMs;
+static uint32_t gLastRawStreamMs;
+static uint32_t gLastDebugStreamMs;
 static bool gTelemetryRequested;
 static bool gRawStreamingEnabled;
+static bool gDebugStreamingEnabled;
 static int16_t gDriveOutput;
 
 static Motor gLeftMotor;
@@ -135,12 +137,29 @@ static void Application_ProcessOneCommand(
         case (uint8_t) 'v':
             gRawStreamingEnabled =
                 !gRawStreamingEnabled;
-            gLastTelemetryMs = nowMs;
+            if (gRawStreamingEnabled) {
+                gDebugStreamingEnabled = false;
+            }
+            gLastRawStreamMs = nowMs;
             HC05_SendString(
                 HC05_UART_INST,
                 gRawStreamingEnabled ?
                 "raw-stream=on\r\n" :
                 "raw-stream=off\r\n");
+            break;
+
+        case (uint8_t) 'd':
+            gDebugStreamingEnabled =
+                !gDebugStreamingEnabled;
+            if (gDebugStreamingEnabled) {
+                gRawStreamingEnabled = false;
+            }
+            gLastDebugStreamMs = nowMs;
+            HC05_SendString(
+                HC05_UART_INST,
+                gDebugStreamingEnabled ?
+                "debug-stream=on\r\n" :
+                "debug-stream=off\r\n");
             break;
 
         default:
@@ -172,6 +191,11 @@ static void Application_SendArray(
         HC05_SendUint32(HC05_UART_INST, values[index]);
     }
     HC05_SendString(HC05_UART_INST, "\r\n");
+}
+
+static void Application_SendSeparator(void)
+{
+    HC05_SendByte(HC05_UART_INST, (uint8_t) ',');
 }
 
 static void Application_PublishTelemetry(uint32_t nowMs)
@@ -220,7 +244,6 @@ static void Application_PublishTelemetry(uint32_t nowMs)
             "strength=", line->strength);
     }
 
-    gLastTelemetryMs = nowMs;
 }
 
 static void Application_PublishRawValues(uint32_t nowMs)
@@ -231,7 +254,73 @@ static void Application_PublishRawValues(uint32_t nowMs)
     if (line != NULL) {
         Application_SendArray("raw=", line->raw);
     }
-    gLastTelemetryMs = nowMs;
+    gLastRawStreamMs = nowMs;
+}
+
+static void Application_PublishDebugSnapshot(uint32_t nowMs)
+{
+    const LineSensor_Result *line;
+    uint32_t index;
+
+    line = LineSensor_GetResult(&gLineSensor);
+    if (line == NULL) {
+        gLastDebugStreamMs = nowMs;
+        return;
+    }
+
+    /*
+     * 字段顺序：
+     * state,lineStatus,valid,position,totalStrength,drive,turn,left,right,
+     * raw[0..4],strength[0..4],adcErrors,missedCycles
+     */
+    HC05_SendString(HC05_UART_INST, "dbg=");
+    HC05_SendUint32(HC05_UART_INST, (uint32_t) gState);
+    Application_SendSeparator();
+    HC05_SendUint32(
+        HC05_UART_INST,
+        (uint32_t) LineControl_GetStatus(&gLineControl));
+    Application_SendSeparator();
+    HC05_SendUint32(
+        HC05_UART_INST, line->valid ? 1U : 0U);
+    Application_SendSeparator();
+    HC05_SendInt32(HC05_UART_INST, line->position);
+    Application_SendSeparator();
+    HC05_SendUint32(
+        HC05_UART_INST, line->totalStrength);
+    Application_SendSeparator();
+    HC05_SendInt32(
+        HC05_UART_INST,
+        Chassis_GetDriveOutput(&gChassis));
+    Application_SendSeparator();
+    HC05_SendInt32(
+        HC05_UART_INST,
+        Chassis_GetTurnOutput(&gChassis));
+    Application_SendSeparator();
+    HC05_SendInt32(
+        HC05_UART_INST,
+        Chassis_GetLeftOutput(&gChassis));
+    Application_SendSeparator();
+    HC05_SendInt32(
+        HC05_UART_INST,
+        Chassis_GetRightOutput(&gChassis));
+
+    for (index = 0U; index < LINE_SENSOR_COUNT; index++) {
+        Application_SendSeparator();
+        HC05_SendUint32(HC05_UART_INST, line->raw[index]);
+    }
+    for (index = 0U; index < LINE_SENSOR_COUNT; index++) {
+        Application_SendSeparator();
+        HC05_SendUint32(
+            HC05_UART_INST, line->strength[index]);
+    }
+
+    Application_SendSeparator();
+    HC05_SendUint32(HC05_UART_INST, gAdcErrorCount);
+    Application_SendSeparator();
+    HC05_SendUint32(
+        HC05_UART_INST, gMissedControlCycles);
+    HC05_SendString(HC05_UART_INST, "\r\n");
+    gLastDebugStreamMs = nowMs;
 }
 
 void Application_Init(void)
@@ -313,9 +402,11 @@ void Application_Init(void)
     gState = APPLICATION_FAULT;
     gMissedControlCycles = 0U;
     gAdcErrorCount = 0U;
-    gLastTelemetryMs = nowMs;
+    gLastRawStreamMs = nowMs;
+    gLastDebugStreamMs = nowMs;
     gTelemetryRequested = false;
     gRawStreamingEnabled = false;
+    gDebugStreamingEnabled = false;
     gDriveOutput = 0;
 
     HC05_ResetReceiver();
@@ -344,8 +435,8 @@ void Application_Init(void)
     NVIC_EnableIRQ(HC05_UART_INST_INT_IRQN);
     HC05_SendString(
         HC05_UART_INST,
-        "ready: s=start, x=brake, t=telemetry, "
-        "v=raw-stream\r\n");
+        "111ready: s=start, x=brake, t=telemetry, "
+        "v=raw-stream, d=debug-stream\r\n");
 }
 
 void Application_Process(void)
@@ -376,9 +467,16 @@ void Application_Process(void)
 
     if (gRawStreamingEnabled &&
         (SystemTime_ElapsedMs(
-            nowMs, gLastTelemetryMs) >=
+            nowMs, gLastRawStreamMs) >=
             APPLICATION_RAW_STREAM_PERIOD_MS)) {
         Application_PublishRawValues(nowMs);
+    }
+
+    if (gDebugStreamingEnabled &&
+        (SystemTime_ElapsedMs(
+            nowMs, gLastDebugStreamMs) >=
+            APPLICATION_DEBUG_STREAM_PERIOD_MS)) {
+        Application_PublishDebugSnapshot(nowMs);
     }
 }
 

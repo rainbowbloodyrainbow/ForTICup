@@ -337,11 +337,11 @@ Chassis_Config.standby 允许为 NULL
 
 不能继续把 PA7 当作 STBY，PA7 在扩展板上连接蜂鸣器。
 
-HC-05 / 调试串口：
+调试串口：
 
 ```text
-UART1_TX：PB6
-UART1_RX：PB7
+UART0_TX：PA10
+UART0_RX：PA11
 代码只使用 HC05_UART_INST 生成宏
 ```
 
@@ -349,11 +349,15 @@ UART2 的 PA23/PA24 接线曾在 115200、8-N-1 下持续收到乱码，已停�
 当前调试串口使用。生成代码仍采用 32 MHz BUSCLK、16 倍过采样，业务代码
 没有 UART 实例字面量。
 
+原 HC-05 模块已经损坏，PB6/PB7 不再作为当前调试串口；现使用
+UART0/PA10/PA11 接串口设备。`hc05` 仅保留为现有通用 UART 收发模块名。
+
 调试命令：
 
 ```text
 t：单次输出完整遥测，包括五路 raw、strength、线位置和差速输出
 v：开关五路 raw 连续输出，周期 100 ms，默认关闭
+d：开关完整控制快照，周期 200 ms，默认关闭；与 v 互斥
 ```
 
 MPU6050：

@@ -29,6 +29,12 @@
 #define APPLICATION_RAW_STREAM_PERIOD_MS (100U)
 
 /*
+ * 完整控制快照比单独五路 raw 更长，因此使用 200 ms 周期。输出默认关闭，
+ * 收到 d 后开启；它与 v 原始值流互斥，避免两个连续输出同时占用串口。
+ */
+#define APPLICATION_DEBUG_STREAM_PERIOD_MS (200U)
+
+/*
  * 下列数值只是安全启动用的初始标定，必须用本车五路探头在背景和黑线上分别
  * 实测后替换。每个数组从左至右对应 L2、L1、C、R1、R2。
  */

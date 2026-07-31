@@ -30,7 +30,7 @@
 > 右轮电机：TIMG0_C0/PA12 + AIN1/PA16 + AIN2/PB24
 > 左轮电机：TIMG0_C1/PA13 + BIN1/PB17 + BIN2/PB19
 > TB6612 STBY：扩展板固定使能，Chassis_Config.standby = NULL
-> 调试串口：UART1，TX/PB6，RX/PB7
+> 调试串口：UART0，TX/PA10，RX/PA11
 > 左编码器：A/PA14，B/PA25
 > 右编码器：A/PA26，B/PA27
 > MPU6050：I2C0，SDA/PA0，SCL/PA1
@@ -39,9 +39,10 @@
 > ```
 >
 > 正式代码通过 `HC05_UART_INST`、`GPIO_ENCODER_*` 这类 SysConfig
-> 生成宏访问硬件，不把 UART1 或 GPIOA 写成业务代码字面量。
+> 生成宏访问硬件，不把 UART0 或 GPIOA 写成业务代码字面量。
 > HC-05 命令 `t` 单次输出完整遥测；`v` 开关每 100 ms 一行的五路
-> `raw` 连续输出，该功能上电默认关闭。
+> `raw` 连续输出；`d` 开关每 200 ms 一行的完整控制快照。`v` 与 `d`
+> 互斥，两个功能上电均默认关闭。
 
 ## 项目概览
 

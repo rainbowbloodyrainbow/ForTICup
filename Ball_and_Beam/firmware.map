@@ -1,19 +1,19 @@
 Archive member included to satisfy reference by file (symbol)
 
 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
-                              /tmp/ccg0VGCe.o (DL_Common_delayCycles)
+                              /tmp/ccy1kZyF.o (DL_Common_delayCycles)
 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
-                              /tmp/ccgay3jh.o (DL_I2C_setClockConfig)
+                              /tmp/ccr08KQf.o (DL_I2C_setClockConfig)
 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
-                              /tmp/ccgay3jh.o (DL_Timer_setClockConfig)
+                              /tmp/ccr08KQf.o (DL_Timer_setClockConfig)
 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
-                              /tmp/ccgay3jh.o (DL_UART_init)
+                              /tmp/ccr08KQf.o (DL_UART_init)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_cos.o)
-                              /tmp/ccBAz2GS.o (cosf)
+                              /tmp/cc5f6OAs.o (cosf)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_sin.o)
-                              /tmp/ccBAz2GS.o (sinf)
+                              /tmp/cc5f6OAs.o (sinf)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o)
-                              /tmp/ccBAz2GS.o (fmodf)
+                              /tmp/cc5f6OAs.o (fmodf)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_fmod.o)
                               /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-wf_fmod.o) (__ieee754_fmodf)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o)
@@ -33,19 +33,19 @@ Archive member included to satisfy reference by file (symbol)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-sf_scalbn.o)
                               /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-kf_rem_pio2.o) (scalbnf)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
-                              /tmp/cc9rQobc.o (__aeabi_uidiv)
+                              /tmp/ccycw72c.o (__aeabi_uidiv)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o)
-                              /tmp/cc9rQobc.o (__aeabi_idivmod)
+                              /tmp/ccycw72c.o (__aeabi_idivmod)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o)
                               /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o)
-                              /tmp/ccN1BM5A.o (__aeabi_fcmpeq)
+                              /tmp/ccpfFj81.o (__aeabi_fcmpeq)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_fixunssfsi.o)
-                              /tmp/ccBAz2GS.o (__aeabi_f2uiz)
+                              /tmp/cc5f6OAs.o (__aeabi_f2uiz)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o)
-                              /tmp/ccg0VGCe.o (__aeabi_fadd)
+                              /tmp/ccy1kZyF.o (__aeabi_fadd)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(divsf3.o)
-                              /tmp/ccSbW8dM.o (__aeabi_fdiv)
+                              /tmp/ccjG9iii.o (__aeabi_fdiv)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(eqsf2.o)
                               /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o) (__eqsf2)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(gesf2.o)
@@ -53,17 +53,17 @@ Archive member included to satisfy reference by file (symbol)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(lesf2.o)
                               /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_arm_cmpsf2.o) (__lesf2)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(mulsf3.o)
-                              /tmp/ccg0VGCe.o (__aeabi_fmul)
+                              /tmp/ccy1kZyF.o (__aeabi_fmul)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(subsf3.o)
-                              /tmp/ccg0VGCe.o (__aeabi_fsub)
+                              /tmp/ccy1kZyF.o (__aeabi_fsub)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(unordsf2.o)
-                              /tmp/ccg0VGCe.o (__aeabi_fcmpun)
+                              /tmp/ccy1kZyF.o (__aeabi_fcmpun)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(fixsfsi.o)
                               /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a(lib_a-ef_rem_pio2.o) (__aeabi_f2iz)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatsisf.o)
-                              /tmp/ccg0VGCe.o (__aeabi_i2f)
+                              /tmp/ccy1kZyF.o (__aeabi_i2f)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
-                              /tmp/ccSbW8dM.o (__aeabi_ui2f)
+                              /tmp/ccjG9iii.o (__aeabi_ui2f)
 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(_clzsi2.o)
                               /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(addsf3.o) (__clzsi2)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o)
@@ -71,40 +71,40 @@ Archive member included to satisfy reference by file (symbol)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-impure.o)
                               /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-errno.o) (_impure_ptr)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-init.o)
-                              /tmp/ccuF8wEd.o (__libc_init_array)
+                              /tmp/ccKxb8Vo.o (__libc_init_array)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memcpy-stub.o)
-                              /tmp/ccuF8wEd.o (memcpy)
+                              /tmp/ccKxb8Vo.o (memcpy)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-memset.o)
-                              /tmp/ccg0VGCe.o (memset)
+                              /tmp/ccy1kZyF.o (memset)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strlen-stub.o)
-                              /tmp/cc9rQobc.o (strlen)
+                              /tmp/ccycw72c.o (strlen)
 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
-                              /tmp/cc9rQobc.o (strncmp)
+                              /tmp/ccycw72c.o (strncmp)
 
 Discarded input sections
 
  .text.as5600_read_status
-                0x0000000000000000       0x10 /tmp/ccg0VGCe.o
+                0x0000000000000000       0x10 /tmp/ccy1kZyF.o
  .text.as5600_read_raw
-                0x0000000000000000       0x2c /tmp/ccg0VGCe.o
+                0x0000000000000000       0x2c /tmp/ccy1kZyF.o
  .text.as5600_get_angle_rad
-                0x0000000000000000        0xc /tmp/ccg0VGCe.o
+                0x0000000000000000        0xc /tmp/ccy1kZyF.o
  .text.as5600_get_consecutive_failures
-                0x0000000000000000        0xc /tmp/ccg0VGCe.o
+                0x0000000000000000        0xc /tmp/ccy1kZyF.o
  .text.motor_control_reset
-                0x0000000000000000       0x24 /tmp/ccN1BM5A.o
+                0x0000000000000000       0x24 /tmp/ccpfFj81.o
  .text.motor_control_get_position_kp
-                0x0000000000000000        0xc /tmp/ccN1BM5A.o
+                0x0000000000000000        0xc /tmp/ccpfFj81.o
  .text.motor_control_get_velocity_kp
-                0x0000000000000000        0xc /tmp/ccN1BM5A.o
+                0x0000000000000000        0xc /tmp/ccpfFj81.o
  .text.motor_control_get_velocity_ki
-                0x0000000000000000        0xc /tmp/ccN1BM5A.o
+                0x0000000000000000        0xc /tmp/ccpfFj81.o
  .text.motor_control_get_velocity_limit
-                0x0000000000000000        0xc /tmp/ccN1BM5A.o
+                0x0000000000000000        0xc /tmp/ccpfFj81.o
  .text.SYSCFG_DL_saveConfiguration
-                0x0000000000000000       0x14 /tmp/ccgay3jh.o
+                0x0000000000000000       0x14 /tmp/ccr08KQf.o
  .text.SYSCFG_DL_restoreConfiguration
-                0x0000000000000000       0x18 /tmp/ccgay3jh.o
+                0x0000000000000000       0x18 /tmp/ccr08KQf.o
  .text.DL_I2C_getClockConfig
                 0x0000000000000000       0x1c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
  .text.DL_I2C_fillTargetTXFIFO
@@ -248,13 +248,13 @@ BSL_CONFIG       0x0000000041c00100 0x0000000000000080 r
 
 Linker script and memory map
 
-LOAD /tmp/ccSbW8dM.o
-LOAD /tmp/ccg0VGCe.o
-LOAD /tmp/ccBAz2GS.o
-LOAD /tmp/ccN1BM5A.o
-LOAD /tmp/cc9rQobc.o
-LOAD /tmp/ccgay3jh.o
-LOAD /tmp/ccuF8wEd.o
+LOAD /tmp/ccjG9iii.o
+LOAD /tmp/ccy1kZyF.o
+LOAD /tmp/cc5f6OAs.o
+LOAD /tmp/ccpfFj81.o
+LOAD /tmp/ccycw72c.o
+LOAD /tmp/ccr08KQf.o
+LOAD /tmp/ccKxb8Vo.o
 LOAD /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a
 LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
 START GROUP
@@ -278,7 +278,7 @@ END GROUP
 
 .intvecs        0x0000000000000000       0xc0
  *(.intvecs)
- .intvecs       0x0000000000000000       0xc0 /tmp/ccuF8wEd.o
+ .intvecs       0x0000000000000000       0xc0 /tmp/ccKxb8Vo.o
                 0x0000000000000000                interruptVectors
                 0x0000000020200000                PROVIDE (_vtable_base_address = DEFINED (_vtable_base_address)?_vtable_base_address:0x20200000)
 
@@ -288,13 +288,13 @@ END GROUP
 .text           0x00000000000000c0     0x4d08
  CREATE_OBJECT_SYMBOLS
  *(.text)
- .text          0x00000000000000c0        0x0 /tmp/ccSbW8dM.o
- .text          0x00000000000000c0        0x0 /tmp/ccg0VGCe.o
- .text          0x00000000000000c0        0x0 /tmp/ccBAz2GS.o
- .text          0x00000000000000c0        0x0 /tmp/ccN1BM5A.o
- .text          0x00000000000000c0        0x0 /tmp/cc9rQobc.o
- .text          0x00000000000000c0        0x0 /tmp/ccgay3jh.o
- .text          0x00000000000000c0        0x0 /tmp/ccuF8wEd.o
+ .text          0x00000000000000c0        0x0 /tmp/ccjG9iii.o
+ .text          0x00000000000000c0        0x0 /tmp/ccy1kZyF.o
+ .text          0x00000000000000c0        0x0 /tmp/cc5f6OAs.o
+ .text          0x00000000000000c0        0x0 /tmp/ccpfFj81.o
+ .text          0x00000000000000c0        0x0 /tmp/ccycw72c.o
+ .text          0x00000000000000c0        0x0 /tmp/ccr08KQf.o
+ .text          0x00000000000000c0        0x0 /tmp/ccKxb8Vo.o
  .text          0x00000000000000c0        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
  .text          0x00000000000000c0        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
  .text          0x00000000000000c0        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
@@ -389,176 +389,176 @@ END GROUP
  *fill*         0x0000000000002554        0x4 
  *(.text.*)
  .text.startup.main
-                0x0000000000002558       0xd0 /tmp/ccSbW8dM.o
+                0x0000000000002558       0xd0 /tmp/ccjG9iii.o
                 0x0000000000002558                main
  .text.TIMG0_IRQHandler
-                0x0000000000002628       0x2c /tmp/ccSbW8dM.o
+                0x0000000000002628       0x2c /tmp/ccjG9iii.o
                 0x0000000000002628                TIMG0_IRQHandler
- .text.UART1_IRQHandler
-                0x0000000000002654        0x8 /tmp/ccSbW8dM.o
-                0x0000000000002654                UART1_IRQHandler
+ .text.UART0_IRQHandler
+                0x0000000000002654        0x8 /tmp/ccjG9iii.o
+                0x0000000000002654                UART0_IRQHandler
  .text.read_registers
-                0x000000000000265c      0x1d8 /tmp/ccg0VGCe.o
+                0x000000000000265c      0x1d8 /tmp/ccy1kZyF.o
  .text.as5600_init
-                0x0000000000002834       0x80 /tmp/ccg0VGCe.o
+                0x0000000000002834       0x80 /tmp/ccy1kZyF.o
                 0x0000000000002834                as5600_init
  .text.as5600_update
-                0x00000000000028b4      0x184 /tmp/ccg0VGCe.o
+                0x00000000000028b4      0x184 /tmp/ccy1kZyF.o
                 0x00000000000028b4                as5600_update
  .text.as5600_get_unwrapped_angle_rad
-                0x0000000000002a38        0xc /tmp/ccg0VGCe.o
+                0x0000000000002a38        0xc /tmp/ccy1kZyF.o
                 0x0000000000002a38                as5600_get_unwrapped_angle_rad
  .text.as5600_get_velocity_rad_s
-                0x0000000000002a44        0xc /tmp/ccg0VGCe.o
+                0x0000000000002a44        0xc /tmp/ccy1kZyF.o
                 0x0000000000002a44                as5600_get_velocity_rad_s
  .text.as5600_get_raw
-                0x0000000000002a50        0xc /tmp/ccg0VGCe.o
+                0x0000000000002a50        0xc /tmp/ccy1kZyF.o
                 0x0000000000002a50                as5600_get_raw
  .text.as5600_get_status
-                0x0000000000002a5c        0xc /tmp/ccg0VGCe.o
+                0x0000000000002a5c        0xc /tmp/ccy1kZyF.o
                 0x0000000000002a5c                as5600_get_status
  .text.as5600_magnet_ok
-                0x0000000000002a68       0x10 /tmp/ccg0VGCe.o
+                0x0000000000002a68       0x10 /tmp/ccy1kZyF.o
                 0x0000000000002a68                as5600_magnet_ok
  .text.as5600_is_healthy
-                0x0000000000002a78       0x20 /tmp/ccg0VGCe.o
+                0x0000000000002a78       0x20 /tmp/ccy1kZyF.o
                 0x0000000000002a78                as5600_is_healthy
  .text.normalize_angle_0_2pi
-                0x0000000000002a98       0x50 /tmp/ccBAz2GS.o
+                0x0000000000002a98       0x50 /tmp/cc5f6OAs.o
                 0x0000000000002a98                normalize_angle_0_2pi
  .text.foc_pwm_enable
-                0x0000000000002ae8       0x24 /tmp/ccBAz2GS.o
+                0x0000000000002ae8       0x24 /tmp/cc5f6OAs.o
                 0x0000000000002ae8                foc_pwm_enable
  .text.foc_pwm_stop
-                0x0000000000002b0c       0xd0 /tmp/ccBAz2GS.o
+                0x0000000000002b0c       0xd0 /tmp/cc5f6OAs.o
                 0x0000000000002b0c                foc_pwm_stop
  .text.foc_pwm_set_phase_duty
-                0x0000000000002bdc      0x290 /tmp/ccBAz2GS.o
+                0x0000000000002bdc      0x290 /tmp/cc5f6OAs.o
                 0x0000000000002bdc                foc_pwm_set_phase_duty
  .text.foc_set_phase_voltage
-                0x0000000000002e6c      0x100 /tmp/ccBAz2GS.o
+                0x0000000000002e6c      0x100 /tmp/cc5f6OAs.o
                 0x0000000000002e6c                foc_set_phase_voltage
  .text.foc_pwm_init
-                0x0000000000002f6c       0x3c /tmp/ccBAz2GS.o
+                0x0000000000002f6c       0x3c /tmp/cc5f6OAs.o
                 0x0000000000002f6c                foc_pwm_init
  .text.foc_pwm_last_write_ok
-                0x0000000000002fa8        0xc /tmp/ccBAz2GS.o
+                0x0000000000002fa8        0xc /tmp/cc5f6OAs.o
                 0x0000000000002fa8                foc_pwm_last_write_ok
  .text.motor_control_force_fault
-                0x0000000000002fb4       0x30 /tmp/ccN1BM5A.o
+                0x0000000000002fb4       0x30 /tmp/ccpfFj81.o
                 0x0000000000002fb4                motor_control_force_fault
  .text.motor_control_init
-                0x0000000000002fe4       0xb0 /tmp/ccN1BM5A.o
+                0x0000000000002fe4       0xb0 /tmp/ccpfFj81.o
                 0x0000000000002fe4                motor_control_init
  .text.motor_control_try_enable
-                0x0000000000003094       0x70 /tmp/ccN1BM5A.o
+                0x0000000000003094       0x70 /tmp/ccpfFj81.o
                 0x0000000000003094                motor_control_try_enable
  .text.motor_control_enable
-                0x0000000000003104       0x28 /tmp/ccN1BM5A.o
+                0x0000000000003104       0x28 /tmp/ccpfFj81.o
                 0x0000000000003104                motor_control_enable
  .text.motor_control_take_enable_grace
-                0x000000000000312c       0x10 /tmp/ccN1BM5A.o
+                0x000000000000312c       0x10 /tmp/ccpfFj81.o
                 0x000000000000312c                motor_control_take_enable_grace
  .text.motor_control_calibrate
-                0x000000000000313c      0x19c /tmp/ccN1BM5A.o
+                0x000000000000313c      0x19c /tmp/ccpfFj81.o
                 0x000000000000313c                motor_control_calibrate
  .text.motor_control_update
-                0x00000000000032d8      0x3b8 /tmp/ccN1BM5A.o
+                0x00000000000032d8      0x3b8 /tmp/ccpfFj81.o
                 0x00000000000032d8                motor_control_update
  .text.motor_control_set_target_deg
-                0x0000000000003690       0x60 /tmp/ccN1BM5A.o
+                0x0000000000003690       0x60 /tmp/ccpfFj81.o
                 0x0000000000003690                motor_control_set_target_deg
  .text.motor_control_zero_here
-                0x00000000000036f0       0x3c /tmp/ccN1BM5A.o
+                0x00000000000036f0       0x3c /tmp/ccpfFj81.o
                 0x00000000000036f0                motor_control_zero_here
  .text.motor_control_clear_fault
-                0x000000000000372c       0x54 /tmp/ccN1BM5A.o
+                0x000000000000372c       0x54 /tmp/ccpfFj81.o
                 0x000000000000372c                motor_control_clear_fault
  .text.motor_control_get_state
-                0x0000000000003780        0x8 /tmp/ccN1BM5A.o
+                0x0000000000003780        0x8 /tmp/ccpfFj81.o
                 0x0000000000003780                motor_control_get_state
  .text.motor_control_get_voltage_limit
-                0x0000000000003788        0xc /tmp/ccN1BM5A.o
+                0x0000000000003788        0xc /tmp/ccpfFj81.o
                 0x0000000000003788                motor_control_get_voltage_limit
  .text.motor_control_set_position_kp
-                0x0000000000003794       0x50 /tmp/ccN1BM5A.o
+                0x0000000000003794       0x50 /tmp/ccpfFj81.o
                 0x0000000000003794                motor_control_set_position_kp
  .text.motor_control_set_velocity_kp
-                0x00000000000037e4       0x50 /tmp/ccN1BM5A.o
+                0x00000000000037e4       0x50 /tmp/ccpfFj81.o
                 0x00000000000037e4                motor_control_set_velocity_kp
  .text.motor_control_set_velocity_ki
-                0x0000000000003834       0x5c /tmp/ccN1BM5A.o
+                0x0000000000003834       0x5c /tmp/ccpfFj81.o
                 0x0000000000003834                motor_control_set_velocity_ki
  .text.motor_control_set_voltage_limit
-                0x0000000000003890       0x5c /tmp/ccN1BM5A.o
+                0x0000000000003890       0x5c /tmp/ccpfFj81.o
                 0x0000000000003890                motor_control_set_voltage_limit
  .text.motor_control_set_velocity_limit
-                0x00000000000038ec       0x50 /tmp/ccN1BM5A.o
+                0x00000000000038ec       0x50 /tmp/ccpfFj81.o
                 0x00000000000038ec                motor_control_set_velocity_limit
  .text.motor_control_set_pole_pairs
-                0x000000000000393c       0x20 /tmp/ccN1BM5A.o
+                0x000000000000393c       0x20 /tmp/ccpfFj81.o
                 0x000000000000393c                motor_control_set_pole_pairs
  .text.motor_control_set_sensor_direction
-                0x000000000000395c       0x40 /tmp/ccN1BM5A.o
+                0x000000000000395c       0x40 /tmp/ccpfFj81.o
                 0x000000000000395c                motor_control_set_sensor_direction
  .text.motor_control_fault_name
-                0x000000000000399c       0x18 /tmp/ccN1BM5A.o
+                0x000000000000399c       0x18 /tmp/ccpfFj81.o
                 0x000000000000399c                motor_control_fault_name
  .text.parse_float.part.0
-                0x00000000000039b4       0xe4 /tmp/cc9rQobc.o
+                0x00000000000039b4       0xe4 /tmp/ccycw72c.o
  .text.parse_int.part.0
-                0x0000000000003a98       0x70 /tmp/cc9rQobc.o
+                0x0000000000003a98       0x70 /tmp/ccycw72c.o
  .text.command_argument.constprop.0
-                0x0000000000003b08       0x40 /tmp/cc9rQobc.o
+                0x0000000000003b08       0x40 /tmp/ccycw72c.o
  .text.uart_command_send_string.part.0
-                0x0000000000003b48       0xc4 /tmp/cc9rQobc.o
- .text.send_ok  0x0000000000003c0c       0x34 /tmp/cc9rQobc.o
+                0x0000000000003b48       0xc4 /tmp/ccycw72c.o
+ .text.send_ok  0x0000000000003c0c       0x34 /tmp/ccycw72c.o
  .text.send_error
-                0x0000000000003c40       0x20 /tmp/cc9rQobc.o
+                0x0000000000003c40       0x20 /tmp/ccycw72c.o
  .text.uart_send_byte
-                0x0000000000003c60       0x98 /tmp/cc9rQobc.o
+                0x0000000000003c60       0x98 /tmp/ccycw72c.o
  .text.send_uint32
-                0x0000000000003cf8       0x68 /tmp/cc9rQobc.o
+                0x0000000000003cf8       0x68 /tmp/ccycw72c.o
  .text.send_float3
-                0x0000000000003d60       0xe4 /tmp/cc9rQobc.o
+                0x0000000000003d60       0xe4 /tmp/ccycw72c.o
  .text.uart_command_send_string
-                0x0000000000003e44        0xc /tmp/cc9rQobc.o
+                0x0000000000003e44        0xc /tmp/ccycw72c.o
                 0x0000000000003e44                uart_command_send_string
  .text.uart_command_init
-                0x0000000000003e50       0x38 /tmp/cc9rQobc.o
+                0x0000000000003e50       0x38 /tmp/ccycw72c.o
                 0x0000000000003e50                uart_command_init
  .text.uart_command_handle_rx_interrupt
-                0x0000000000003e88       0x94 /tmp/cc9rQobc.o
+                0x0000000000003e88       0x94 /tmp/ccycw72c.o
                 0x0000000000003e88                uart_command_handle_rx_interrupt
  .text.uart_command_process
-                0x0000000000003f1c      0x734 /tmp/cc9rQobc.o
+                0x0000000000003f1c      0x734 /tmp/ccycw72c.o
                 0x0000000000003f1c                uart_command_process
  .text.SYSCFG_DL_initPower
-                0x0000000000004650       0x5c /tmp/ccgay3jh.o
+                0x0000000000004650       0x5c /tmp/ccr08KQf.o
                 0x0000000000004650                SYSCFG_DL_initPower
  .text.SYSCFG_DL_GPIO_init
-                0x00000000000046ac       0x88 /tmp/ccgay3jh.o
+                0x00000000000046ac       0x88 /tmp/ccr08KQf.o
                 0x00000000000046ac                SYSCFG_DL_GPIO_init
  .text.SYSCFG_DL_SYSCTL_init
-                0x0000000000004734       0x38 /tmp/ccgay3jh.o
+                0x0000000000004734       0x38 /tmp/ccr08KQf.o
                 0x0000000000004734                SYSCFG_DL_SYSCTL_init
  .text.SYSCFG_DL_FOC_PWM_init
-                0x000000000000476c       0xb8 /tmp/ccgay3jh.o
+                0x000000000000476c       0xb8 /tmp/ccr08KQf.o
                 0x000000000000476c                SYSCFG_DL_FOC_PWM_init
  .text.SYSCFG_DL_CONTROL_TICK_init
-                0x0000000000004824       0x38 /tmp/ccgay3jh.o
+                0x0000000000004824       0x38 /tmp/ccr08KQf.o
                 0x0000000000004824                SYSCFG_DL_CONTROL_TICK_init
  .text.SYSCFG_DL_AS5600_I2C_init
-                0x000000000000485c       0x70 /tmp/ccgay3jh.o
+                0x000000000000485c       0x70 /tmp/ccr08KQf.o
                 0x000000000000485c                SYSCFG_DL_AS5600_I2C_init
  .text.SYSCFG_DL_CMD_UART_init
-                0x00000000000048cc       0x88 /tmp/ccgay3jh.o
+                0x00000000000048cc       0x88 /tmp/ccr08KQf.o
                 0x00000000000048cc                SYSCFG_DL_CMD_UART_init
  .text.SYSCFG_DL_init
-                0x0000000000004954       0x2c /tmp/ccgay3jh.o
+                0x0000000000004954       0x2c /tmp/ccr08KQf.o
                 0x0000000000004954                SYSCFG_DL_init
  .text.Default_Handler
-                0x0000000000004980        0x4 /tmp/ccuF8wEd.o
+                0x0000000000004980        0x4 /tmp/ccKxb8Vo.o
                 0x0000000000004980                TIMG6_IRQHandler
                 0x0000000000004980                TIMG8_IRQHandler
                 0x0000000000004980                I2C0_IRQHandler
@@ -567,8 +567,8 @@ END GROUP
                 0x0000000000004980                PendSV_Handler
                 0x0000000000004980                NMI_Handler
                 0x0000000000004980                I2C1_IRQHandler
+                0x0000000000004980                UART1_IRQHandler
                 0x0000000000004980                TIMA1_IRQHandler
-                0x0000000000004980                UART0_IRQHandler
                 0x0000000000004980                ADC0_IRQHandler
                 0x0000000000004980                SPI1_IRQHandler
                 0x0000000000004980                ADC1_IRQHandler
@@ -588,10 +588,10 @@ END GROUP
                 0x0000000000004980                UART3_IRQHandler
                 0x0000000000004980                CANFD0_IRQHandler
  .text.Reset_Handler
-                0x0000000000004984       0x78 /tmp/ccuF8wEd.o
+                0x0000000000004984       0x78 /tmp/ccKxb8Vo.o
                 0x0000000000004984                Reset_Handler
  .text.initStub
-                0x00000000000049fc        0x4 /tmp/ccuF8wEd.o
+                0x00000000000049fc        0x4 /tmp/ccKxb8Vo.o
                 0x00000000000049fc                _init
                 0x00000000000049fc                initStub
  .text.DL_Common_delayCycles
@@ -657,7 +657,7 @@ END GROUP
  .v4_bx         0x0000000000004dc8        0x0 linker stubs
 
 .iplt           0x0000000000004dc8        0x0
- .iplt          0x0000000000004dc8        0x0 /tmp/ccSbW8dM.o
+ .iplt          0x0000000000004dc8        0x0 /tmp/ccjG9iii.o
 
 .ramfunc        0x0000000020200000        0x0 load address 0x0000000000004dc8
                 0x0000000000004dc8                __ramfunct_load__ = LOADADDR (.ramfunc)
@@ -676,56 +676,56 @@ END GROUP
                 0x0000000000005260                . = ALIGN (0x8)
  *(.rodata.*)
  .rodata.main.str1.4
-                0x0000000000005260       0xb1 /tmp/ccSbW8dM.o
+                0x0000000000005260       0xb1 /tmp/ccjG9iii.o
  *fill*         0x0000000000005311        0x3 
  .rodata.motor_control_fault_name.str1.4
-                0x0000000000005314        0x8 /tmp/ccN1BM5A.o
+                0x0000000000005314        0x8 /tmp/ccpfFj81.o
  .rodata.str1.4
-                0x000000000000531c       0x40 /tmp/ccN1BM5A.o
+                0x000000000000531c       0x40 /tmp/ccpfFj81.o
  .rodata.CSWTCH.45
-                0x000000000000535c       0x20 /tmp/ccN1BM5A.o
+                0x000000000000535c       0x20 /tmp/ccpfFj81.o
  .rodata.send_ok.str1.4
-                0x000000000000537c        0x6 /tmp/cc9rQobc.o
+                0x000000000000537c        0x6 /tmp/ccycw72c.o
                                           0xb (size before relaxing)
  *fill*         0x0000000000005382        0x2 
  .rodata.send_error.str1.4
-                0x0000000000005384        0x5 /tmp/cc9rQobc.o
+                0x0000000000005384        0x5 /tmp/ccycw72c.o
  *fill*         0x0000000000005389        0x3 
  .rodata.send_float3.str1.4
-                0x000000000000538c        0xd /tmp/cc9rQobc.o
+                0x000000000000538c        0xd /tmp/ccycw72c.o
  *fill*         0x0000000000005399        0x3 
  .rodata.uart_command_process.str1.4
-                0x000000000000539c      0x346 /tmp/cc9rQobc.o
+                0x000000000000539c      0x346 /tmp/ccycw72c.o
                                         0x34e (size before relaxing)
  *fill*         0x00000000000056e2        0x2 
- .rodata.hex.0  0x00000000000056e4       0x11 /tmp/cc9rQobc.o
+ .rodata.hex.0  0x00000000000056e4       0x11 /tmp/ccycw72c.o
  *fill*         0x00000000000056f5        0x3 
  .rodata.gAS5600_I2CClockConfig
-                0x00000000000056f8        0x2 /tmp/ccgay3jh.o
+                0x00000000000056f8        0x2 /tmp/ccr08KQf.o
  *fill*         0x00000000000056fa        0x2 
  .rodata.gCMD_UARTClockConfig
-                0x00000000000056fc        0x2 /tmp/ccgay3jh.o
+                0x00000000000056fc        0x2 /tmp/ccr08KQf.o
  *fill*         0x00000000000056fe        0x2 
  .rodata.gCMD_UARTConfig
-                0x0000000000005700        0xa /tmp/ccgay3jh.o
+                0x0000000000005700        0xa /tmp/ccr08KQf.o
  *fill*         0x000000000000570a        0x2 
  .rodata.gCONTROL_TICKClockConfig
-                0x000000000000570c        0x3 /tmp/ccgay3jh.o
+                0x000000000000570c        0x3 /tmp/ccr08KQf.o
  *fill*         0x000000000000570f        0x1 
  .rodata.gCONTROL_TICKTimerConfig
-                0x0000000000005710       0x14 /tmp/ccgay3jh.o
+                0x0000000000005710       0x14 /tmp/ccr08KQf.o
  .rodata.gFOC_PWMClockConfig
-                0x0000000000005724        0x3 /tmp/ccgay3jh.o
+                0x0000000000005724        0x3 /tmp/ccr08KQf.o
  *fill*         0x0000000000005727        0x1 
  .rodata.gFOC_PWMConfig
-                0x0000000000005728        0x8 /tmp/ccgay3jh.o
+                0x0000000000005728        0x8 /tmp/ccr08KQf.o
  .rodata.DL_Timer_initTimerMode
                 0x0000000000005730       0x8c /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
                 0x00000000000057c0                . = ALIGN (0x8)
  *fill*         0x00000000000057bc        0x4 
 
 .rel.dyn        0x00000000000057c0        0x0
- .rel.iplt      0x00000000000057c0        0x0 /tmp/ccSbW8dM.o
+ .rel.iplt      0x00000000000057c0        0x0 /tmp/ccjG9iii.o
 
 .preinit_array  0x00000000000057c0        0x0
                 0x00000000000057c0                PROVIDE (__preinit_array_start = .)
@@ -762,13 +762,13 @@ END GROUP
                 0x00000000000057c0                __data_load__ = LOADADDR (.data)
                 0x0000000020200000                __data_start__ = .
  *(.data)
- .data          0x0000000020200000        0x0 /tmp/ccSbW8dM.o
- .data          0x0000000020200000        0x0 /tmp/ccg0VGCe.o
- .data          0x0000000020200000        0x0 /tmp/ccBAz2GS.o
- .data          0x0000000020200000        0x0 /tmp/ccN1BM5A.o
- .data          0x0000000020200000        0x0 /tmp/cc9rQobc.o
- .data          0x0000000020200000        0x0 /tmp/ccgay3jh.o
- .data          0x0000000020200000        0x0 /tmp/ccuF8wEd.o
+ .data          0x0000000020200000        0x0 /tmp/ccjG9iii.o
+ .data          0x0000000020200000        0x0 /tmp/ccy1kZyF.o
+ .data          0x0000000020200000        0x0 /tmp/cc5f6OAs.o
+ .data          0x0000000020200000        0x0 /tmp/ccpfFj81.o
+ .data          0x0000000020200000        0x0 /tmp/ccycw72c.o
+ .data          0x0000000020200000        0x0 /tmp/ccr08KQf.o
+ .data          0x0000000020200000        0x0 /tmp/ccKxb8Vo.o
  .data          0x0000000020200000        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
  .data          0x0000000020200000        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
  .data          0x0000000020200000        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
@@ -817,19 +817,19 @@ END GROUP
                 0x0000000020200068                __data_end__ = .
 
 .igot.plt       0x0000000020200068        0x0 load address 0x0000000000005828
- .igot.plt      0x0000000020200068        0x0 /tmp/ccSbW8dM.o
+ .igot.plt      0x0000000020200068        0x0 /tmp/ccjG9iii.o
 
 .bss            0x0000000020200068      0x608
                 0x0000000020200068                __bss_start__ = .
  *(.shbss)
  *(.bss)
- .bss           0x0000000020200068        0x0 /tmp/ccSbW8dM.o
- .bss           0x0000000020200068        0x0 /tmp/ccg0VGCe.o
- .bss           0x0000000020200068        0x0 /tmp/ccBAz2GS.o
- .bss           0x0000000020200068        0x0 /tmp/ccN1BM5A.o
- .bss           0x0000000020200068        0x0 /tmp/cc9rQobc.o
- .bss           0x0000000020200068        0x0 /tmp/ccgay3jh.o
- .bss           0x0000000020200068        0x0 /tmp/ccuF8wEd.o
+ .bss           0x0000000020200068        0x0 /tmp/ccjG9iii.o
+ .bss           0x0000000020200068        0x0 /tmp/ccy1kZyF.o
+ .bss           0x0000000020200068        0x0 /tmp/cc5f6OAs.o
+ .bss           0x0000000020200068        0x0 /tmp/ccpfFj81.o
+ .bss           0x0000000020200068        0x0 /tmp/ccycw72c.o
+ .bss           0x0000000020200068        0x0 /tmp/ccr08KQf.o
+ .bss           0x0000000020200068        0x0 /tmp/ccKxb8Vo.o
  .bss           0x0000000020200068        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
  .bss           0x0000000020200068        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
  .bss           0x0000000020200068        0x0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
@@ -872,43 +872,43 @@ END GROUP
  .bss           0x0000000020200068        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
  *(.bss.*)
  .bss.g_controlTicks
-                0x0000000020200068        0x4 /tmp/ccSbW8dM.o
- .bss.g_as5600  0x000000002020006c       0x18 /tmp/ccg0VGCe.o
+                0x0000000020200068        0x4 /tmp/ccjG9iii.o
+ .bss.g_as5600  0x000000002020006c       0x18 /tmp/ccy1kZyF.o
  .bss.g_lastWriteOk
-                0x0000000020200084        0x1 /tmp/ccBAz2GS.o
+                0x0000000020200084        0x1 /tmp/cc5f6OAs.o
  .bss.g_enableGrace
-                0x0000000020200085        0x1 /tmp/ccN1BM5A.o
+                0x0000000020200085        0x1 /tmp/ccpfFj81.o
  *fill*         0x0000000020200086        0x2 
- .bss.g_motor   0x0000000020200088       0x30 /tmp/ccN1BM5A.o
+ .bss.g_motor   0x0000000020200088       0x30 /tmp/ccpfFj81.o
  .bss.g_positionKp
-                0x00000000202000b8        0x4 /tmp/ccN1BM5A.o
+                0x00000000202000b8        0x4 /tmp/ccpfFj81.o
  .bss.g_velocityIntegral
-                0x00000000202000bc        0x4 /tmp/ccN1BM5A.o
+                0x00000000202000bc        0x4 /tmp/ccpfFj81.o
  .bss.g_velocityKi
-                0x00000000202000c0        0x4 /tmp/ccN1BM5A.o
+                0x00000000202000c0        0x4 /tmp/ccpfFj81.o
  .bss.g_velocityKp
-                0x00000000202000c4        0x4 /tmp/ccN1BM5A.o
+                0x00000000202000c4        0x4 /tmp/ccpfFj81.o
  .bss.g_velocityLimit
-                0x00000000202000c8        0x4 /tmp/ccN1BM5A.o
+                0x00000000202000c8        0x4 /tmp/ccpfFj81.o
  .bss.g_voltageLimit
-                0x00000000202000cc        0x4 /tmp/ccN1BM5A.o
+                0x00000000202000cc        0x4 /tmp/ccpfFj81.o
  .bss.g_zeroPositionRad
-                0x00000000202000d0        0x4 /tmp/ccN1BM5A.o
- .bss.g_line    0x00000000202000d4       0x50 /tmp/cc9rQobc.o
+                0x00000000202000d0        0x4 /tmp/ccpfFj81.o
+ .bss.g_line    0x00000000202000d4       0x50 /tmp/ccycw72c.o
  .bss.g_lineLength
-                0x0000000020200124        0x2 /tmp/cc9rQobc.o
- .bss.g_rxHead  0x0000000020200126        0x2 /tmp/cc9rQobc.o
+                0x0000000020200124        0x2 /tmp/ccycw72c.o
+ .bss.g_rxHead  0x0000000020200126        0x2 /tmp/ccycw72c.o
  .bss.g_rxOverflow
-                0x0000000020200128        0x1 /tmp/cc9rQobc.o
+                0x0000000020200128        0x1 /tmp/ccycw72c.o
  *fill*         0x0000000020200129        0x3 
- .bss.g_rxRing  0x000000002020012c       0x80 /tmp/cc9rQobc.o
- .bss.g_rxTail  0x00000000202001ac        0x2 /tmp/cc9rQobc.o
- .bss.g_txHead  0x00000000202001ae        0x2 /tmp/cc9rQobc.o
- .bss.g_txRing  0x00000000202001b0      0x400 /tmp/cc9rQobc.o
- .bss.g_txTail  0x00000000202005b0        0x2 /tmp/cc9rQobc.o
+ .bss.g_rxRing  0x000000002020012c       0x80 /tmp/ccycw72c.o
+ .bss.g_rxTail  0x00000000202001ac        0x2 /tmp/ccycw72c.o
+ .bss.g_txHead  0x00000000202001ae        0x2 /tmp/ccycw72c.o
+ .bss.g_txRing  0x00000000202001b0      0x400 /tmp/ccycw72c.o
+ .bss.g_txTail  0x00000000202005b0        0x2 /tmp/ccycw72c.o
  *fill*         0x00000000202005b2        0x2 
  .bss.gFOC_PWMBackup
-                0x00000000202005b4       0xbc /tmp/ccgay3jh.o
+                0x00000000202005b4       0xbc /tmp/ccr08KQf.o
                 0x00000000202005b4                gFOC_PWMBackup
  *(COMMON)
                 0x0000000020200670                . = ALIGN (0x8)
@@ -942,13 +942,13 @@ OUTPUT(firmware.elf elf32-littlearm)
 LOAD linker stubs
 
 .debug_info     0x0000000000000000    0x49266
- .debug_info    0x0000000000000000     0x5e6d /tmp/ccSbW8dM.o
- .debug_info    0x0000000000005e6d     0x646e /tmp/ccg0VGCe.o
- .debug_info    0x000000000000c2db     0x6259 /tmp/ccBAz2GS.o
- .debug_info    0x0000000000012534     0x6854 /tmp/ccN1BM5A.o
- .debug_info    0x0000000000018d88     0x81b9 /tmp/cc9rQobc.o
- .debug_info    0x0000000000020f41     0x7a85 /tmp/ccgay3jh.o
- .debug_info    0x00000000000289c6      0x1fc /tmp/ccuF8wEd.o
+ .debug_info    0x0000000000000000     0x5e6d /tmp/ccjG9iii.o
+ .debug_info    0x0000000000005e6d     0x646e /tmp/ccy1kZyF.o
+ .debug_info    0x000000000000c2db     0x6259 /tmp/cc5f6OAs.o
+ .debug_info    0x0000000000012534     0x6854 /tmp/ccpfFj81.o
+ .debug_info    0x0000000000018d88     0x81b9 /tmp/ccycw72c.o
+ .debug_info    0x0000000000020f41     0x7a85 /tmp/ccr08KQf.o
+ .debug_info    0x00000000000289c6      0x1fc /tmp/ccKxb8Vo.o
  .debug_info    0x0000000000028bc2     0x561b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
  .debug_info    0x000000000002e1dd     0x5f7e /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
  .debug_info    0x000000000003415b     0x9259 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
@@ -991,13 +991,13 @@ LOAD linker stubs
  .debug_info    0x0000000000049156      0x110 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
 
 .debug_abbrev   0x0000000000000000     0x4792
- .debug_abbrev  0x0000000000000000      0x35d /tmp/ccSbW8dM.o
- .debug_abbrev  0x000000000000035d      0x47b /tmp/ccg0VGCe.o
- .debug_abbrev  0x00000000000007d8      0x362 /tmp/ccBAz2GS.o
- .debug_abbrev  0x0000000000000b3a      0x440 /tmp/ccN1BM5A.o
- .debug_abbrev  0x0000000000000f7a      0x43f /tmp/cc9rQobc.o
- .debug_abbrev  0x00000000000013b9      0x3b5 /tmp/ccgay3jh.o
- .debug_abbrev  0x000000000000176e      0x12d /tmp/ccuF8wEd.o
+ .debug_abbrev  0x0000000000000000      0x35d /tmp/ccjG9iii.o
+ .debug_abbrev  0x000000000000035d      0x47b /tmp/ccy1kZyF.o
+ .debug_abbrev  0x00000000000007d8      0x362 /tmp/cc5f6OAs.o
+ .debug_abbrev  0x0000000000000b3a      0x440 /tmp/ccpfFj81.o
+ .debug_abbrev  0x0000000000000f7a      0x43f /tmp/ccycw72c.o
+ .debug_abbrev  0x00000000000013b9      0x3b5 /tmp/ccr08KQf.o
+ .debug_abbrev  0x000000000000176e      0x12d /tmp/ccKxb8Vo.o
  .debug_abbrev  0x000000000000189b      0x166 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
  .debug_abbrev  0x0000000000001a01      0x2f1 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
  .debug_abbrev  0x0000000000001cf2      0x3dd /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
@@ -1040,12 +1040,12 @@ LOAD linker stubs
  .debug_abbrev  0x0000000000004703       0x8f /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
 
 .debug_loc      0x0000000000000000     0xea23
- .debug_loc     0x0000000000000000      0x199 /tmp/ccSbW8dM.o
- .debug_loc     0x0000000000000199      0x9ca /tmp/ccg0VGCe.o
- .debug_loc     0x0000000000000b63      0x973 /tmp/ccBAz2GS.o
- .debug_loc     0x00000000000014d6      0x874 /tmp/ccN1BM5A.o
- .debug_loc     0x0000000000001d4a     0x1b6a /tmp/cc9rQobc.o
- .debug_loc     0x00000000000038b4      0xc5a /tmp/ccgay3jh.o
+ .debug_loc     0x0000000000000000      0x199 /tmp/ccjG9iii.o
+ .debug_loc     0x0000000000000199      0x9ca /tmp/ccy1kZyF.o
+ .debug_loc     0x0000000000000b63      0x973 /tmp/cc5f6OAs.o
+ .debug_loc     0x00000000000014d6      0x874 /tmp/ccpfFj81.o
+ .debug_loc     0x0000000000001d4a     0x1b6a /tmp/ccycw72c.o
+ .debug_loc     0x00000000000038b4      0xc5a /tmp/ccr08KQf.o
  .debug_loc     0x000000000000450e      0x473 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
  .debug_loc     0x0000000000004981     0x3114 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
  .debug_loc     0x0000000000007a95      0xad7 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_uart.o)
@@ -1080,19 +1080,19 @@ LOAD linker stubs
 
 .debug_aranges  0x0000000000000000      0xa28
  .debug_aranges
-                0x0000000000000000       0x30 /tmp/ccSbW8dM.o
+                0x0000000000000000       0x30 /tmp/ccjG9iii.o
  .debug_aranges
-                0x0000000000000030       0x80 /tmp/ccg0VGCe.o
+                0x0000000000000030       0x80 /tmp/ccy1kZyF.o
  .debug_aranges
-                0x00000000000000b0       0x50 /tmp/ccBAz2GS.o
+                0x00000000000000b0       0x50 /tmp/cc5f6OAs.o
  .debug_aranges
-                0x0000000000000100       0xe0 /tmp/ccN1BM5A.o
+                0x0000000000000100       0xe0 /tmp/ccpfFj81.o
  .debug_aranges
-                0x00000000000001e0       0x80 /tmp/cc9rQobc.o
+                0x00000000000001e0       0x80 /tmp/ccycw72c.o
  .debug_aranges
-                0x0000000000000260       0x68 /tmp/ccgay3jh.o
+                0x0000000000000260       0x68 /tmp/ccr08KQf.o
  .debug_aranges
-                0x00000000000002c8       0x30 /tmp/ccuF8wEd.o
+                0x00000000000002c8       0x30 /tmp/ccKxb8Vo.o
  .debug_aranges
                 0x00000000000002f8       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
  .debug_aranges
@@ -1175,13 +1175,13 @@ LOAD linker stubs
                 0x0000000000000a08       0x20 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
 
 .debug_ranges   0x0000000000000000     0x2aa8
- .debug_ranges  0x0000000000000000       0x98 /tmp/ccSbW8dM.o
- .debug_ranges  0x0000000000000098      0x3f0 /tmp/ccg0VGCe.o
- .debug_ranges  0x0000000000000488      0x228 /tmp/ccBAz2GS.o
- .debug_ranges  0x00000000000006b0      0x3c0 /tmp/ccN1BM5A.o
- .debug_ranges  0x0000000000000a70      0x420 /tmp/cc9rQobc.o
- .debug_ranges  0x0000000000000e90      0x308 /tmp/ccgay3jh.o
- .debug_ranges  0x0000000000001198       0x20 /tmp/ccuF8wEd.o
+ .debug_ranges  0x0000000000000000       0x98 /tmp/ccjG9iii.o
+ .debug_ranges  0x0000000000000098      0x3f0 /tmp/ccy1kZyF.o
+ .debug_ranges  0x0000000000000488      0x228 /tmp/cc5f6OAs.o
+ .debug_ranges  0x00000000000006b0      0x3c0 /tmp/ccpfFj81.o
+ .debug_ranges  0x0000000000000a70      0x420 /tmp/ccycw72c.o
+ .debug_ranges  0x0000000000000e90      0x308 /tmp/ccr08KQf.o
+ .debug_ranges  0x0000000000001198       0x20 /tmp/ccKxb8Vo.o
  .debug_ranges  0x00000000000011b8       0x10 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
  .debug_ranges  0x00000000000011c8      0x318 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
  .debug_ranges  0x00000000000014e0      0x8b0 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
@@ -1208,13 +1208,13 @@ LOAD linker stubs
  .debug_ranges  0x0000000000002a18       0x90 /usr/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/libgcc.a(floatunsisf.o)
 
 .debug_line     0x0000000000000000     0xe6a9
- .debug_line    0x0000000000000000      0x64a /tmp/ccSbW8dM.o
- .debug_line    0x000000000000064a      0xc6e /tmp/ccg0VGCe.o
- .debug_line    0x00000000000012b8      0x967 /tmp/ccBAz2GS.o
- .debug_line    0x0000000000001c1f     0x1298 /tmp/ccN1BM5A.o
- .debug_line    0x0000000000002eb7     0x16b5 /tmp/cc9rQobc.o
- .debug_line    0x000000000000456c      0xcb9 /tmp/ccgay3jh.o
- .debug_line    0x0000000000005225      0x16e /tmp/ccuF8wEd.o
+ .debug_line    0x0000000000000000      0x64a /tmp/ccjG9iii.o
+ .debug_line    0x000000000000064a      0xc6e /tmp/ccy1kZyF.o
+ .debug_line    0x00000000000012b8      0x967 /tmp/cc5f6OAs.o
+ .debug_line    0x0000000000001c1f     0x1298 /tmp/ccpfFj81.o
+ .debug_line    0x0000000000002eb7     0x16b5 /tmp/ccycw72c.o
+ .debug_line    0x000000000000456c      0xcb9 /tmp/ccr08KQf.o
+ .debug_line    0x0000000000005225      0x16e /tmp/ccKxb8Vo.o
  .debug_line    0x0000000000005393      0x427 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
  .debug_line    0x00000000000057ba      0xaae /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
  .debug_line    0x0000000000006268     0x24f6 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
@@ -1257,19 +1257,19 @@ LOAD linker stubs
  .debug_line    0x000000000000e500      0x1a9 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
 
 .debug_str      0x0000000000000000     0x81d9
- .debug_str     0x0000000000000000     0x20f9 /tmp/ccSbW8dM.o
+ .debug_str     0x0000000000000000     0x20f9 /tmp/ccjG9iii.o
                                        0x2246 (size before relaxing)
- .debug_str     0x00000000000020f9      0x3b7 /tmp/ccg0VGCe.o
+ .debug_str     0x00000000000020f9      0x3b7 /tmp/ccy1kZyF.o
                                        0x1e91 (size before relaxing)
- .debug_str     0x00000000000024b0      0x1ee /tmp/ccBAz2GS.o
+ .debug_str     0x00000000000024b0      0x1ee /tmp/cc5f6OAs.o
                                        0x1cef (size before relaxing)
- .debug_str     0x000000000000269e      0x3a7 /tmp/ccN1BM5A.o
+ .debug_str     0x000000000000269e      0x3a7 /tmp/ccpfFj81.o
                                        0x21d9 (size before relaxing)
- .debug_str     0x0000000000002a45      0x3ec /tmp/cc9rQobc.o
+ .debug_str     0x0000000000002a45      0x3ec /tmp/ccycw72c.o
                                        0x2339 (size before relaxing)
- .debug_str     0x0000000000002e31     0x2026 /tmp/ccgay3jh.o
+ .debug_str     0x0000000000002e31     0x2026 /tmp/ccr08KQf.o
                                        0x3bb5 (size before relaxing)
- .debug_str     0x0000000000004e57      0x170 /tmp/ccuF8wEd.o
+ .debug_str     0x0000000000004e57      0x170 /tmp/ccKxb8Vo.o
                                         0x2e7 (size before relaxing)
  .debug_str     0x0000000000004fc7      0x1ac /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
                                        0x1b32 (size before relaxing)
@@ -1349,14 +1349,14 @@ LOAD linker stubs
                                         0x1a7 (size before relaxing)
 
 .comment        0x0000000000000000       0xac
- .comment       0x0000000000000000       0x33 /tmp/ccSbW8dM.o
+ .comment       0x0000000000000000       0x33 /tmp/ccjG9iii.o
                                          0x34 (size before relaxing)
- .comment       0x0000000000000033       0x34 /tmp/ccg0VGCe.o
- .comment       0x0000000000000033       0x34 /tmp/ccBAz2GS.o
- .comment       0x0000000000000033       0x34 /tmp/ccN1BM5A.o
- .comment       0x0000000000000033       0x34 /tmp/cc9rQobc.o
- .comment       0x0000000000000033       0x34 /tmp/ccgay3jh.o
- .comment       0x0000000000000033       0x34 /tmp/ccuF8wEd.o
+ .comment       0x0000000000000033       0x34 /tmp/ccy1kZyF.o
+ .comment       0x0000000000000033       0x34 /tmp/cc5f6OAs.o
+ .comment       0x0000000000000033       0x34 /tmp/ccpfFj81.o
+ .comment       0x0000000000000033       0x34 /tmp/ccycw72c.o
+ .comment       0x0000000000000033       0x34 /tmp/ccr08KQf.o
+ .comment       0x0000000000000033       0x34 /tmp/ccKxb8Vo.o
  .comment       0x0000000000000033       0x79 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
                                          0x7a (size before relaxing)
  .comment       0x00000000000000ac       0x7a /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
@@ -1397,19 +1397,19 @@ LOAD linker stubs
 .ARM.attributes
                 0x0000000000000000       0x2c
  .ARM.attributes
-                0x0000000000000000       0x2c /tmp/ccSbW8dM.o
+                0x0000000000000000       0x2c /tmp/ccjG9iii.o
  .ARM.attributes
-                0x000000000000002c       0x2c /tmp/ccg0VGCe.o
+                0x000000000000002c       0x2c /tmp/ccy1kZyF.o
  .ARM.attributes
-                0x0000000000000058       0x2c /tmp/ccBAz2GS.o
+                0x0000000000000058       0x2c /tmp/cc5f6OAs.o
  .ARM.attributes
-                0x0000000000000084       0x2c /tmp/ccN1BM5A.o
+                0x0000000000000084       0x2c /tmp/ccpfFj81.o
  .ARM.attributes
-                0x00000000000000b0       0x2c /tmp/cc9rQobc.o
+                0x00000000000000b0       0x2c /tmp/ccycw72c.o
  .ARM.attributes
-                0x00000000000000dc       0x2c /tmp/ccgay3jh.o
+                0x00000000000000dc       0x2c /tmp/ccr08KQf.o
  .ARM.attributes
-                0x0000000000000108       0x2c /tmp/ccuF8wEd.o
+                0x0000000000000108       0x2c /tmp/ccKxb8Vo.o
  .ARM.attributes
                 0x0000000000000134       0x2b /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
  .ARM.attributes
@@ -1492,13 +1492,13 @@ LOAD linker stubs
                 0x000000000000079e       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg_nano.a(lib_a-strncmp.o)
 
 .debug_frame    0x0000000000000000     0x1404
- .debug_frame   0x0000000000000000       0x58 /tmp/ccSbW8dM.o
- .debug_frame   0x0000000000000058      0x138 /tmp/ccg0VGCe.o
- .debug_frame   0x0000000000000190       0xc4 /tmp/ccBAz2GS.o
- .debug_frame   0x0000000000000254      0x270 /tmp/ccN1BM5A.o
- .debug_frame   0x00000000000004c4      0x1b4 /tmp/cc9rQobc.o
- .debug_frame   0x0000000000000678      0x10c /tmp/ccgay3jh.o
- .debug_frame   0x0000000000000784       0x48 /tmp/ccuF8wEd.o
+ .debug_frame   0x0000000000000000       0x58 /tmp/ccjG9iii.o
+ .debug_frame   0x0000000000000058      0x138 /tmp/ccy1kZyF.o
+ .debug_frame   0x0000000000000190       0xc4 /tmp/cc5f6OAs.o
+ .debug_frame   0x0000000000000254      0x270 /tmp/ccpfFj81.o
+ .debug_frame   0x00000000000004c4      0x1b4 /tmp/ccycw72c.o
+ .debug_frame   0x0000000000000678      0x10c /tmp/ccr08KQf.o
+ .debug_frame   0x0000000000000784       0x48 /tmp/ccKxb8Vo.o
  .debug_frame   0x00000000000007cc       0x20 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_common.o)
  .debug_frame   0x00000000000007ec      0x124 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_i2c.o)
  .debug_frame   0x0000000000000910      0x3d4 /home/clbritheking/ti/mspm0_sdk_2_11_00_07/source/ti/driverlib/lib/gcc/m0p/mspm0g1x0x_g3x0x/driverlib.a(dl_timer.o)
