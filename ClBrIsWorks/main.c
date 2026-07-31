@@ -6,14 +6,14 @@
 
 #define LINE_PRINT_PERIOD_MS (100U)
 
-#define MOTOR_MAXIMUM_OUTPUT (300U)
-#define WHEEL_STRAIGHT_OUTPUT (220)
-#define WHEEL_CORRECTION_SLOW_OUTPUT (140)
+#define MOTOR_MAXIMUM_OUTPUT (250U)
+#define WHEEL_STRAIGHT_OUTPUT (215)
+#define WHEEL_CORRECTION_SLOW_OUTPUT (50)
 #define WHEEL_CORRECTION_FAST_OUTPUT (210)
-#define WHEEL_SHARP_SLOW_OUTPUT (110)
-#define WHEEL_SHARP_FAST_OUTPUT (230)
-#define WHEEL_SEARCH_SLOW_OUTPUT (110)
-#define WHEEL_SEARCH_FAST_OUTPUT (230)
+#define WHEEL_SHARP_SLOW_OUTPUT (40)
+#define WHEEL_SHARP_FAST_OUTPUT (240)
+#define WHEEL_SEARCH_SLOW_OUTPUT (120)
+#define WHEEL_SEARCH_FAST_OUTPUT (180)
 
 static uint16_t adc_line[ADC_SEQUENCE5_COUNT];
 static uint8_t line_state[ADC_SEQUENCE5_COUNT];
@@ -96,12 +96,15 @@ static void follow_line(uint32_t now_ms)
 {
     int32_t error;
     uint32_t active_count;
+    uint32_t middle_black_count;
     int16_t left_output;
     int16_t right_output;
 
-    if ((line_state[1] != 0U) &&
-        (line_state[2] != 0U) &&
-        (line_state[3] != 0U)) {
+    middle_black_count =
+        (uint32_t) line_state[1] +
+        (uint32_t) line_state[2] +
+        (uint32_t) line_state[3];
+    if (middle_black_count >= 2U) {
         Chassis_Brake(&chassis, now_ms);
         return;
     }

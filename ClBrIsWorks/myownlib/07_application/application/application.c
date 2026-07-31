@@ -28,6 +28,7 @@ static bool gTelemetryRequested;
 static bool gRawStreamingEnabled;
 static bool gDebugStreamingEnabled;
 static int16_t gDriveOutput;
+static int8_t gLastLineDirection;
 
 static Motor gLeftMotor;
 static Motor gRightMotor;
@@ -57,21 +58,63 @@ static void Application_HandleMissedControlCycles(
     }
 }
 
-static void Application_RunLineFollowing(uint32_t nowMs)
+static bool Application_IsStopMarker(
+    const LineSensor_Result *line)
 {
-    LineControl_Status status;
+    return (line != NULL) &&
+        (line->strength[1] != 0U) &&
+        (line->strength[2] != 0U) &&
+        (line->strength[3] != 0U);
+}
+
+static void Application_SearchForLine(uint32_t nowMs)
+{
     int16_t turn;
 
-    status = LineControl_Update(
-        &gLineControl,
-        LineSensor_GetResult(&gLineSensor),
-        APPLICATION_CONTROL_DT_SECONDS);
-
-    if (status == LINE_CONTROL_LINE_LOST) {
-        Application_EnterState(APPLICATION_LINE_LOST);
+    if (gLastLineDirection == 0) {
+        gDriveOutput = 0;
         Application_ApplySafeState(nowMs);
         return;
     }
+
+    turn = (gLastLineDirection > 0) ?
+        APPLICATION_SEARCH_TURN_OUTPUT :
+        -APPLICATION_SEARCH_TURN_OUTPUT;
+    gDriveOutput = APPLICATION_SEARCH_DRIVE_OUTPUT;
+    Chassis_SetDriveTurn(
+        &gChassis, gDriveOutput, turn, nowMs);
+}
+
+static void Application_RunLineFollowing(uint32_t nowMs)
+{
+    const LineSensor_Result *line;
+    LineControl_Status status;
+    int16_t turn;
+
+    line = LineSensor_GetResult(&gLineSensor);
+    if (line == NULL) {
+        Application_EnterState(APPLICATION_FAULT);
+        Application_ApplySafeState(nowMs);
+        return;
+    }
+
+    if (!line->valid) {
+        Application_EnterState(APPLICATION_LINE_LOST);
+        Application_SearchForLine(nowMs);
+        return;
+    }
+
+    if (Application_IsStopMarker(line)) {
+        gDriveOutput = 0;
+        Application_ApplySafeState(nowMs);
+        return;
+    }
+
+    status = LineControl_Update(
+        &gLineControl,
+        line,
+        APPLICATION_CONTROL_DT_SECONDS);
+
     if (status == LINE_CONTROL_INVALID_ARGUMENT) {
         Application_EnterState(APPLICATION_FAULT);
         Application_ApplySafeState(nowMs);
@@ -80,8 +123,29 @@ static void Application_RunLineFollowing(uint32_t nowMs)
 
     turn =
         LineControl_GetTurnCommand(&gLineControl);
+    if (turn > 0) {
+        gLastLineDirection = 1;
+    } else if (turn < 0) {
+        gLastLineDirection = -1;
+    }
+
+    if (turn == 0) {
+        gDriveOutput =
+            APPLICATION_STRAIGHT_DRIVE_OUTPUT;
+    } else if ((turn >=
+            APPLICATION_SHARP_TURN_OUTPUT) ||
+        (turn <=
+            -APPLICATION_SHARP_TURN_OUTPUT)) {
+        gDriveOutput =
+            APPLICATION_SHARP_DRIVE_OUTPUT;
+    } else {
+        gDriveOutput =
+            APPLICATION_CORRECTION_DRIVE_OUTPUT;
+    }
+
     turn = ApplicationPolicy_LimitTurnForForwardDrive(
         gDriveOutput, turn);
+    Application_EnterState(APPLICATION_RUNNING);
     Chassis_SetDriveTurn(
         &gChassis, gDriveOutput, turn, nowMs);
 }
@@ -106,7 +170,8 @@ static void Application_RunControlStep(uint32_t nowMs)
         return;
     }
 
-    if (gState == APPLICATION_RUNNING) {
+    if ((gState == APPLICATION_RUNNING) ||
+        (gState == APPLICATION_LINE_LOST)) {
         Application_RunLineFollowing(nowMs);
     }
 }
@@ -122,21 +187,12 @@ static void Application_ProcessOneCommand(
     uint8_t command, uint32_t nowMs)
 {
     switch (command) {
-        case (uint8_t) 's':
-            Application_AcknowledgeCommand(command);
-            if (gState == APPLICATION_IDLE) {
-                LineControl_Reset(&gLineControl);
-                gDriveOutput =
-                    APPLICATION_DEFAULT_DRIVE_OUTPUT;
-                Application_EnterState(
-                    APPLICATION_RUNNING);
-            }
-            break;
-
         case (uint8_t) 'x':
             Application_AcknowledgeCommand(command);
             Application_ApplySafeState(nowMs);
             LineControl_Reset(&gLineControl);
+            gDriveOutput = 0;
+            gLastLineDirection = 0;
             Application_EnterState(APPLICATION_IDLE);
             break;
 
@@ -406,13 +462,12 @@ void Application_Init(void)
     };
     const LineSensor_Config lineSensorConfig = {
         .channelMap = APPLICATION_LINE_CHANNEL_MAP,
-        .backgroundValue =
-            APPLICATION_LINE_BACKGROUND_VALUES,
-        .lineValue = APPLICATION_LINE_VALUES,
+        .mode = LINE_SENSOR_MODE_BINARY_THRESHOLD,
+        .thresholdValue =
+            APPLICATION_LINE_THRESHOLDS,
+        .lineIsHigh = APPLICATION_LINE_IS_HIGH,
         .positionWeight =
             APPLICATION_LINE_POSITION_WEIGHTS,
-        .minimumCalibrationRange =
-            APPLICATION_LINE_MINIMUM_CALIBRATION_RANGE,
         .minimumTotalStrength =
             APPLICATION_LINE_MINIMUM_TOTAL_STRENGTH
     };
@@ -433,7 +488,12 @@ void Application_Init(void)
             APPLICATION_MAXIMUM_TURN_OUTPUT,
         .turnInverted = APPLICATION_TURN_INVERTED,
         .maximumInvalidFrames =
-            APPLICATION_MAXIMUM_INVALID_FRAMES
+            APPLICATION_MAXIMUM_INVALID_FRAMES,
+        .binaryPatternEnabled = true,
+        .binaryCorrectionCommand =
+            APPLICATION_CORRECTION_TURN_OUTPUT,
+        .binarySharpCommand =
+            APPLICATION_SHARP_TURN_OUTPUT
     };
     const Chassis_Config chassisConfig = {
         .leftMotor = &gLeftMotor,
@@ -461,7 +521,9 @@ void Application_Init(void)
     gTelemetryRequested = false;
     gRawStreamingEnabled = false;
     gDebugStreamingEnabled = false;
-    gDriveOutput = 0;
+    gDriveOutput =
+        APPLICATION_STRAIGHT_DRIVE_OUTPUT;
+    gLastLineDirection = 0;
 
     HC05_ResetReceiver();
     initialized =
@@ -483,14 +545,14 @@ void Application_Init(void)
 
     gProcessedControlSequence =
         SystemTime_GetControlSequence();
-    Application_EnterState(APPLICATION_IDLE);
+    Application_EnterState(APPLICATION_RUNNING);
 
     NVIC_ClearPendingIRQ(HC05_UART_INST_INT_IRQN);
     NVIC_EnableIRQ(HC05_UART_INST_INT_IRQN);
     __enable_irq();
     HC05_SendString(
         HC05_UART_INST,
-        "112ready: s=start, x=brake, t=telemetry, "
+        "ready: auto-run, x=brake, t=telemetry, "
         "v=raw-stream, d=debug-stream\r\n");
 }
 

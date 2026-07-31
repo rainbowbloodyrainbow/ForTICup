@@ -4,9 +4,8 @@
 #include <stdbool.h>
 
 /*
- * 这一文件集中保存必须上车实测的参数。烧录后先保持车轮离地，用 t 单次查看
- * 完整遥测，或用 v 开关五路原始值连续输出，再修正黑线/背景数组、电机反相
- * 和差速方向；确认后才发送 s。
+ * 这一文件集中保存必须上车实测的参数。正式程序初始化成功后直接巡迹，
+ * 不等待串口启动命令。烧录和调参时必须先让车轮离地。
  *
  * 五路模拟信号进入 MSPM0 前必须确认始终不超过 3.3 V。扩展板接口旁的
  * +5 V 不能证明信号电平对 ADC 安全。
@@ -14,11 +13,18 @@
 
 #define APPLICATION_LEFT_MOTOR_INVERTED (false)
 #define APPLICATION_RIGHT_MOTOR_INVERTED (false)
-#define APPLICATION_MOTOR_MAXIMUM_OUTPUT (350U)
+#define APPLICATION_MOTOR_MAXIMUM_OUTPUT (300U)
 #define APPLICATION_MOTOR_REVERSAL_DELAY_MS (5U)
 
-#define APPLICATION_DEFAULT_DRIVE_OUTPUT (180)
-#define APPLICATION_MAXIMUM_TURN_OUTPUT (90)
+#define APPLICATION_STRAIGHT_DRIVE_OUTPUT (220)
+#define APPLICATION_CORRECTION_DRIVE_OUTPUT (175)
+#define APPLICATION_SHARP_DRIVE_OUTPUT (170)
+#define APPLICATION_SEARCH_DRIVE_OUTPUT (170)
+#define APPLICATION_CORRECTION_TURN_OUTPUT (35)
+#define APPLICATION_SHARP_TURN_OUTPUT (60)
+#define APPLICATION_SEARCH_TURN_OUTPUT (60)
+#define APPLICATION_MAXIMUM_TURN_OUTPUT \
+    APPLICATION_SHARP_TURN_OUTPUT
 #define APPLICATION_LEFT_OPEN_LOOP_SCALE (1000U)
 #define APPLICATION_RIGHT_OPEN_LOOP_SCALE (1000U)
 
@@ -42,18 +48,18 @@
 #define APPLICATION_UART_DIAGNOSTIC_PERIOD_MS (1000U)
 
 /*
- * 下列数值只是安全启动用的初始标定，必须用本车五路探头在背景和黑线上分别
- * 实测后替换。每个数组从左至右对应 L2、L1、C、R1、R2。
+ * 当前使用已经上车验证的五路二值阈值，数组从左至右对应
+ * L2、L1、C、R1、R2。五路均为 ADC 数值大于等于阈值时检测到黑线。
+ * 完整白底/黑线端点尚未实测，因此不启用连续归一化模式。
  */
 #define APPLICATION_LINE_CHANNEL_MAP \
     {0U, 1U, 2U, 3U, 4U}
-#define APPLICATION_LINE_BACKGROUND_VALUES \
-    {270U, 270U, 270U, 270U, 270U}
-#define APPLICATION_LINE_VALUES \
-    {500U, 40U, 30U, 25U, 500U}
+#define APPLICATION_LINE_THRESHOLDS \
+    {330U, 295U, 290U, 300U, 500U}
+#define APPLICATION_LINE_IS_HIGH \
+    {true, true, true, true, true}
 #define APPLICATION_LINE_POSITION_WEIGHTS \
     {-2000, -1000, 0, 1000, 2000}
-#define APPLICATION_LINE_MINIMUM_CALIBRATION_RANGE (100U)
 #define APPLICATION_LINE_MINIMUM_TOTAL_STRENGTH (300U)
 
 #define APPLICATION_TURN_KP (0.65f)

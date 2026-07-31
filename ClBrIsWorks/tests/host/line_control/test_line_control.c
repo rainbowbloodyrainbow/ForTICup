@@ -101,11 +101,53 @@ static void TestInvalidFramesAndRecovery(void)
     assert(LineControl_GetInvalidFrameCount(&control) == 0U);
 }
 
+static void TestBinaryPatternCommands(void)
+{
+    LineControl control = {0};
+    LineControl_Config config = MakeConfig(false);
+    LineSensor_Result line = {
+        .valid = true
+    };
+
+    config.maximumTurnCommand = 60;
+    config.binaryPatternEnabled = true;
+    config.binaryCorrectionCommand = 35;
+    config.binarySharpCommand = 60;
+    assert(LineControl_Init(&control, &config));
+
+    line.strength[2] = LINE_SENSOR_STRENGTH_MAX;
+    assert(LineControl_Update(
+        &control, &line, 0.01f) ==
+        LINE_CONTROL_TRACKING);
+    assert(LineControl_GetTurnCommand(&control) == 0);
+
+    line.strength[2] = 0U;
+    line.strength[1] = LINE_SENSOR_STRENGTH_MAX;
+    (void) LineControl_Update(&control, &line, 0.01f);
+    assert(LineControl_GetTurnCommand(&control) == 35);
+
+    line.strength[1] = 0U;
+    line.strength[0] = LINE_SENSOR_STRENGTH_MAX;
+    (void) LineControl_Update(&control, &line, 0.01f);
+    assert(LineControl_GetTurnCommand(&control) == 60);
+
+    line.strength[0] = 0U;
+    line.strength[4] = LINE_SENSOR_STRENGTH_MAX;
+    (void) LineControl_Update(&control, &line, 0.01f);
+    assert(LineControl_GetTurnCommand(&control) == -60);
+
+    config.turnInverted = true;
+    assert(LineControl_Init(&control, &config));
+    (void) LineControl_Update(&control, &line, 0.01f);
+    assert(LineControl_GetTurnCommand(&control) == 60);
+}
+
 int main(void)
 {
     TestTrackingSignsAndLimit();
     TestInversion();
     TestInvalidFramesAndRecovery();
+    TestBinaryPatternCommands();
 
     puts("line_control host tests passed");
     return 0;

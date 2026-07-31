@@ -20,6 +20,14 @@ typedef struct {
     int16_t maximumTurnCommand;
     bool turnInverted;
     uint8_t maximumInvalidFrames;
+
+    /*
+     * 启用后按五路二值强度使用 2、1、0、-1、-2 权重输出分级转向；
+     * 关闭时仍使用连续质心位置和 PID。
+     */
+    bool binaryPatternEnabled;
+    int16_t binaryCorrectionCommand;
+    int16_t binarySharpCommand;
 } LineControl_Config;
 
 typedef struct {

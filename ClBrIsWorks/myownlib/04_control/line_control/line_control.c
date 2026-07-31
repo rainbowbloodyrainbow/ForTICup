@@ -6,11 +6,23 @@
 static bool LineControl_IsConfigValid(
     const LineControl_Config *config)
 {
-    return (config != NULL) &&
+    bool basicValid;
+
+    basicValid = (config != NULL) &&
         isfinite(config->positionFullScale) &&
         (config->positionFullScale > 0.0f) &&
         (config->maximumTurnCommand > 0) &&
         (config->maximumInvalidFrames > 0U);
+    if (!basicValid) {
+        return false;
+    }
+
+    return !config->binaryPatternEnabled ||
+        ((config->binaryCorrectionCommand > 0) &&
+            (config->binarySharpCommand >=
+                config->binaryCorrectionCommand) &&
+            (config->binarySharpCommand <=
+                config->maximumTurnCommand));
 }
 
 static int16_t LineControl_ClampTurn(
@@ -47,6 +59,37 @@ static int16_t LineControl_OutputToTurnCommand(
         command = -command;
     }
 
+    return LineControl_ClampTurn(control, command);
+}
+
+static int16_t LineControl_BinaryPatternToCommand(
+    const LineControl *control,
+    const LineSensor_Result *line)
+{
+    int32_t error;
+    int32_t command;
+
+    error =
+        2 * (line->strength[0] != 0U) +
+        (line->strength[1] != 0U) -
+        (line->strength[3] != 0U) -
+        2 * (line->strength[4] != 0U);
+
+    if (error >= 2) {
+        command = control->config.binarySharpCommand;
+    } else if (error == 1) {
+        command = control->config.binaryCorrectionCommand;
+    } else if (error == -1) {
+        command = -control->config.binaryCorrectionCommand;
+    } else if (error <= -2) {
+        command = -control->config.binarySharpCommand;
+    } else {
+        command = 0;
+    }
+
+    if (control->config.turnInverted) {
+        command = -command;
+    }
     return LineControl_ClampTurn(control, command);
 }
 
@@ -120,6 +163,14 @@ LineControl_Status LineControl_Update(
     }
 
     control->consecutiveInvalidFrames = 0U;
+    if (control->config.binaryPatternEnabled) {
+        control->turnCommand =
+            LineControl_BinaryPatternToCommand(
+                control, line);
+        control->status = LINE_CONTROL_TRACKING;
+        return control->status;
+    }
+
     normalizedPosition =
         (float) line->position /
         control->config.positionFullScale;

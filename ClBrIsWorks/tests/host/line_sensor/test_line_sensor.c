@@ -9,9 +9,10 @@ static LineSensor_Config MakeConfig(bool inversePolarity)
     static const int16_t weights[LINE_SENSOR_COUNT] = {
         -2000, -1000, 0, 1000, 2000
     };
-    LineSensor_Config config;
+    LineSensor_Config config = {0};
     uint32_t index;
 
+    config.mode = LINE_SENSOR_MODE_CALIBRATED;
     for (index = 0U; index < LINE_SENSOR_COUNT; index++) {
         config.channelMap[index] = (uint8_t) index;
         config.backgroundValue[index] =
@@ -134,12 +135,65 @@ static void TestChannelMapping(void)
     assert(result->position == -2000);
 }
 
+static void TestBinaryThresholdMode(void)
+{
+    static const uint16_t thresholds[LINE_SENSOR_COUNT] = {
+        330U, 295U, 290U, 300U, 500U
+    };
+    LineSensor sensor = {0};
+    LineSensor_Config config = {0};
+    uint16_t raw[LINE_SENSOR_COUNT] = {
+        329U, 295U, 289U, 301U, 499U
+    };
+    const LineSensor_Result *result;
+    uint32_t index;
+
+    config.mode = LINE_SENSOR_MODE_BINARY_THRESHOLD;
+    config.minimumTotalStrength = 300U;
+    for (index = 0U; index < LINE_SENSOR_COUNT; index++) {
+        config.channelMap[index] = (uint8_t) index;
+        config.thresholdValue[index] = thresholds[index];
+        config.lineIsHigh[index] = true;
+        config.positionWeight[index] =
+            (int16_t) (((int32_t) index - 2) * 1000);
+    }
+
+    assert(LineSensor_Init(&sensor, &config));
+    assert(LineSensor_ProcessRaw(&sensor, raw));
+    result = LineSensor_GetResult(&sensor);
+    assert(result != NULL);
+    assert(result->strength[0] == 0U);
+    assert(result->strength[1] ==
+        LINE_SENSOR_STRENGTH_MAX);
+    assert(result->strength[2] == 0U);
+    assert(result->strength[3] ==
+        LINE_SENSOR_STRENGTH_MAX);
+    assert(result->strength[4] == 0U);
+    assert(result->valid);
+    assert(result->position == 0);
+
+    for (index = 0U; index < LINE_SENSOR_COUNT; index++) {
+        raw[index] = thresholds[index] - 1U;
+    }
+    assert(LineSensor_ProcessRaw(&sensor, raw));
+    assert(!result->valid);
+
+    config.lineIsHigh[4] = false;
+    assert(LineSensor_Init(&sensor, &config));
+    raw[4] = thresholds[4];
+    assert(LineSensor_ProcessRaw(&sensor, raw));
+    result = LineSensor_GetResult(&sensor);
+    assert(result->strength[4] ==
+        LINE_SENSOR_STRENGTH_MAX);
+}
+
 int main(void)
 {
     TestConfigurationValidation();
     TestBothPolaritiesAndSaturation();
     TestPositionsAndInvalidRetention();
     TestChannelMapping();
+    TestBinaryThresholdMode();
 
     puts("line_sensor host tests passed");
     return 0;

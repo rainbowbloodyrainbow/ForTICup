@@ -47,6 +47,23 @@ static uint16_t LineSensor_NormalizeOne(
     return (uint16_t) strength;
 }
 
+static uint16_t LineSensor_ThresholdOne(
+    uint16_t raw,
+    uint16_t threshold,
+    bool lineIsHigh)
+{
+    bool lineDetected;
+
+    if (lineIsHigh) {
+        lineDetected = (raw >= threshold);
+    } else {
+        lineDetected = (raw <= threshold);
+    }
+
+    return lineDetected ?
+        LINE_SENSOR_STRENGTH_MAX : 0U;
+}
+
 static void LineSensor_MapRaw(
     const LineSensor_Config *config,
     const uint16_t adcRaw[LINE_SENSOR_COUNT],
@@ -95,9 +112,20 @@ bool LineSensor_IsConfigValid(
     int32_t range;
 
     if ((config == NULL) ||
-        (config->minimumCalibrationRange == 0U) ||
         (config->minimumTotalStrength == 0U) ||
+        (config->minimumTotalStrength >
+            (LINE_SENSOR_COUNT *
+                LINE_SENSOR_STRENGTH_MAX)) ||
         !LineSensor_IsChannelMapValid(config->channelMap)) {
+        return false;
+    }
+
+    if (config->mode ==
+        LINE_SENSOR_MODE_BINARY_THRESHOLD) {
+        return true;
+    }
+    if ((config->mode != LINE_SENSOR_MODE_CALIBRATED) ||
+        (config->minimumCalibrationRange == 0U)) {
         return false;
     }
 
@@ -158,11 +186,20 @@ bool LineSensor_ProcessRaw(
         &sensor->config, adcRaw, sensor->result.raw);
 
     for (index = 0U; index < LINE_SENSOR_COUNT; index++) {
-        sensor->result.strength[index] =
-            LineSensor_NormalizeOne(
-                sensor->result.raw[index],
-                sensor->config.backgroundValue[index],
-                sensor->config.lineValue[index]);
+        if (sensor->config.mode ==
+            LINE_SENSOR_MODE_BINARY_THRESHOLD) {
+            sensor->result.strength[index] =
+                LineSensor_ThresholdOne(
+                    sensor->result.raw[index],
+                    sensor->config.thresholdValue[index],
+                    sensor->config.lineIsHigh[index]);
+        } else {
+            sensor->result.strength[index] =
+                LineSensor_NormalizeOne(
+                    sensor->result.raw[index],
+                    sensor->config.backgroundValue[index],
+                    sensor->config.lineValue[index]);
+        }
     }
 
     LineSensor_CalculatePosition(sensor);
