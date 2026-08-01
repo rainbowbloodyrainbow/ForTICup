@@ -43,12 +43,20 @@
 #define VISION_NEG_REF_MAG_MILLIDEG  (40000L)
 #define VISION_MIN_TARGET_MILLIDEG   (-60000L)
 #define VISION_MAX_TARGET_MILLIDEG   (45000L)
-#define VISION_PID_U_LIMIT_MILLI     (1500)
-#define VISION_KP_U_MILLI_PER_PIXEL  (10)
-#define VISION_KI_U_MILLI_PER_PIXEL_S (1)
-#define VISION_KD_U_MILLI_S_PER_PIXEL (1)
-#define VISION_D_FILTER_DIVISOR      (4)
-#define VISION_I_LIMIT_PIXEL_MS      (500000)
+#define BALL_TILT_U_LIMIT_MILLI      (1500)
+
+/* Ball position P loop: position error[pixel] -> target speed[pixel/s]. */
+#define BALL_POSITION_KP_NUM         (4)
+#define BALL_POSITION_KP_DEN         (1)
+#define BALL_MAX_TARGET_SPEED_PX_S   (400)
+
+/* Ball speed PI loop: speed error[pixel/s] -> symmetric tilt demand u. */
+#define BALL_SPEED_FILTER_DIVISOR    (4)
+#define BALL_SPEED_KP_U_NUM          (5)
+#define BALL_SPEED_KP_U_DEN          (2)
+#define BALL_SPEED_KI_U_PER_PIXEL    (1)
+#define BALL_SPEED_I_LIMIT_PIXEL_MS  (300000)
+#define BALL_STOP_SPEED_BAND_PX_S    (5)
 #define VISION_STATUS_EVERY_FRAMES   (10U)
 
 typedef enum {
@@ -82,11 +90,13 @@ static char g_openmvBuffer[OPENMV_BUFFER_SIZE];
 static uint32_t g_openmvLength;
 static uint8_t g_visionEnabled;
 static uint32_t g_visionStatusFrameCount;
-static int32_t g_visionIntegralPixelMs;
-static int32_t g_visionPreviousError;
-static int32_t g_visionDerivativePixelsPerS;
-static uint32_t g_visionPreviousMs;
-static uint8_t g_visionPidInitialized;
+static uint32_t g_ballLatestX;
+static uint32_t g_ballPreviousX;
+static int32_t g_ballTargetSpeedPixelsPerS;
+static int32_t g_ballMeasuredSpeedPixelsPerS;
+static int32_t g_ballSpeedIntegralPixelMs;
+static uint32_t g_ballPreviousMs;
+static uint8_t g_ballControllerInitialized;
 static volatile uint32_t g_milliseconds;
 
 void SysTick_Handler(void)
@@ -175,6 +185,17 @@ static int32_t clamp_i32(int32_t value, int32_t minimum, int32_t maximum)
     return value;
 }
 
+static void reset_ball_controller(void)
+{
+    g_ballLatestX = VISION_CENTER_X;
+    g_ballPreviousX = VISION_CENTER_X;
+    g_ballTargetSpeedPixelsPerS = 0;
+    g_ballMeasuredSpeedPixelsPerS = 0;
+    g_ballSpeedIntegralPixelMs = 0;
+    g_ballPreviousMs = 0U;
+    g_ballControllerInitialized = 0U;
+}
+
 static int32_t encoder_update(void)
 {
     uint16_t currentRaw;
@@ -260,6 +281,14 @@ static void print_status(void)
                ((g_motionState == MOTION_FAULT) ? "FAULT" : "IDLE")));
     uart_puts(" vision=");
     uart_puts((g_visionEnabled != 0U) ? "ON" : "OFF");
+    uart_puts(" ball=");
+    uart_puts((g_ballControllerInitialized != 0U) ? "VALID" : "NO_DATA");
+    uart_puts(" ball_x=");
+    uart_write_u32(g_ballLatestX);
+    uart_puts(" ball_v_px_s=");
+    uart_write_i32(g_ballMeasuredSpeedPixelsPerS);
+    uart_puts(" ball_v_target_px_s=");
+    uart_write_i32(g_ballTargetSpeedPixelsPerS);
     uart_puts(" A=");
     uart_write_u32((DL_GPIO_readPins(GPIOA, DL_GPIO_PIN_1) != 0U) ? 1U : 0U);
     uart_puts(" B=");
@@ -405,7 +434,7 @@ static void handle_command(char *command)
 
     if (parse_to_command(command, &targetMillideg) != 0U) {
         g_visionEnabled = 0U;
-        g_visionPidInitialized = 0U;
+        reset_ball_controller();
         start_position_move(targetMillideg);
     } else if ((command[0] == '?' && command[1] == '\0') ||
                ((command[0] == 'S' || command[0] == 's') &&
@@ -414,7 +443,7 @@ static void handle_command(char *command)
             print_status();
         } else {
             g_visionEnabled = 0U;
-            g_visionPidInitialized = 0U;
+            reset_ball_controller();
             g_motionState = MOTION_IDLE;
             motor_disable();
             uart_puts("OK stopped; driver disabled and vision OFF\r\n");
@@ -425,9 +454,7 @@ static void handle_command(char *command)
         g_motionState = MOTION_IDLE;
         g_visionEnabled = 1U;
         g_visionStatusFrameCount = 0U;
-        g_visionIntegralPixelMs = 0;
-        g_visionDerivativePixelsPerS = 0;
-        g_visionPidInitialized = 0U;
+        reset_ball_controller();
         uart_puts("OK vision control ON\r\n");
     } else {
         uart_puts("ERR command; use V, To30, To-30, ?, or S, then press Enter\r\n");
@@ -453,27 +480,31 @@ static uint8_t parse_openmv_x(const char *text, uint32_t *x)
     return 1U;
 }
 
-static void print_vision_pid_status(
+static void print_ball_cascade_status(
     uint32_t x,
-    int32_t error,
-    int32_t proportionalUMilli,
-    int32_t integralUMilli,
-    int32_t derivativeUMilli,
+    int32_t positionError,
+    int32_t speedError,
+    int32_t speedProportionalUMilli,
+    int32_t speedIntegralUMilli,
     int32_t tiltCommandUMilli,
     int32_t targetMillideg)
 {
     int32_t currentCount = encoder_update();
 
-    uart_puts("VISION_PID x=");
+    uart_puts("BALL_CASCADE x=");
     uart_write_u32(x);
-    uart_puts(" err_px=");
-    uart_write_i32(error);
-    uart_puts(" p_u_milli=");
-    uart_write_i32(proportionalUMilli);
-    uart_puts(" i_u_milli=");
-    uart_write_i32(integralUMilli);
-    uart_puts(" d_u_milli=");
-    uart_write_i32(derivativeUMilli);
+    uart_puts(" pos_err_px=");
+    uart_write_i32(positionError);
+    uart_puts(" ball_v_target_px_s=");
+    uart_write_i32(g_ballTargetSpeedPixelsPerS);
+    uart_puts(" ball_v_px_s=");
+    uart_write_i32(g_ballMeasuredSpeedPixelsPerS);
+    uart_puts(" speed_err_px_s=");
+    uart_write_i32(speedError);
+    uart_puts(" speed_p_u_milli=");
+    uart_write_i32(speedProportionalUMilli);
+    uart_puts(" speed_i_u_milli=");
+    uart_write_i32(speedIntegralUMilli);
     uart_puts(" u_milli=");
     uart_write_i32(tiltCommandUMilli);
     uart_puts(" target_deg=");
@@ -504,69 +535,113 @@ static int32_t vision_tilt_to_motor_millideg(int32_t tiltCommandUMilli)
         VISION_MAX_TARGET_MILLIDEG);
 }
 
-static int32_t vision_pid_calculate(
+static int32_t ball_cascade_calculate(
     uint32_t x,
-    int32_t *errorOut,
-    int32_t *proportionalOut,
-    int32_t *integralOut,
-    int32_t *derivativeOut,
+    int32_t *positionErrorOut,
+    int32_t *speedErrorOut,
+    int32_t *speedProportionalOut,
+    int32_t *speedIntegralOut,
     int32_t *tiltCommandOut)
 {
     uint32_t now = g_milliseconds;
-    uint32_t elapsedMs;
-    int32_t error = (int32_t) VISION_CENTER_X - (int32_t) x;
-    int32_t rawDerivative = 0;
-    int32_t proportionalUMilli;
-    int32_t integralUMilli;
-    int32_t derivativeUMilli;
+    uint32_t elapsedMs = 0U;
+    int32_t positionError = (int32_t) VISION_CENTER_X - (int32_t) x;
+    int32_t rawBallSpeed = 0;
+    int32_t speedError;
+    int32_t speedProportionalUMilli;
+    int32_t speedIntegralUMilli;
     int32_t tiltCommandUMilli;
+    int32_t unclampedTiltUMilli;
+    int64_t candidateIntegral;
+    uint8_t allowIntegration;
 
-    if (absolute_i32(error) <= VISION_DEADBAND_PIXELS) error = 0;
+    if (absolute_i32(positionError) <= VISION_DEADBAND_PIXELS) {
+        positionError = 0;
+    }
 
-    if (g_visionPidInitialized == 0U) {
-        g_visionPidInitialized = 1U;
-        g_visionPreviousError = error;
-        g_visionPreviousMs = now;
-        g_visionIntegralPixelMs = 0;
-        g_visionDerivativePixelsPerS = 0;
+    g_ballLatestX = x;
+    if (g_ballControllerInitialized == 0U) {
+        g_ballControllerInitialized = 1U;
+        g_ballPreviousX = x;
+        g_ballPreviousMs = now;
+        g_ballMeasuredSpeedPixelsPerS = 0;
+        g_ballSpeedIntegralPixelMs = 0;
     } else {
-        elapsedMs = now - g_visionPreviousMs;
+        elapsedMs = now - g_ballPreviousMs;
         if (elapsedMs != 0U) {
-            if (elapsedMs > 200U) elapsedMs = 200U;
-            g_visionIntegralPixelMs = clamp_i32(
-                g_visionIntegralPixelMs + error * (int32_t) elapsedMs,
-                -VISION_I_LIMIT_PIXEL_MS,
-                VISION_I_LIMIT_PIXEL_MS);
-            rawDerivative = (int32_t) (
-                ((int64_t) (error - g_visionPreviousError) * 1000LL) /
-                elapsedMs);
-            g_visionDerivativePixelsPerS +=
-                (rawDerivative - g_visionDerivativePixelsPerS) /
-                VISION_D_FILTER_DIVISOR;
-            g_visionPreviousError = error;
-            g_visionPreviousMs = now;
+            if (elapsedMs > 200U) {
+                g_ballMeasuredSpeedPixelsPerS = 0;
+                g_ballSpeedIntegralPixelMs = 0;
+            } else {
+                rawBallSpeed = (int32_t) (
+                    ((int64_t) ((int32_t) x - (int32_t) g_ballPreviousX) *
+                     1000LL) / elapsedMs);
+                g_ballMeasuredSpeedPixelsPerS +=
+                    (rawBallSpeed - g_ballMeasuredSpeedPixelsPerS) /
+                    BALL_SPEED_FILTER_DIVISOR;
+            }
+            g_ballPreviousX = x;
+            g_ballPreviousMs = now;
         }
     }
 
-    if (error == 0) {
-        g_visionIntegralPixelMs = 0;
+    g_ballTargetSpeedPixelsPerS = (int32_t) (
+        ((int64_t) positionError * BALL_POSITION_KP_NUM) /
+        BALL_POSITION_KP_DEN);
+    g_ballTargetSpeedPixelsPerS = clamp_i32(
+        g_ballTargetSpeedPixelsPerS,
+        -BALL_MAX_TARGET_SPEED_PX_S,
+        BALL_MAX_TARGET_SPEED_PX_S);
+
+    speedError = g_ballTargetSpeedPixelsPerS -
+                 g_ballMeasuredSpeedPixelsPerS;
+    speedProportionalUMilli = (int32_t) (
+        ((int64_t) speedError * BALL_SPEED_KP_U_NUM) /
+        BALL_SPEED_KP_U_DEN);
+
+    speedIntegralUMilli = (int32_t) (
+        ((int64_t) g_ballSpeedIntegralPixelMs *
+         BALL_SPEED_KI_U_PER_PIXEL) / 1000LL);
+    unclampedTiltUMilli = speedProportionalUMilli + speedIntegralUMilli;
+
+    /* Conditional integration prevents the ball-speed PI from winding up. */
+    allowIntegration =
+        ((unclampedTiltUMilli < BALL_TILT_U_LIMIT_MILLI &&
+          unclampedTiltUMilli > -BALL_TILT_U_LIMIT_MILLI) ||
+         (unclampedTiltUMilli >= BALL_TILT_U_LIMIT_MILLI &&
+          speedError < 0) ||
+         (unclampedTiltUMilli <= -BALL_TILT_U_LIMIT_MILLI &&
+          speedError > 0)) ? 1U : 0U;
+    if (allowIntegration != 0U && elapsedMs != 0U && elapsedMs <= 200U) {
+        candidateIntegral = (int64_t) g_ballSpeedIntegralPixelMs +
+                            (int64_t) speedError * elapsedMs;
+        if (candidateIntegral > BALL_SPEED_I_LIMIT_PIXEL_MS) {
+            candidateIntegral = BALL_SPEED_I_LIMIT_PIXEL_MS;
+        } else if (candidateIntegral < -BALL_SPEED_I_LIMIT_PIXEL_MS) {
+            candidateIntegral = -BALL_SPEED_I_LIMIT_PIXEL_MS;
+        }
+        g_ballSpeedIntegralPixelMs = (int32_t) candidateIntegral;
     }
 
-    proportionalUMilli = error * VISION_KP_U_MILLI_PER_PIXEL;
-    integralUMilli = (int32_t) (
-        ((int64_t) g_visionIntegralPixelMs *
-         VISION_KI_U_MILLI_PER_PIXEL_S) / 1000LL);
-    derivativeUMilli =
-        g_visionDerivativePixelsPerS * VISION_KD_U_MILLI_S_PER_PIXEL;
-    tiltCommandUMilli = clamp_i32(
-        proportionalUMilli + integralUMilli + derivativeUMilli,
-        -VISION_PID_U_LIMIT_MILLI,
-        VISION_PID_U_LIMIT_MILLI);
+    if (positionError == 0 &&
+        absolute_i32(g_ballMeasuredSpeedPixelsPerS) <=
+        (uint32_t) BALL_STOP_SPEED_BAND_PX_S) {
+        g_ballSpeedIntegralPixelMs =
+            (g_ballSpeedIntegralPixelMs * 3) / 4;
+    }
 
-    *errorOut = error;
-    *proportionalOut = proportionalUMilli;
-    *integralOut = integralUMilli;
-    *derivativeOut = derivativeUMilli;
+    speedIntegralUMilli = (int32_t) (
+        ((int64_t) g_ballSpeedIntegralPixelMs *
+         BALL_SPEED_KI_U_PER_PIXEL) / 1000LL);
+    tiltCommandUMilli = clamp_i32(
+        speedProportionalUMilli + speedIntegralUMilli,
+        -BALL_TILT_U_LIMIT_MILLI,
+        BALL_TILT_U_LIMIT_MILLI);
+
+    *positionErrorOut = positionError;
+    *speedErrorOut = speedError;
+    *speedProportionalOut = speedProportionalUMilli;
+    *speedIntegralOut = speedIntegralUMilli;
     *tiltCommandOut = tiltCommandUMilli;
     return vision_tilt_to_motor_millideg(tiltCommandUMilli);
 }
@@ -574,39 +649,39 @@ static int32_t vision_pid_calculate(
 static void handle_openmv_line(char *line)
 {
     uint32_t x;
-    int32_t error;
-    int32_t proportionalUMilli;
-    int32_t integralUMilli;
-    int32_t derivativeUMilli;
+    int32_t positionError;
+    int32_t speedError;
+    int32_t speedProportionalUMilli;
+    int32_t speedIntegralUMilli;
     int32_t tiltCommandUMilli;
     int32_t targetMillideg;
 
     if (line[0] == 'N' && line[1] == '\0') {
-        g_visionPidInitialized = 0U;
-        return; /* No ball: retain and hold the last valid target. */
+        reset_ball_controller();
+        return; /* No ball: retain and hold the last valid motor target. */
     }
     if (parse_openmv_x(line, &x) == 0U || g_visionEnabled == 0U) {
         return;
     }
 
-    targetMillideg = vision_pid_calculate(
+    targetMillideg = ball_cascade_calculate(
         x,
-        &error,
-        &proportionalUMilli,
-        &integralUMilli,
-        &derivativeUMilli,
+        &positionError,
+        &speedError,
+        &speedProportionalUMilli,
+        &speedIntegralUMilli,
         &tiltCommandUMilli);
     update_vision_position_target(targetMillideg);
 
     g_visionStatusFrameCount++;
     if (g_visionStatusFrameCount >= VISION_STATUS_EVERY_FRAMES) {
         g_visionStatusFrameCount = 0U;
-        print_vision_pid_status(
+        print_ball_cascade_status(
             x,
-            error,
-            proportionalUMilli,
-            integralUMilli,
-            derivativeUMilli,
+            positionError,
+            speedError,
+            speedProportionalUMilli,
+            speedIntegralUMilli,
             tiltCommandUMilli,
             targetMillideg);
     }
@@ -828,22 +903,19 @@ int main(void)
     g_openmvLength = 0U;
     g_visionEnabled = 1U;
     g_visionStatusFrameCount = 0U;
-    g_visionIntegralPixelMs = 0;
-    g_visionPreviousError = 0;
-    g_visionDerivativePixelsPerS = 0;
-    g_visionPreviousMs = 0U;
-    g_visionPidInitialized = 0U;
+    reset_ball_controller();
     g_dirInitialized = 0U;
     g_milliseconds = 0U;
     DL_SYSTICK_config(CPUCLK_FREQ / 1000U);
     g_lastControlMs = g_milliseconds;
     g_lastStepSchedulerMs = g_milliseconds;
 
-    uart_puts("\r\nMS42CG position-speed cascade control ready\r\n");
+    uart_puts("\r\nBall position-speed cascade + motor angle servo ready\r\n");
     uart_puts("Power-on position=0 deg, CCW=positive, CW=negative\r\n");
-    uart_puts("Outer position P + inner speed PI; control period=10 ms, STEP max=1000 pps.\r\n");
+    uart_puts("Motor actuator: encoder position P + motor speed PI, STEP max=1000 pps.\r\n");
     uart_puts("OpenMV UART1: PA8 TX, PA9 RX; protocol X<pixel> or N\r\n");
-    uart_puts("Vision PID: x=180 -> 0 deg; u=+1000/-1000 -> +30/-40 deg.\r\n");
+    uart_puts("Ball control: position P -> target ball speed; ball speed PI -> tilt u.\r\n");
+    uart_puts("Ball equilibrium: x=180, ball speed=0; u=+1000/-1000 -> +30/-40 deg.\r\n");
     uart_puts("Vision motor-angle hard limit: -60..+45 deg.\r\n");
     uart_puts("Power-on vision control ON; no valid ball means no automatic movement.\r\n");
     uart_puts("Commands: V, To30, To-30, To12.5, ?, S (press Enter)\r\n");

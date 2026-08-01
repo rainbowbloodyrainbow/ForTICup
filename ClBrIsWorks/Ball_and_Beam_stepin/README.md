@@ -1,4 +1,4 @@
-# 地猛星 MS42CG + D36A 位置—速度双环闭环
+# 小球位置—速度双环 + MS42CG电机角度闭环
 
 上电时的电机位置定义为 `0°`。从电机输出轴端正对电机观察：
 
@@ -12,14 +12,16 @@
 
 这里控制的是**电机轴角度**，不是摆杆角度。电机轴、丝杠位移和摆杆角度之间还需要单独做机械标定。
 
-## 视觉PID与电机双环结构
+## 小球双环与电机闭环结构
 
-OpenMV给出球的横坐标后，最外层球位PID先计算电机目标角度；电机位置—速度双环只负责准确跟随这个动态角度：
+OpenMV给出球的横坐标后，小球位置外环先生成期望球速，小球速度内环再生成倾斜需求；电机位置—速度双环只负责准确跟随最终的动态角度：
 
 ```text
 OpenMV横坐标
    ↓
-球位PID：像素误差 → 对称倾斜需求u
+小球位置P外环：位置误差 → 目标小球速度
+   ↓
+小球速度PI内环：(目标速度 - Δx/Δt) → 对称倾斜需求u
    ↓
 非对称机械映射：u → 电机目标角度
    ↓
@@ -30,18 +32,21 @@ OpenMV横坐标
 D36A + MS42CG + 编码器反馈
 ```
 
-球位PID以 `x=180` 为目标，PID输出不是电机角度，而是对称的倾斜需求 `u`。代码用千分量表示：`u_milli=+1000/-1000` 代表大小相同、方向相反的一组参考倾斜需求。
+最终平衡状态是 `x=180`、目标小球速度为0、实际小球速度为0、倾斜需求趋近0。纠偏过程中目标速度不是固定为0，而是由位置外环动态给出，否则静止在中心以外的小球不会主动返回。
 
 ```text
-error = 180 - x
-u = Kp×error + Ki×∫error·dt + Kd×d(error)/dt
+position_error = 180 - x
+ball_speed_target = clamp(Kp_position × position_error)
+ball_speed = low_pass((x - previous_x) / dt)
+speed_error = ball_speed_target - ball_speed
+u = Kp_speed × speed_error + Ki_speed × ∫speed_error·dt
 
 u = 0      → motor_angle = 0°
 u = +1000  → motor_angle = +30°
 u = -1000  → motor_angle = -40°
 ```
 
-正负方向分别映射，从而补偿丝杠机构两侧角度—倾斜度不对称。PID倾斜需求限制为±1500，因此电机视觉目标硬限额为 `+45°/-60°`。
+速度PI输出的是对称倾斜需求 `u`，不是电机角度。正负方向分别映射，从而补偿丝杠机构两侧角度—倾斜度不对称。倾斜需求限制为±1500，因此电机视觉目标硬限额为 `+45°/-60°`。速度PI带条件积分抗饱和；球进入中心死区且基本静止后，残余积分会逐步衰减，使目标角度回到机械零点。
 
 控制器每10ms读取一次编码器，速度按下式计算并做一阶低通滤波：
 
@@ -54,15 +59,19 @@ u = -1000  → motor_angle = -40°
 初始调参宏集中在 `main.c` 顶部：
 
 ```c
-POSITION_KP_NUM / POSITION_KP_DEN   // 位置环P
-SPEED_KP_NUM / SPEED_KP_DEN         // 速度环P
-SPEED_KI_DIVISOR                    // 速度环I；数值越小，积分越强
+POSITION_KP_NUM / POSITION_KP_DEN   // 电机位置环P
+SPEED_KP_NUM / SPEED_KP_DEN         // 电机速度环P
+SPEED_KI_DIVISOR                    // 电机速度环I；数值越小，积分越强
 MAX_TARGET_SPEED_COUNTS_S           // 目标编码器速度上限
 MAX_STEP_RATE_PPS                   // STEP频率安全上限
-VISION_KP/KI/KD_U_MILLI...          // 球位PID参数
+BALL_POSITION_KP_NUM/DEN            // 小球位置误差→目标球速
+BALL_MAX_TARGET_SPEED_PX_S          // 目标小球速度限幅，单位pixel/s
+BALL_SPEED_KP_U_NUM/DEN             // 小球速度环P
+BALL_SPEED_KI_U_PER_PIXEL           // 小球速度环I
+BALL_SPEED_FILTER_DIVISOR           // 实测小球速度低通滤波
 VISION_POS_REF_MILLIDEG             // u=+1000对应+30°
 VISION_NEG_REF_MAG_MILLIDEG         // u=-1000对应-40°
-VISION_PID_U_LIMIT_MILLI            // ±1500，对应+45°/-60°
+BALL_TILT_U_LIMIT_MILLI             // ±1500，对应+45°/-60°
 ```
 
 ## 接线
@@ -126,18 +135,18 @@ X123\r\n    检测到球，横坐标为123
 N\r\n       当前帧未检测到球
 ```
 
-地猛星对每一个有效坐标执行球位PID：
+地猛星对每一个有效坐标执行小球位置—速度串级控制：
 
 ```text
-error = 180 - x
-x < 180  -> PID倾斜需求u为正，按+30侧比例映射
-x > 180  -> PID倾斜需求u为负，按-40侧比例映射
-x≈180    -> u趋近0，电机目标趋近0°
+position_error = 180 - x
+x < 180  -> 位置环给出向右的目标小球速度
+x > 180  -> 位置环给出向左的目标小球速度
+x≈180    -> 目标球速为0，速度环根据实际球速主动制动
 视觉角度限幅 -> -60°～+45°
-无球     -> 保持上一个有效目标，并重置PID时间基准
+无球     -> 保持上一个有效电机目标，并重置小球速度基准
 ```
 
-每个有效坐标都会更新目标角度，但不会重置电机速度环。像素中心带有±2像素死区，D项带一阶低通滤波。每10个有效坐标输出一条 `VISION_PID`，包含像素误差、P/I/D分量、目标角度、当前角度和STEP频率。
+每个有效坐标都会更新目标角度，但不会重置电机速度环。像素中心带有±2像素死区，实测小球速度带一阶低通滤波。每10个有效坐标输出一条 `BALL_CASCADE`，包含位置误差、目标/实际小球速度、速度误差、速度PI分量、倾斜需求、目标/当前电机角度和STEP频率。
 
 ## 命令
 
@@ -153,12 +162,12 @@ V          开启OpenMV视觉控制
 S          停止、使D36A失能并关闭视觉控制
 ```
 
-固件上电后默认开启视觉控制，但在收到第一个有效 `X...` 坐标前电机保持失能，不会自动执行固定角度往返。手动 `To...` 或 `S` 会关闭视觉控制；发送 `V` 后重新进入视觉PID。
+固件上电后默认开启视觉控制，但在收到第一个有效 `X...` 坐标前电机保持失能，不会自动执行固定角度往返。手动 `To...` 或 `S` 会关闭视觉控制；发送 `V` 后重新进入小球位置—速度双环控制。
 
 视觉联调日志示例：
 
 ```text
-VISION_PID x=150 err_px=30 p_u_milli=300 i_u_milli=... d_u_milli=... u_milli=... target_deg=... current_deg=... step_pps=...
+BALL_CASCADE x=150 pos_err_px=30 ball_v_target_px_s=120 ball_v_px_s=... speed_err_px_s=... speed_p_u_milli=... speed_i_u_milli=... u_milli=... target_deg=... current_deg=... step_pps=...
 ```
 
 安全起见，当前命令范围限制为 `-90°～+90°`。机械行程确认后再修改 `MAX_ABS_TARGET_MILLIDEG`。
