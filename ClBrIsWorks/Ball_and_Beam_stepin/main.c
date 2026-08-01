@@ -15,16 +15,40 @@
 #define POSITION_TOLERANCE_COUNTS    (2)
 #define MAX_ABS_TARGET_MILLIDEG      (90000L)
 #define STEP_HIGH_CYCLES             (320U)   /* 10 us at 32 MHz */
-#define STEP_LOW_CYCLES              (31680U) /* remainder of a 1 kHz period */
 #define DIR_SETUP_CYCLES             (320U)
+#define CONTROL_PERIOD_MS            (10U)
+#define STEP_SCHEDULER_HZ            (1000U)
+#define MAX_STEP_RATE_PPS            (1000)
+
+/* Position P loop: position error[count] -> target speed[count/s]. */
+#define POSITION_KP_NUM              (6)
+#define POSITION_KP_DEN              (1)
+#define MAX_TARGET_SPEED_COUNTS_S    (1000)
+
+/* Speed PI loop: speed error[count/s] -> STEP rate[pulse/s]. */
+#define SPEED_FILTER_DIVISOR         (4)
+#define SPEED_KP_NUM                 (1)
+#define SPEED_KP_DEN                 (4)
+#define SPEED_KI_DIVISOR             (500)
+#define SPEED_INTEGRAL_LIMIT         (150000)
+
 #define FEEDBACK_CHECK_STEPS         (32U)
 #define FEEDBACK_CHECK_COUNTS        (4)
 #define NO_FEEDBACK_LIMIT_STEPS      (64U)
 #define COMMAND_BUFFER_SIZE          (24U)
 #define OPENMV_BUFFER_SIZE           (12U)
 #define VISION_CENTER_X              (180U)
-#define VISION_LEFT_TARGET_MILLIDEG  (20000L)
-#define VISION_RIGHT_TARGET_MILLIDEG (-40000L)
+#define VISION_DEADBAND_PIXELS       (2)
+#define VISION_POS_REF_MILLIDEG      (30000L)
+#define VISION_NEG_REF_MAG_MILLIDEG  (40000L)
+#define VISION_MIN_TARGET_MILLIDEG   (-60000L)
+#define VISION_MAX_TARGET_MILLIDEG   (45000L)
+#define VISION_PID_U_LIMIT_MILLI     (1500)
+#define VISION_KP_U_MILLI_PER_PIXEL  (10)
+#define VISION_KI_U_MILLI_PER_PIXEL_S (1)
+#define VISION_KD_U_MILLI_S_PER_PIXEL (1)
+#define VISION_D_FILTER_DIVISOR      (4)
+#define VISION_I_LIMIT_PIXEL_MS      (500000)
 #define VISION_STATUS_EVERY_FRAMES   (10U)
 
 typedef enum {
@@ -38,10 +62,17 @@ static uint16_t g_previousRaw;
 static int32_t g_accumulatedRaw;
 static int32_t g_targetCount;
 static int32_t g_targetMillideg;
-static int32_t g_motionStartCount;
-static uint32_t g_stepsIssued;
-static uint32_t g_stepLimit;
-static int8_t g_expectedDirection;
+static int32_t g_targetSpeedCountsPerS;
+static int32_t g_measuredSpeedCountsPerS;
+static int32_t g_commandStepRatePps;
+static int32_t g_speedIntegralError;
+static int32_t g_lastControlCount;
+static uint32_t g_lastControlMs;
+static uint32_t g_lastStepSchedulerMs;
+static uint32_t g_stepPhaseAccumulator;
+static int32_t g_feedbackStartCount;
+static uint32_t g_feedbackPulseCount;
+static int8_t g_feedbackExpectedDirection;
 static uint8_t g_lastDirLevel;
 static uint8_t g_dirInitialized;
 static MotionState g_motionState;
@@ -49,9 +80,19 @@ static char g_commandBuffer[COMMAND_BUFFER_SIZE];
 static uint32_t g_commandLength;
 static char g_openmvBuffer[OPENMV_BUFFER_SIZE];
 static uint32_t g_openmvLength;
-static int8_t g_lastVisionSide;
 static uint8_t g_visionEnabled;
 static uint32_t g_visionStatusFrameCount;
+static int32_t g_visionIntegralPixelMs;
+static int32_t g_visionPreviousError;
+static int32_t g_visionDerivativePixelsPerS;
+static uint32_t g_visionPreviousMs;
+static uint8_t g_visionPidInitialized;
+static volatile uint32_t g_milliseconds;
+
+void SysTick_Handler(void)
+{
+    g_milliseconds++;
+}
 
 static void uart_putc(char character)
 {
@@ -127,6 +168,13 @@ static uint32_t absolute_i32(int32_t value)
     return (uint32_t) (-(value + 1)) + 1U;
 }
 
+static int32_t clamp_i32(int32_t value, int32_t minimum, int32_t maximum)
+{
+    if (value < minimum) return minimum;
+    if (value > maximum) return maximum;
+    return value;
+}
+
 static int32_t encoder_update(void)
 {
     uint16_t currentRaw;
@@ -161,6 +209,8 @@ static int32_t millideg_to_count(int32_t angleMillideg)
 
 static void motor_disable(void)
 {
+    g_commandStepRatePps = 0;
+    g_stepPhaseAccumulator = 0U;
     DL_GPIO_clearPins(MOTOR_GPIO_PORT,
         MOTOR_GPIO_STEP_PIN | MOTOR_GPIO_EN_PIN);
 }
@@ -170,7 +220,7 @@ static void motor_enable(void)
     DL_GPIO_setPins(MOTOR_GPIO_PORT, MOTOR_GPIO_EN_PIN);
 }
 
-static void motor_step(uint8_t directionLevel)
+static void motor_emit_step(uint8_t directionLevel)
 {
     if ((g_dirInitialized == 0U) || (directionLevel != g_lastDirLevel)) {
         if (directionLevel != 0U) {
@@ -186,7 +236,6 @@ static void motor_step(uint8_t directionLevel)
     DL_GPIO_setPins(MOTOR_GPIO_PORT, MOTOR_GPIO_STEP_PIN);
     delay_cycles(STEP_HIGH_CYCLES);
     DL_GPIO_clearPins(MOTOR_GPIO_PORT, MOTOR_GPIO_STEP_PIN);
-    delay_cycles(STEP_LOW_CYCLES);
 }
 
 static void print_status(void)
@@ -199,6 +248,12 @@ static void print_status(void)
     uart_write_angle_millideg(count_to_millideg(currentCount));
     uart_puts(" target_deg=");
     uart_write_angle_millideg(g_targetMillideg);
+    uart_puts(" speed_cps=");
+    uart_write_i32(g_measuredSpeedCountsPerS);
+    uart_puts(" speed_target_cps=");
+    uart_write_i32(g_targetSpeedCountsPerS);
+    uart_puts(" step_pps=");
+    uart_write_i32(g_commandStepRatePps);
     uart_puts(" state=");
     uart_puts((g_motionState == MOTION_MOVING) ? "MOVING" :
               ((g_motionState == MOTION_HOLDING) ? "HOLDING" :
@@ -266,7 +321,6 @@ static void start_position_move(int32_t targetMillideg)
 {
     int32_t currentCount;
     int32_t error;
-    uint32_t expectedSteps;
 
     if (targetMillideg > MAX_ABS_TARGET_MILLIDEG ||
         targetMillideg < -MAX_ABS_TARGET_MILLIDEG) {
@@ -278,13 +332,17 @@ static void start_position_move(int32_t targetMillideg)
     g_targetMillideg = targetMillideg;
     g_targetCount = millideg_to_count(targetMillideg);
     error = g_targetCount - currentCount;
-    g_motionStartCount = currentCount;
-    g_stepsIssued = 0U;
-    g_expectedDirection = (error >= 0) ? 1 : -1;
-    expectedSteps = (absolute_i32(error) * MOTOR_STEPS_PER_REV +
-                     (uint32_t) ENCODER_COUNTS_PER_REV - 1U) /
-                    (uint32_t) ENCODER_COUNTS_PER_REV;
-    g_stepLimit = expectedSteps * 2U + 100U;
+    g_targetSpeedCountsPerS = 0;
+    g_measuredSpeedCountsPerS = 0;
+    g_commandStepRatePps = 0;
+    g_speedIntegralError = 0;
+    g_lastControlCount = currentCount;
+    g_lastControlMs = g_milliseconds;
+    g_lastStepSchedulerMs = g_milliseconds;
+    g_stepPhaseAccumulator = 0U;
+    g_feedbackStartCount = currentCount;
+    g_feedbackPulseCount = 0U;
+    g_feedbackExpectedDirection = 0;
     g_motionState = (absolute_i32(error) <=
                      (uint32_t) POSITION_TOLERANCE_COUNTS) ?
                     MOTION_HOLDING : MOTION_MOVING;
@@ -298,12 +356,56 @@ static void start_position_move(int32_t targetMillideg)
     if (g_motionState == MOTION_HOLDING) print_status();
 }
 
+static void update_vision_position_target(int32_t targetMillideg)
+{
+    int32_t currentCount;
+    int32_t previousError;
+    int32_t newError;
+    uint8_t controllerWasInactive;
+
+    if (g_motionState == MOTION_FAULT) return;
+
+    currentCount = encoder_update();
+    previousError = g_targetCount - currentCount;
+    g_targetMillideg = clamp_i32(
+        targetMillideg,
+        VISION_MIN_TARGET_MILLIDEG,
+        VISION_MAX_TARGET_MILLIDEG);
+    g_targetCount = millideg_to_count(g_targetMillideg);
+    newError = g_targetCount - currentCount;
+    controllerWasInactive = (g_motionState == MOTION_IDLE) ? 1U : 0U;
+
+    if (controllerWasInactive != 0U) {
+        g_measuredSpeedCountsPerS = 0;
+        g_lastControlCount = currentCount;
+        g_lastControlMs = g_milliseconds;
+        g_lastStepSchedulerMs = g_milliseconds;
+    }
+    if (controllerWasInactive != 0U ||
+        (previousError > 0 && newError < 0) ||
+        (previousError < 0 && newError > 0)) {
+        g_targetSpeedCountsPerS = 0;
+        g_commandStepRatePps = 0;
+        g_speedIntegralError = 0;
+        g_stepPhaseAccumulator = 0U;
+        g_feedbackStartCount = currentCount;
+        g_feedbackPulseCount = 0U;
+        g_feedbackExpectedDirection = 0;
+    }
+
+    g_motionState = (absolute_i32(newError) <=
+                     (uint32_t) POSITION_TOLERANCE_COUNTS) ?
+                    MOTION_HOLDING : MOTION_MOVING;
+    motor_enable();
+}
+
 static void handle_command(char *command)
 {
     int32_t targetMillideg;
 
     if (parse_to_command(command, &targetMillideg) != 0U) {
         g_visionEnabled = 0U;
+        g_visionPidInitialized = 0U;
         start_position_move(targetMillideg);
     } else if ((command[0] == '?' && command[1] == '\0') ||
                ((command[0] == 'S' || command[0] == 's') &&
@@ -312,18 +414,23 @@ static void handle_command(char *command)
             print_status();
         } else {
             g_visionEnabled = 0U;
+            g_visionPidInitialized = 0U;
             g_motionState = MOTION_IDLE;
             motor_disable();
-            uart_puts("OK stopped; driver disabled and vision control OFF\r\n");
+            uart_puts("OK stopped; driver disabled and vision OFF\r\n");
         }
     } else if ((command[0] == 'V' || command[0] == 'v') &&
                command[1] == '\0') {
+        motor_disable();
+        g_motionState = MOTION_IDLE;
         g_visionEnabled = 1U;
-        g_lastVisionSide = 0;
         g_visionStatusFrameCount = 0U;
+        g_visionIntegralPixelMs = 0;
+        g_visionDerivativePixelsPerS = 0;
+        g_visionPidInitialized = 0U;
         uart_puts("OK vision control ON\r\n");
     } else {
-        uart_puts("ERR command; use To30, To-30, V, ?, or S, then press Enter\r\n");
+        uart_puts("ERR command; use V, To30, To-30, ?, or S, then press Enter\r\n");
     }
 }
 
@@ -346,60 +453,163 @@ static uint8_t parse_openmv_x(const char *text, uint32_t *x)
     return 1U;
 }
 
-static void print_vision_status(uint32_t x)
+static void print_vision_pid_status(
+    uint32_t x,
+    int32_t error,
+    int32_t proportionalUMilli,
+    int32_t integralUMilli,
+    int32_t derivativeUMilli,
+    int32_t tiltCommandUMilli,
+    int32_t targetMillideg)
 {
-    uart_puts("VISION_STATUS x=");
+    int32_t currentCount = encoder_update();
+
+    uart_puts("VISION_PID x=");
     uart_write_u32(x);
-    uart_puts(" ");
-    print_status();
+    uart_puts(" err_px=");
+    uart_write_i32(error);
+    uart_puts(" p_u_milli=");
+    uart_write_i32(proportionalUMilli);
+    uart_puts(" i_u_milli=");
+    uart_write_i32(integralUMilli);
+    uart_puts(" d_u_milli=");
+    uart_write_i32(derivativeUMilli);
+    uart_puts(" u_milli=");
+    uart_write_i32(tiltCommandUMilli);
+    uart_puts(" target_deg=");
+    uart_write_angle_millideg(targetMillideg);
+    uart_puts(" current_deg=");
+    uart_write_angle_millideg(count_to_millideg(currentCount));
+    uart_puts(" step_pps=");
+    uart_write_i32(g_commandStepRatePps);
+    uart_puts("\r\n");
 }
 
-static void vision_status_tick(uint32_t x)
+static int32_t vision_tilt_to_motor_millideg(int32_t tiltCommandUMilli)
 {
-    g_visionStatusFrameCount++;
-    if (g_visionStatusFrameCount >= VISION_STATUS_EVERY_FRAMES) {
-        g_visionStatusFrameCount = 0U;
-        print_vision_status(x);
+    int64_t motorMillideg;
+
+    if (tiltCommandUMilli >= 0) {
+        motorMillideg =
+            ((int64_t) tiltCommandUMilli * VISION_POS_REF_MILLIDEG) /
+            1000LL;
+    } else {
+        motorMillideg =
+            ((int64_t) tiltCommandUMilli * VISION_NEG_REF_MAG_MILLIDEG) /
+            1000LL;
     }
+    return clamp_i32(
+        (int32_t) motorMillideg,
+        VISION_MIN_TARGET_MILLIDEG,
+        VISION_MAX_TARGET_MILLIDEG);
+}
+
+static int32_t vision_pid_calculate(
+    uint32_t x,
+    int32_t *errorOut,
+    int32_t *proportionalOut,
+    int32_t *integralOut,
+    int32_t *derivativeOut,
+    int32_t *tiltCommandOut)
+{
+    uint32_t now = g_milliseconds;
+    uint32_t elapsedMs;
+    int32_t error = (int32_t) VISION_CENTER_X - (int32_t) x;
+    int32_t rawDerivative = 0;
+    int32_t proportionalUMilli;
+    int32_t integralUMilli;
+    int32_t derivativeUMilli;
+    int32_t tiltCommandUMilli;
+
+    if (absolute_i32(error) <= VISION_DEADBAND_PIXELS) error = 0;
+
+    if (g_visionPidInitialized == 0U) {
+        g_visionPidInitialized = 1U;
+        g_visionPreviousError = error;
+        g_visionPreviousMs = now;
+        g_visionIntegralPixelMs = 0;
+        g_visionDerivativePixelsPerS = 0;
+    } else {
+        elapsedMs = now - g_visionPreviousMs;
+        if (elapsedMs != 0U) {
+            if (elapsedMs > 200U) elapsedMs = 200U;
+            g_visionIntegralPixelMs = clamp_i32(
+                g_visionIntegralPixelMs + error * (int32_t) elapsedMs,
+                -VISION_I_LIMIT_PIXEL_MS,
+                VISION_I_LIMIT_PIXEL_MS);
+            rawDerivative = (int32_t) (
+                ((int64_t) (error - g_visionPreviousError) * 1000LL) /
+                elapsedMs);
+            g_visionDerivativePixelsPerS +=
+                (rawDerivative - g_visionDerivativePixelsPerS) /
+                VISION_D_FILTER_DIVISOR;
+            g_visionPreviousError = error;
+            g_visionPreviousMs = now;
+        }
+    }
+
+    if (error == 0) {
+        g_visionIntegralPixelMs = 0;
+    }
+
+    proportionalUMilli = error * VISION_KP_U_MILLI_PER_PIXEL;
+    integralUMilli = (int32_t) (
+        ((int64_t) g_visionIntegralPixelMs *
+         VISION_KI_U_MILLI_PER_PIXEL_S) / 1000LL);
+    derivativeUMilli =
+        g_visionDerivativePixelsPerS * VISION_KD_U_MILLI_S_PER_PIXEL;
+    tiltCommandUMilli = clamp_i32(
+        proportionalUMilli + integralUMilli + derivativeUMilli,
+        -VISION_PID_U_LIMIT_MILLI,
+        VISION_PID_U_LIMIT_MILLI);
+
+    *errorOut = error;
+    *proportionalOut = proportionalUMilli;
+    *integralOut = integralUMilli;
+    *derivativeOut = derivativeUMilli;
+    *tiltCommandOut = tiltCommandUMilli;
+    return vision_tilt_to_motor_millideg(tiltCommandUMilli);
 }
 
 static void handle_openmv_line(char *line)
 {
     uint32_t x;
-    int8_t side;
+    int32_t error;
+    int32_t proportionalUMilli;
+    int32_t integralUMilli;
+    int32_t derivativeUMilli;
+    int32_t tiltCommandUMilli;
     int32_t targetMillideg;
 
     if (line[0] == 'N' && line[1] == '\0') {
+        g_visionPidInitialized = 0U;
         return; /* No ball: retain and hold the last valid target. */
     }
     if (parse_openmv_x(line, &x) == 0U || g_visionEnabled == 0U) {
         return;
     }
 
-    if (x < VISION_CENTER_X) {
-        side = -1;
-        targetMillideg = VISION_LEFT_TARGET_MILLIDEG;
-    } else if (x > VISION_CENTER_X) {
-        side = 1;
-        targetMillideg = VISION_RIGHT_TARGET_MILLIDEG;
-    } else {
-        vision_status_tick(x);
-        return;
-    }
+    targetMillideg = vision_pid_calculate(
+        x,
+        &error,
+        &proportionalUMilli,
+        &integralUMilli,
+        &derivativeUMilli,
+        &tiltCommandUMilli);
+    update_vision_position_target(targetMillideg);
 
-    /* Do not restart the same move on every camera frame. */
-    if (side == g_lastVisionSide) {
-        vision_status_tick(x);
-        return;
+    g_visionStatusFrameCount++;
+    if (g_visionStatusFrameCount >= VISION_STATUS_EVERY_FRAMES) {
+        g_visionStatusFrameCount = 0U;
+        print_vision_pid_status(
+            x,
+            error,
+            proportionalUMilli,
+            integralUMilli,
+            derivativeUMilli,
+            tiltCommandUMilli,
+            targetMillideg);
     }
-    g_lastVisionSide = side;
-    g_visionStatusFrameCount = 0U;
-
-    uart_puts("VISION x=");
-    uart_write_u32(x);
-    uart_puts((side < 0) ? " -> +20 deg\r\n" : " -> -40 deg\r\n");
-    start_position_move(targetMillideg);
-    print_vision_status(x);
 }
 
 static void poll_openmv_uart(void)
@@ -443,19 +653,74 @@ static void poll_uart(void)
     }
 }
 
-static void position_control_process(void)
+static uint8_t feedback_fault_check(int32_t currentCount)
 {
-    int32_t currentCount;
-    int32_t error;
     int32_t movement;
-    uint8_t directionLevel;
+
+    if (g_feedbackPulseCount < FEEDBACK_CHECK_STEPS) return 0U;
+
+    movement = currentCount - g_feedbackStartCount;
+    if (absolute_i32(movement) >= FEEDBACK_CHECK_COUNTS) {
+        if ((g_feedbackExpectedDirection > 0 && movement < 0) ||
+            (g_feedbackExpectedDirection < 0 && movement > 0)) {
+            g_motionState = MOTION_FAULT;
+            motor_disable();
+            uart_puts("FAULT feedback direction reversed; change DIR_LEVEL_FOR_POSITIVE_ANGLE\r\n");
+            print_status();
+            return 1U;
+        }
+        g_feedbackStartCount = currentCount;
+        g_feedbackPulseCount = 0U;
+    } else if (g_feedbackPulseCount >= NO_FEEDBACK_LIMIT_STEPS) {
+        g_motionState = MOTION_FAULT;
+        motor_disable();
+        uart_puts("FAULT encoder did not move after 64 STEP pulses\r\n");
+        print_status();
+        return 1U;
+    }
+    return 0U;
+}
+
+static void position_speed_control_process(void)
+{
+    uint32_t now;
+    uint32_t elapsedMs;
+    int32_t currentCount;
+    int32_t deltaCount;
+    int32_t rawSpeed;
+    int32_t positionError;
+    int32_t speedError;
+    int32_t integralDelta;
+    int32_t feedForwardStepRate;
+    int32_t proportionalCorrection;
+    int32_t integralCorrection;
+    int32_t stepRate;
 
     if (g_motionState != MOTION_MOVING &&
         g_motionState != MOTION_HOLDING) return;
 
+    now = g_milliseconds;
+    elapsedMs = now - g_lastControlMs;
+    if (elapsedMs < CONTROL_PERIOD_MS) return;
+
     currentCount = encoder_update();
-    error = g_targetCount - currentCount;
-    if (absolute_i32(error) <= (uint32_t) POSITION_TOLERANCE_COUNTS) {
+    deltaCount = currentCount - g_lastControlCount;
+    rawSpeed = (int32_t) (((int64_t) deltaCount * 1000LL) /
+                          (int64_t) elapsedMs);
+    g_measuredSpeedCountsPerS +=
+        (rawSpeed - g_measuredSpeedCountsPerS) / SPEED_FILTER_DIVISOR;
+    g_lastControlCount = currentCount;
+    g_lastControlMs = now;
+
+    if (feedback_fault_check(currentCount) != 0U) return;
+
+    positionError = g_targetCount - currentCount;
+    if (absolute_i32(positionError) <=
+        (uint32_t) POSITION_TOLERANCE_COUNTS) {
+        g_targetSpeedCountsPerS = 0;
+        g_commandStepRatePps = 0;
+        g_speedIntegralError = 0;
+        g_stepPhaseAccumulator = 0U;
         if (g_motionState == MOTION_MOVING) {
             g_motionState = MOTION_HOLDING;
             DL_GPIO_clearPins(MOTOR_GPIO_PORT, MOTOR_GPIO_STEP_PIN);
@@ -466,49 +731,76 @@ static void position_control_process(void)
     }
 
     if (g_motionState == MOTION_HOLDING) {
-        uint32_t expectedSteps;
-
         g_motionState = MOTION_MOVING;
-        g_motionStartCount = currentCount;
-        g_stepsIssued = 0U;
-        g_expectedDirection = (error > 0) ? 1 : -1;
-        expectedSteps = (absolute_i32(error) * MOTOR_STEPS_PER_REV +
-                         (uint32_t) ENCODER_COUNTS_PER_REV - 1U) /
-                        (uint32_t) ENCODER_COUNTS_PER_REV;
-        g_stepLimit = expectedSteps * 2U + 100U;
+        g_speedIntegralError = 0;
+        g_feedbackStartCount = currentCount;
+        g_feedbackPulseCount = 0U;
+        g_feedbackExpectedDirection = 0;
     }
 
-    if (g_stepsIssued >= g_stepLimit) {
-        g_motionState = MOTION_FAULT;
-        motor_disable();
-        uart_puts("FAULT no encoder feedback or mechanism blocked\r\n");
-        print_status();
+    g_targetSpeedCountsPerS = (int32_t) (
+        ((int64_t) positionError * POSITION_KP_NUM) / POSITION_KP_DEN);
+    g_targetSpeedCountsPerS = clamp_i32(
+        g_targetSpeedCountsPerS,
+        -MAX_TARGET_SPEED_COUNTS_S,
+        MAX_TARGET_SPEED_COUNTS_S);
+
+    speedError = g_targetSpeedCountsPerS - g_measuredSpeedCountsPerS;
+    integralDelta = (int32_t) (((int64_t) speedError * elapsedMs) /
+                               CONTROL_PERIOD_MS);
+    g_speedIntegralError = clamp_i32(
+        g_speedIntegralError + integralDelta,
+        -SPEED_INTEGRAL_LIMIT,
+        SPEED_INTEGRAL_LIMIT);
+
+    feedForwardStepRate = (int32_t) (
+        ((int64_t) g_targetSpeedCountsPerS * MOTOR_STEPS_PER_REV) /
+        ENCODER_COUNTS_PER_REV);
+    proportionalCorrection =
+        (speedError * SPEED_KP_NUM) / SPEED_KP_DEN;
+    integralCorrection = g_speedIntegralError / SPEED_KI_DIVISOR;
+    stepRate = feedForwardStepRate +
+               proportionalCorrection + integralCorrection;
+    g_commandStepRatePps = clamp_i32(
+        stepRate, -MAX_STEP_RATE_PPS, MAX_STEP_RATE_PPS);
+}
+
+static void step_scheduler_process(void)
+{
+    uint32_t now;
+    uint32_t elapsedMs;
+    uint32_t stepRateMagnitude;
+    uint8_t directionLevel;
+    int8_t feedbackDirection;
+
+    now = g_milliseconds;
+    elapsedMs = now - g_lastStepSchedulerMs;
+    if (elapsedMs == 0U) return;
+    g_lastStepSchedulerMs = now;
+
+    if (g_motionState != MOTION_MOVING || g_commandStepRatePps == 0) {
+        g_stepPhaseAccumulator = 0U;
         return;
     }
 
-    directionLevel = (error > 0) ? DIR_LEVEL_FOR_POSITIVE_ANGLE :
-                                   (uint8_t) !DIR_LEVEL_FOR_POSITIVE_ANGLE;
-    motor_step(directionLevel);
-    g_stepsIssued++;
+    stepRateMagnitude = absolute_i32(g_commandStepRatePps);
+    g_stepPhaseAccumulator += stepRateMagnitude * elapsedMs;
+    if (g_stepPhaseAccumulator < STEP_SCHEDULER_HZ) return;
 
-    if (g_stepsIssued >= FEEDBACK_CHECK_STEPS) {
-        currentCount = encoder_update();
-        movement = currentCount - g_motionStartCount;
-        if (absolute_i32(movement) >= FEEDBACK_CHECK_COUNTS &&
-            ((g_expectedDirection > 0 && movement < 0) ||
-             (g_expectedDirection < 0 && movement > 0))) {
-            g_motionState = MOTION_FAULT;
-            motor_disable();
-            uart_puts("FAULT feedback direction reversed; change DIR_LEVEL_FOR_POSITIVE_ANGLE\r\n");
-            print_status();
-        } else if (g_stepsIssued >= NO_FEEDBACK_LIMIT_STEPS &&
-                   absolute_i32(movement) < FEEDBACK_CHECK_COUNTS) {
-            g_motionState = MOTION_FAULT;
-            motor_disable();
-            uart_puts("FAULT encoder did not move after 64 STEP pulses\r\n");
-            print_status();
-        }
+    /* Emit at most one pulse per millisecond; discard backlog after UART stalls. */
+    g_stepPhaseAccumulator %= STEP_SCHEDULER_HZ;
+    feedbackDirection = (g_commandStepRatePps > 0) ? 1 : -1;
+    directionLevel = (feedbackDirection > 0) ?
+        DIR_LEVEL_FOR_POSITIVE_ANGLE :
+        (uint8_t) !DIR_LEVEL_FOR_POSITIVE_ANGLE;
+
+    if (feedbackDirection != g_feedbackExpectedDirection) {
+        g_feedbackExpectedDirection = feedbackDirection;
+        g_feedbackStartCount = g_lastControlCount;
+        g_feedbackPulseCount = 0U;
     }
+    motor_emit_step(directionLevel);
+    g_feedbackPulseCount++;
 }
 
 int main(void)
@@ -522,26 +814,45 @@ int main(void)
     g_accumulatedRaw = 0;
     g_targetCount = 0;
     g_targetMillideg = 0;
+    g_targetSpeedCountsPerS = 0;
+    g_measuredSpeedCountsPerS = 0;
+    g_commandStepRatePps = 0;
+    g_speedIntegralError = 0;
+    g_lastControlCount = 0;
+    g_stepPhaseAccumulator = 0U;
+    g_feedbackStartCount = 0;
+    g_feedbackPulseCount = 0U;
+    g_feedbackExpectedDirection = 0;
     g_motionState = MOTION_IDLE;
     g_commandLength = 0U;
     g_openmvLength = 0U;
-    g_lastVisionSide = 0;
     g_visionEnabled = 1U;
     g_visionStatusFrameCount = 0U;
+    g_visionIntegralPixelMs = 0;
+    g_visionPreviousError = 0;
+    g_visionDerivativePixelsPerS = 0;
+    g_visionPreviousMs = 0U;
+    g_visionPidInitialized = 0U;
     g_dirInitialized = 0U;
+    g_milliseconds = 0U;
+    DL_SYSTICK_config(CPUCLK_FREQ / 1000U);
+    g_lastControlMs = g_milliseconds;
+    g_lastStepSchedulerMs = g_milliseconds;
 
-    uart_puts("\r\nMS42CG position control ready\r\n");
+    uart_puts("\r\nMS42CG position-speed cascade control ready\r\n");
     uart_puts("Power-on position=0 deg, CCW=positive, CW=negative\r\n");
-    uart_puts("Position remains closed-loop: external displacement is corrected automatically.\r\n");
+    uart_puts("Outer position P + inner speed PI; control period=10 ms, STEP max=1000 pps.\r\n");
     uart_puts("OpenMV UART1: PA8 TX, PA9 RX; protocol X<pixel> or N\r\n");
-    uart_puts("Vision rule: x<180 -> +20 deg, x>180 -> -40 deg\r\n");
-    uart_puts("VISION_STATUS prints every 10 valid frames and whenever the side changes.\r\n");
+    uart_puts("Vision PID: x=180 -> 0 deg; u=+1000/-1000 -> +30/-40 deg.\r\n");
+    uart_puts("Vision motor-angle hard limit: -60..+45 deg.\r\n");
+    uart_puts("Power-on vision control ON; no valid ball means no automatic movement.\r\n");
     uart_puts("Commands: V, To30, To-30, To12.5, ?, S (press Enter)\r\n");
 
     while (1) {
         poll_uart();
         poll_openmv_uart();
-        position_control_process();
+        position_speed_control_process();
+        step_scheduler_process();
         if (g_motionState != MOTION_MOVING) {
             (void) encoder_update();
         }
