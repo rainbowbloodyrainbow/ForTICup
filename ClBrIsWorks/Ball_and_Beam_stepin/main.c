@@ -61,12 +61,24 @@
 #define BALL_SETTLE_HOLD_MS          (300U)
 #define VISION_STATUS_EVERY_FRAMES   (10U)
 
+/* Requirement 3: center -> right 5 cm -> left 5 cm, all within 5 s. */
+#define REQ3_ACCEL_MOTOR_MILLIDEG    (15000L)
+#define REQ3_SWITCH_TO_PID_X         (195U)
+#define REQ3_FINAL_TARGET_X          (135U)
+#define REQ3_TIME_LIMIT_MS           (5000U)
+
 typedef enum {
     MOTION_IDLE = 0,
     MOTION_MOVING,
     MOTION_HOLDING,
     MOTION_FAULT
 } MotionState;
+
+typedef enum {
+    BALL_TASK_BALANCE_180 = 0,
+    BALL_TASK_REQ3_ACCEL_RIGHT,
+    BALL_TASK_REQ3_SETTLE_135
+} BallTaskState;
 
 static uint16_t g_previousRaw;
 static int32_t g_accumulatedRaw;
@@ -102,6 +114,11 @@ static uint32_t g_ballSettleStartMs;
 static uint8_t g_ballControllerInitialized;
 static uint8_t g_ballSettleTimerActive;
 static uint8_t g_ballSettled;
+static BallTaskState g_ballTaskState;
+static uint32_t g_req3StartMs;
+static uint32_t g_req3PeakX;
+static uint8_t g_req3CompletionReported;
+static uint8_t g_req3TimeoutReported;
 static volatile uint32_t g_milliseconds;
 
 void SysTick_Handler(void)
@@ -204,6 +221,15 @@ static void reset_ball_controller(void)
     g_ballSettled = 0U;
 }
 
+static void reset_ball_control_action_state(void)
+{
+    g_ballTargetSpeedPixelsPerS = 0;
+    g_ballSpeedIntegralPixelMs = 0;
+    g_ballSettleStartMs = 0U;
+    g_ballSettleTimerActive = 0U;
+    g_ballSettled = 0U;
+}
+
 static int32_t encoder_update(void)
 {
     uint16_t currentRaw;
@@ -299,6 +325,17 @@ static void print_status(void)
     uart_write_i32(g_ballTargetSpeedPixelsPerS);
     uart_puts(" ball_settled=");
     uart_puts((g_ballSettled != 0U) ? "YES" : "NO");
+    uart_puts(" task=");
+    uart_puts((g_ballTaskState == BALL_TASK_REQ3_ACCEL_RIGHT) ?
+              "REQ3_ACCEL_RIGHT" :
+              ((g_ballTaskState == BALL_TASK_REQ3_SETTLE_135) ?
+               "REQ3_SETTLE_135" : "BALANCE_180"));
+    if (g_ballTaskState != BALL_TASK_BALANCE_180) {
+        uart_puts(" req3_elapsed_ms=");
+        uart_write_u32(g_milliseconds - g_req3StartMs);
+        uart_puts(" req3_peak_x=");
+        uart_write_u32(g_req3PeakX);
+    }
     uart_puts(" A=");
     uart_write_u32((DL_GPIO_readPins(GPIOA, DL_GPIO_PIN_1) != 0U) ? 1U : 0U);
     uart_puts(" B=");
@@ -438,14 +475,35 @@ static void update_vision_position_target(int32_t targetMillideg)
     motor_enable();
 }
 
+static void start_requirement3(void)
+{
+    motor_disable();
+    g_motionState = MOTION_IDLE;
+    g_visionEnabled = 1U;
+    g_visionStatusFrameCount = 0U;
+    reset_ball_controller();
+    g_ballTaskState = BALL_TASK_REQ3_ACCEL_RIGHT;
+    g_req3StartMs = g_milliseconds;
+    g_req3PeakX = VISION_CENTER_X;
+    g_req3CompletionReported = 0U;
+    g_req3TimeoutReported = 0U;
+
+    /* This is motor-shaft angle, not a calibrated physical beam angle. */
+    update_vision_position_target(REQ3_ACCEL_MOTOR_MILLIDEG);
+    uart_puts("REQ3 START fixed_motor_deg=+15.000 switch_x=210 final_x=135 limit_ms=5000\r\n");
+}
+
 static void handle_command(char *command)
 {
     int32_t targetMillideg;
 
     if (parse_to_command(command, &targetMillideg) != 0U) {
         g_visionEnabled = 0U;
+        g_ballTaskState = BALL_TASK_BALANCE_180;
         reset_ball_controller();
         start_position_move(targetMillideg);
+    } else if (command[0] == '3' && command[1] == '\0') {
+        start_requirement3();
     } else if ((command[0] == '?' && command[1] == '\0') ||
                ((command[0] == 'S' || command[0] == 's') &&
                 command[1] == '\0')) {
@@ -453,6 +511,7 @@ static void handle_command(char *command)
             print_status();
         } else {
             g_visionEnabled = 0U;
+            g_ballTaskState = BALL_TASK_BALANCE_180;
             reset_ball_controller();
             g_motionState = MOTION_IDLE;
             motor_disable();
@@ -463,11 +522,12 @@ static void handle_command(char *command)
         motor_disable();
         g_motionState = MOTION_IDLE;
         g_visionEnabled = 1U;
+        g_ballTaskState = BALL_TASK_BALANCE_180;
         g_visionStatusFrameCount = 0U;
         reset_ball_controller();
-        uart_puts("OK vision control ON\r\n");
+        uart_puts("OK vision balance target_x=180 ON\r\n");
     } else {
-        uart_puts("ERR command; use V, To30, To-30, ?, or S, then press Enter\r\n");
+        uart_puts("ERR command; use 3, V, To30, To-30, ?, or S, then press Enter\r\n");
     }
 }
 
@@ -492,6 +552,7 @@ static uint8_t parse_openmv_x(const char *text, uint32_t *x)
 
 static void print_ball_cascade_status(
     uint32_t x,
+    uint32_t targetX,
     int32_t positionError,
     int32_t speedError,
     int32_t speedProportionalUMilli,
@@ -503,6 +564,8 @@ static void print_ball_cascade_status(
 
     uart_puts("BALL_CASCADE x=");
     uart_write_u32(x);
+    uart_puts(" target_x=");
+    uart_write_u32(targetX);
     uart_puts(" pos_err_px=");
     uart_write_i32(positionError);
     uart_puts(" ball_v_target_px_s=");
@@ -547,8 +610,45 @@ static int32_t vision_tilt_to_motor_millideg(int32_t tiltCommandUMilli)
         VISION_MAX_TARGET_MILLIDEG);
 }
 
+static uint32_t ball_observer_update(uint32_t x)
+{
+    uint32_t now = g_milliseconds;
+    uint32_t elapsedMs = 0U;
+    int32_t rawBallSpeed;
+
+    g_ballLatestX = x;
+    if (g_ballControllerInitialized == 0U) {
+        g_ballControllerInitialized = 1U;
+        g_ballPreviousX = x;
+        g_ballPreviousMs = now;
+        g_ballMeasuredSpeedPixelsPerS = 0;
+        g_ballSpeedIntegralPixelMs = 0;
+        return 0U;
+    }
+
+    elapsedMs = now - g_ballPreviousMs;
+    if (elapsedMs == 0U) return 0U;
+
+    if (elapsedMs > 200U) {
+        g_ballMeasuredSpeedPixelsPerS = 0;
+        g_ballSpeedIntegralPixelMs = 0;
+    } else {
+        rawBallSpeed = (int32_t) (
+            ((int64_t) ((int32_t) x - (int32_t) g_ballPreviousX) *
+             1000LL) / elapsedMs);
+        g_ballMeasuredSpeedPixelsPerS +=
+            (rawBallSpeed - g_ballMeasuredSpeedPixelsPerS) /
+            BALL_SPEED_FILTER_DIVISOR;
+    }
+    g_ballPreviousX = x;
+    g_ballPreviousMs = now;
+    return elapsedMs;
+}
+
 static int32_t ball_cascade_calculate(
     uint32_t x,
+    uint32_t targetX,
+    uint32_t elapsedMs,
     int32_t *positionErrorOut,
     int32_t *speedErrorOut,
     int32_t *speedProportionalOut,
@@ -556,9 +656,7 @@ static int32_t ball_cascade_calculate(
     int32_t *tiltCommandOut)
 {
     uint32_t now = g_milliseconds;
-    uint32_t elapsedMs = 0U;
-    int32_t positionError = (int32_t) VISION_CENTER_X - (int32_t) x;
-    int32_t rawBallSpeed = 0;
+    int32_t positionError = (int32_t) targetX - (int32_t) x;
     int32_t speedError;
     int32_t speedProportionalUMilli;
     int32_t speedIntegralUMilli;
@@ -569,32 +667,6 @@ static int32_t ball_cascade_calculate(
 
     if (absolute_i32(positionError) <= VISION_DEADBAND_PIXELS) {
         positionError = 0;
-    }
-
-    g_ballLatestX = x;
-    if (g_ballControllerInitialized == 0U) {
-        g_ballControllerInitialized = 1U;
-        g_ballPreviousX = x;
-        g_ballPreviousMs = now;
-        g_ballMeasuredSpeedPixelsPerS = 0;
-        g_ballSpeedIntegralPixelMs = 0;
-    } else {
-        elapsedMs = now - g_ballPreviousMs;
-        if (elapsedMs != 0U) {
-            if (elapsedMs > 200U) {
-                g_ballMeasuredSpeedPixelsPerS = 0;
-                g_ballSpeedIntegralPixelMs = 0;
-            } else {
-                rawBallSpeed = (int32_t) (
-                    ((int64_t) ((int32_t) x - (int32_t) g_ballPreviousX) *
-                     1000LL) / elapsedMs);
-                g_ballMeasuredSpeedPixelsPerS +=
-                    (rawBallSpeed - g_ballMeasuredSpeedPixelsPerS) /
-                    BALL_SPEED_FILTER_DIVISOR;
-            }
-            g_ballPreviousX = x;
-            g_ballPreviousMs = now;
-        }
     }
 
     g_ballTargetSpeedPixelsPerS = (int32_t) (
@@ -683,9 +755,50 @@ static int32_t ball_cascade_calculate(
     return vision_tilt_to_motor_millideg(tiltCommandUMilli);
 }
 
+static void print_req3_accel_status(uint32_t x)
+{
+    int32_t currentCount = encoder_update();
+
+    uart_puts("REQ3_ACCEL x=");
+    uart_write_u32(x);
+    uart_puts(" switch_x=");
+    uart_write_u32(REQ3_SWITCH_TO_PID_X);
+    uart_puts(" ball_v_px_s=");
+    uart_write_i32(g_ballMeasuredSpeedPixelsPerS);
+    uart_puts(" motor_target_deg=");
+    uart_write_angle_millideg(REQ3_ACCEL_MOTOR_MILLIDEG);
+    uart_puts(" motor_current_deg=");
+    uart_write_angle_millideg(count_to_millideg(currentCount));
+    uart_puts(" elapsed_ms=");
+    uart_write_u32(g_milliseconds - g_req3StartMs);
+    uart_puts(" peak_x=");
+    uart_write_u32(g_req3PeakX);
+    uart_puts("\r\n");
+}
+
+static void requirement3_report_timeout_if_needed(void)
+{
+    if (g_ballTaskState == BALL_TASK_BALANCE_180 ||
+        g_req3CompletionReported != 0U ||
+        g_req3TimeoutReported != 0U ||
+        (g_milliseconds - g_req3StartMs) < REQ3_TIME_LIMIT_MS) {
+        return;
+    }
+
+    g_req3TimeoutReported = 1U;
+    uart_puts("REQ3 TIMEOUT elapsed_ms=");
+    uart_write_u32(g_milliseconds - g_req3StartMs);
+    uart_puts(" peak_x=");
+    uart_write_u32(g_req3PeakX);
+    uart_puts("; control continues toward x=135\r\n");
+}
+
 static void handle_openmv_line(char *line)
 {
     uint32_t x;
+    uint32_t targetX;
+    uint32_t frameElapsedMs;
+    uint32_t req3ElapsedMs;
     int32_t positionError;
     int32_t speedError;
     int32_t speedProportionalUMilli;
@@ -701,8 +814,43 @@ static void handle_openmv_line(char *line)
         return;
     }
 
+    frameElapsedMs = ball_observer_update(x);
+
+    if (g_ballTaskState != BALL_TASK_BALANCE_180 && x > g_req3PeakX) {
+        g_req3PeakX = x;
+    }
+
+    if (g_ballTaskState == BALL_TASK_REQ3_ACCEL_RIGHT) {
+        if (x < REQ3_SWITCH_TO_PID_X) {
+            update_vision_position_target(REQ3_ACCEL_MOTOR_MILLIDEG);
+            g_visionStatusFrameCount++;
+            if (g_visionStatusFrameCount >= VISION_STATUS_EVERY_FRAMES) {
+                g_visionStatusFrameCount = 0U;
+                print_req3_accel_status(x);
+            }
+            requirement3_report_timeout_if_needed();
+            return;
+        }
+
+        g_ballTaskState = BALL_TASK_REQ3_SETTLE_135;
+        reset_ball_control_action_state();
+        uart_puts("REQ3 SWITCH_TO_PID x=");
+        uart_write_u32(x);
+        uart_puts(" ball_v_px_s=");
+        uart_write_i32(g_ballMeasuredSpeedPixelsPerS);
+        uart_puts(" final_target_x=");
+        uart_write_u32(REQ3_FINAL_TARGET_X);
+        uart_puts(" elapsed_ms=");
+        uart_write_u32(g_milliseconds - g_req3StartMs);
+        uart_puts("\r\n");
+    }
+
+    targetX = (g_ballTaskState == BALL_TASK_REQ3_SETTLE_135) ?
+              REQ3_FINAL_TARGET_X : VISION_CENTER_X;
     targetMillideg = ball_cascade_calculate(
         x,
+        targetX,
+        frameElapsedMs,
         &positionError,
         &speedError,
         &speedProportionalUMilli,
@@ -715,6 +863,7 @@ static void handle_openmv_line(char *line)
         g_visionStatusFrameCount = 0U;
         print_ball_cascade_status(
             x,
+            targetX,
             positionError,
             speedError,
             speedProportionalUMilli,
@@ -722,6 +871,23 @@ static void handle_openmv_line(char *line)
             tiltCommandUMilli,
             targetMillideg);
     }
+
+    if (g_ballTaskState == BALL_TASK_REQ3_SETTLE_135 &&
+        g_ballSettled != 0U &&
+        g_req3CompletionReported == 0U) {
+        g_req3CompletionReported = 1U;
+        req3ElapsedMs = g_milliseconds - g_req3StartMs;
+        uart_puts("REQ3 COMPLETE elapsed_ms=");
+        uart_write_u32(req3ElapsedMs);
+        uart_puts(" peak_x=");
+        uart_write_u32(g_req3PeakX);
+        uart_puts(" final_x=");
+        uart_write_u32(x);
+        uart_puts(" result=");
+        uart_puts((req3ElapsedMs <= REQ3_TIME_LIMIT_MS) ? "PASS" : "LATE");
+        uart_puts("\r\n");
+    }
+    requirement3_report_timeout_if_needed();
 }
 
 static void poll_openmv_uart(void)
@@ -941,6 +1107,11 @@ int main(void)
     g_visionEnabled = 1U;
     g_visionStatusFrameCount = 0U;
     reset_ball_controller();
+    g_ballTaskState = BALL_TASK_BALANCE_180;
+    g_req3StartMs = 0U;
+    g_req3PeakX = VISION_CENTER_X;
+    g_req3CompletionReported = 0U;
+    g_req3TimeoutReported = 0U;
     g_dirInitialized = 0U;
     g_milliseconds = 0U;
     DL_SYSTICK_config(CPUCLK_FREQ / 1000U);
@@ -953,9 +1124,10 @@ int main(void)
     uart_puts("OpenMV UART1: PA8 TX, PA9 RX; protocol X<pixel> or N\r\n");
     uart_puts("Ball control: position P -> target ball speed; ball speed PI -> tilt u.\r\n");
     uart_puts("Ball equilibrium: x=180, ball speed=0; u=+1000/-1000 -> +30/-40 deg.\r\n");
-    uart_puts("Vision motor-angle hard limit: -60..+45 deg.\r\n");
+    uart_puts("Vision motor-angle hard limit: -30..+20 deg.\r\n");
+    uart_puts("Requirement 3: command 3 -> +15 deg until x>=210 -> settle at x=135.\r\n");
     uart_puts("Power-on vision control ON; no valid ball means no automatic movement.\r\n");
-    uart_puts("Commands: V, To30, To-30, To12.5, ?, S (press Enter)\r\n");
+    uart_puts("Commands: 3, V, To30, To-30, To12.5, ?, S (press Enter)\r\n");
 
     while (1) {
         poll_uart();
