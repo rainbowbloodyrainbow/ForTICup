@@ -46,7 +46,9 @@ u = +1000  → motor_angle = +30°
 u = -1000  → motor_angle = -40°
 ```
 
-速度PI输出的是对称倾斜需求 `u`，不是电机角度。正负方向分别映射，从而补偿丝杠机构两侧角度—倾斜度不对称。倾斜需求限制为±1500，因此电机视觉目标硬限额为 `+45°/-60°`。速度PI带条件积分抗饱和；球进入中心死区且基本静止后，残余积分会逐步衰减，使目标角度回到机械零点。
+速度环输出的是对称倾斜需求 `u`，不是电机角度。正负方向分别映射，从而补偿丝杠机构两侧角度—倾斜度不对称。倾斜需求限制为±1500，因此电机视觉目标硬限额为 `+45°/-60°`。
+
+当前第一轮稳定化参数暂时关闭了小球速度积分，只保留位置P和速度P，避免历史积分抵消反向制动。位置在中心±2像素且实测速度不超过10 pixel/s，连续保持300ms后才报告 `settled=YES`，同时清零倾斜需求和速度积分。若位置或速度再次超出范围，立即退出停稳状态并恢复控制。
 
 控制器每10ms读取一次编码器，速度按下式计算并做一阶低通滤波：
 
@@ -72,6 +74,18 @@ BALL_SPEED_FILTER_DIVISOR           // 实测小球速度低通滤波
 VISION_POS_REF_MILLIDEG             // u=+1000对应+30°
 VISION_NEG_REF_MAG_MILLIDEG         // u=-1000对应-40°
 BALL_TILT_U_LIMIT_MILLI             // ±1500，对应+45°/-60°
+```
+
+第一轮稳定化试验值：
+
+```c
+BALL_POSITION_KP_NUM = 2
+BALL_MAX_TARGET_SPEED_PX_S = 220
+BALL_SPEED_FILTER_DIVISOR = 2
+BALL_SPEED_KP_U_NUM / DEN = 3 / 1
+BALL_SPEED_KI_U_PER_PIXEL = 0
+BALL_SETTLE_SPEED_BAND_PX_S = 10
+BALL_SETTLE_HOLD_MS = 300
 ```
 
 ## 接线
@@ -146,7 +160,7 @@ x≈180    -> 目标球速为0，速度环根据实际球速主动制动
 无球     -> 保持上一个有效电机目标，并重置小球速度基准
 ```
 
-每个有效坐标都会更新目标角度，但不会重置电机速度环。像素中心带有±2像素死区，实测小球速度带一阶低通滤波。每10个有效坐标输出一条 `BALL_CASCADE`，包含位置误差、目标/实际小球速度、速度误差、速度PI分量、倾斜需求、目标/当前电机角度和STEP频率。
+每个有效坐标都会更新目标角度，但不会重置电机速度环。像素中心带有±2像素死区，实测小球速度带一阶低通滤波。每10个有效坐标输出一条 `BALL_CASCADE`，包含位置误差、目标/实际小球速度、速度误差、速度环分量、停稳标志、倾斜需求、目标/当前电机角度和STEP频率。
 
 ## 命令
 
@@ -167,7 +181,7 @@ S          停止、使D36A失能并关闭视觉控制
 视觉联调日志示例：
 
 ```text
-BALL_CASCADE x=150 pos_err_px=30 ball_v_target_px_s=120 ball_v_px_s=... speed_err_px_s=... speed_p_u_milli=... speed_i_u_milli=... u_milli=... target_deg=... current_deg=... step_pps=...
+BALL_CASCADE x=150 pos_err_px=30 ball_v_target_px_s=60 ball_v_px_s=... speed_err_px_s=... speed_p_u_milli=... speed_i_u_milli=0 settled=NO u_milli=... target_deg=... current_deg=... step_pps=...
 ```
 
 安全起见，当前命令范围限制为 `-90°～+90°`。机械行程确认后再修改 `MAX_ABS_TARGET_MILLIDEG`。

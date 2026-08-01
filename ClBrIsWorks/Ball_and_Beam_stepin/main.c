@@ -46,17 +46,19 @@
 #define BALL_TILT_U_LIMIT_MILLI      (1500)
 
 /* Ball position P loop: position error[pixel] -> target speed[pixel/s]. */
-#define BALL_POSITION_KP_NUM         (4)
+#define BALL_POSITION_KP_NUM         (2)
 #define BALL_POSITION_KP_DEN         (1)
-#define BALL_MAX_TARGET_SPEED_PX_S   (400)
+#define BALL_MAX_TARGET_SPEED_PX_S   (220)
 
 /* Ball speed PI loop: speed error[pixel/s] -> symmetric tilt demand u. */
-#define BALL_SPEED_FILTER_DIVISOR    (4)
-#define BALL_SPEED_KP_U_NUM          (5)
-#define BALL_SPEED_KP_U_DEN          (2)
-#define BALL_SPEED_KI_U_PER_PIXEL    (1)
+#define BALL_SPEED_FILTER_DIVISOR    (2)
+#define BALL_SPEED_KP_U_NUM          (3)
+#define BALL_SPEED_KP_U_DEN          (1)
+#define BALL_SPEED_KI_U_PER_PIXEL    (0)
 #define BALL_SPEED_I_LIMIT_PIXEL_MS  (300000)
 #define BALL_STOP_SPEED_BAND_PX_S    (5)
+#define BALL_SETTLE_SPEED_BAND_PX_S  (10)
+#define BALL_SETTLE_HOLD_MS          (300U)
 #define VISION_STATUS_EVERY_FRAMES   (10U)
 
 typedef enum {
@@ -96,7 +98,10 @@ static int32_t g_ballTargetSpeedPixelsPerS;
 static int32_t g_ballMeasuredSpeedPixelsPerS;
 static int32_t g_ballSpeedIntegralPixelMs;
 static uint32_t g_ballPreviousMs;
+static uint32_t g_ballSettleStartMs;
 static uint8_t g_ballControllerInitialized;
+static uint8_t g_ballSettleTimerActive;
+static uint8_t g_ballSettled;
 static volatile uint32_t g_milliseconds;
 
 void SysTick_Handler(void)
@@ -193,7 +198,10 @@ static void reset_ball_controller(void)
     g_ballMeasuredSpeedPixelsPerS = 0;
     g_ballSpeedIntegralPixelMs = 0;
     g_ballPreviousMs = 0U;
+    g_ballSettleStartMs = 0U;
     g_ballControllerInitialized = 0U;
+    g_ballSettleTimerActive = 0U;
+    g_ballSettled = 0U;
 }
 
 static int32_t encoder_update(void)
@@ -289,6 +297,8 @@ static void print_status(void)
     uart_write_i32(g_ballMeasuredSpeedPixelsPerS);
     uart_puts(" ball_v_target_px_s=");
     uart_write_i32(g_ballTargetSpeedPixelsPerS);
+    uart_puts(" ball_settled=");
+    uart_puts((g_ballSettled != 0U) ? "YES" : "NO");
     uart_puts(" A=");
     uart_write_u32((DL_GPIO_readPins(GPIOA, DL_GPIO_PIN_1) != 0U) ? 1U : 0U);
     uart_puts(" B=");
@@ -505,6 +515,8 @@ static void print_ball_cascade_status(
     uart_write_i32(speedProportionalUMilli);
     uart_puts(" speed_i_u_milli=");
     uart_write_i32(speedIntegralUMilli);
+    uart_puts(" settled=");
+    uart_puts((g_ballSettled != 0U) ? "YES" : "NO");
     uart_puts(" u_milli=");
     uart_write_i32(tiltCommandUMilli);
     uart_puts(" target_deg=");
@@ -598,6 +610,31 @@ static int32_t ball_cascade_calculate(
     speedProportionalUMilli = (int32_t) (
         ((int64_t) speedError * BALL_SPEED_KP_U_NUM) /
         BALL_SPEED_KP_U_DEN);
+
+    if (positionError == 0 &&
+        absolute_i32(g_ballMeasuredSpeedPixelsPerS) <=
+        (uint32_t) BALL_SETTLE_SPEED_BAND_PX_S) {
+        if (g_ballSettleTimerActive == 0U) {
+            g_ballSettleTimerActive = 1U;
+            g_ballSettleStartMs = now;
+        } else if ((now - g_ballSettleStartMs) >= BALL_SETTLE_HOLD_MS) {
+            g_ballSettled = 1U;
+        }
+    } else {
+        g_ballSettleTimerActive = 0U;
+        g_ballSettled = 0U;
+    }
+
+    if (g_ballSettled != 0U) {
+        g_ballTargetSpeedPixelsPerS = 0;
+        g_ballSpeedIntegralPixelMs = 0;
+        *positionErrorOut = positionError;
+        *speedErrorOut = speedError;
+        *speedProportionalOut = 0;
+        *speedIntegralOut = 0;
+        *tiltCommandOut = 0;
+        return 0;
+    }
 
     speedIntegralUMilli = (int32_t) (
         ((int64_t) g_ballSpeedIntegralPixelMs *
