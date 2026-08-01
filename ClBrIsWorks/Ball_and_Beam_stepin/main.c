@@ -41,8 +41,8 @@
 #define VISION_DEADBAND_PIXELS       (2)
 #define VISION_POS_REF_MILLIDEG      (30000L)
 #define VISION_NEG_REF_MAG_MILLIDEG  (40000L)
-#define VISION_MIN_TARGET_MILLIDEG   (-60000L)
-#define VISION_MAX_TARGET_MILLIDEG   (45000L)
+#define VISION_MIN_TARGET_MILLIDEG   (-30000L)
+#define VISION_MAX_TARGET_MILLIDEG   (20000L)
 #define BALL_TILT_U_LIMIT_MILLI      (1500)
 
 /* Ball position P loop: position error[pixel] -> target speed[pixel/s]. */
