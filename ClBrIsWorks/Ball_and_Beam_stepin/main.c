@@ -64,8 +64,9 @@
 /* Requirement 3: center -> right 5 cm -> left 5 cm, all within 5 s. */
 #define REQ3_ACCEL_MOTOR_MILLIDEG    (15000L)
 #define REQ3_SWITCH_TO_PID_X         (195U)
-#define REQ3_FINAL_TARGET_X          (135U)
+#define REQ3_FINAL_TARGET_X          (120U)
 #define REQ3_TIME_LIMIT_MS           (5000U)
+#define REQ3_BREAKAWAY_U_MILLI       (220)
 
 typedef enum {
     MOTION_IDLE = 0,
@@ -119,6 +120,7 @@ static uint32_t g_req3StartMs;
 static uint32_t g_req3PeakX;
 static uint8_t g_req3CompletionReported;
 static uint8_t g_req3TimeoutReported;
+static uint8_t g_req3BreakawayActive;
 static volatile uint32_t g_milliseconds;
 
 void SysTick_Handler(void)
@@ -219,6 +221,7 @@ static void reset_ball_controller(void)
     g_ballControllerInitialized = 0U;
     g_ballSettleTimerActive = 0U;
     g_ballSettled = 0U;
+    g_req3BreakawayActive = 0U;
 }
 
 static void reset_ball_control_action_state(void)
@@ -228,6 +231,7 @@ static void reset_ball_control_action_state(void)
     g_ballSettleStartMs = 0U;
     g_ballSettleTimerActive = 0U;
     g_ballSettled = 0U;
+    g_req3BreakawayActive = 0U;
 }
 
 static int32_t encoder_update(void)
@@ -335,6 +339,8 @@ static void print_status(void)
         uart_write_u32(g_milliseconds - g_req3StartMs);
         uart_puts(" req3_peak_x=");
         uart_write_u32(g_req3PeakX);
+        uart_puts(" req3_breakaway=");
+        uart_puts((g_req3BreakawayActive != 0U) ? "YES" : "NO");
     }
     uart_puts(" A=");
     uart_write_u32((DL_GPIO_readPins(GPIOA, DL_GPIO_PIN_1) != 0U) ? 1U : 0U);
@@ -490,7 +496,15 @@ static void start_requirement3(void)
 
     /* This is motor-shaft angle, not a calibrated physical beam angle. */
     update_vision_position_target(REQ3_ACCEL_MOTOR_MILLIDEG);
-    uart_puts("REQ3 START fixed_motor_deg=+15.000 switch_x=210 final_x=135 limit_ms=5000\r\n");
+    uart_puts("REQ3 START fixed_motor_deg=+15.000 switch_x=");
+    uart_write_u32(REQ3_SWITCH_TO_PID_X);
+    uart_puts(" final_x=");
+    uart_write_u32(REQ3_FINAL_TARGET_X);
+    uart_puts(" breakaway_u=");
+    uart_write_i32(REQ3_BREAKAWAY_U_MILLI);
+    uart_puts(" limit_ms=");
+    uart_write_u32(REQ3_TIME_LIMIT_MS);
+    uart_puts("\r\n");
 }
 
 static void handle_command(char *command)
@@ -580,6 +594,8 @@ static void print_ball_cascade_status(
     uart_write_i32(speedIntegralUMilli);
     uart_puts(" settled=");
     uart_puts((g_ballSettled != 0U) ? "YES" : "NO");
+    uart_puts(" breakaway=");
+    uart_puts((g_req3BreakawayActive != 0U) ? "YES" : "NO");
     uart_puts(" u_milli=");
     uart_write_i32(tiltCommandUMilli);
     uart_puts(" target_deg=");
@@ -665,6 +681,8 @@ static int32_t ball_cascade_calculate(
     int64_t candidateIntegral;
     uint8_t allowIntegration;
 
+    g_req3BreakawayActive = 0U;
+
     if (absolute_i32(positionError) <= VISION_DEADBAND_PIXELS) {
         positionError = 0;
     }
@@ -746,6 +764,19 @@ static int32_t ball_cascade_calculate(
         speedProportionalUMilli + speedIntegralUMilli,
         -BALL_TILT_U_LIMIT_MILLI,
         BALL_TILT_U_LIMIT_MILLI);
+
+    /* Requirement 3 only: overcome stiction without restoring global I. */
+    if (g_ballTaskState == BALL_TASK_REQ3_SETTLE_135 &&
+        positionError != 0 &&
+        absolute_i32(g_ballMeasuredSpeedPixelsPerS) <=
+        (uint32_t) BALL_SETTLE_SPEED_BAND_PX_S &&
+        absolute_i32(tiltCommandUMilli) <
+        (uint32_t) REQ3_BREAKAWAY_U_MILLI) {
+        tiltCommandUMilli = (positionError > 0) ?
+                            REQ3_BREAKAWAY_U_MILLI :
+                            -REQ3_BREAKAWAY_U_MILLI;
+        g_req3BreakawayActive = 1U;
+    }
 
     *positionErrorOut = positionError;
     *speedErrorOut = speedError;
@@ -1112,6 +1143,7 @@ int main(void)
     g_req3PeakX = VISION_CENTER_X;
     g_req3CompletionReported = 0U;
     g_req3TimeoutReported = 0U;
+    g_req3BreakawayActive = 0U;
     g_dirInitialized = 0U;
     g_milliseconds = 0U;
     DL_SYSTICK_config(CPUCLK_FREQ / 1000U);
@@ -1125,7 +1157,7 @@ int main(void)
     uart_puts("Ball control: position P -> target ball speed; ball speed PI -> tilt u.\r\n");
     uart_puts("Ball equilibrium: x=180, ball speed=0; u=+1000/-1000 -> +30/-40 deg.\r\n");
     uart_puts("Vision motor-angle hard limit: -30..+20 deg.\r\n");
-    uart_puts("Requirement 3: command 3 -> +15 deg until x>=210 -> settle at x=135.\r\n");
+    uart_puts("Requirement 3: command 3 -> +15 deg, then PID settles at x=135.\r\n");
     uart_puts("Power-on vision control ON; no valid ball means no automatic movement.\r\n");
     uart_puts("Commands: 3, V, To30, To-30, To12.5, ?, S (press Enter)\r\n");
 

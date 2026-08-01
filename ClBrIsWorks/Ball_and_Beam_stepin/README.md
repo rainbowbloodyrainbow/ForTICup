@@ -178,7 +178,7 @@ x≈180    -> 目标球速为0，速度环根据实际球速主动制动
   ↓
 固定电机目标+15°，同时持续观测小球速度
   ↓
-x达到210
+x达到195
   ↓
 立即切换为位置目标x=135的位置P+速度P闭环
   ↓
@@ -193,19 +193,22 @@ REQ3 COMPLETE，继续闭环保持在x=135
 REQ3 START ...
 REQ3_ACCEL ...
 REQ3 SWITCH_TO_PID ...
-BALL_CASCADE ... target_x=135 ...
+BALL_CASCADE ... target_x=135 ... breakaway=YES/NO ...
 REQ3 COMPLETE elapsed_ms=... peak_x=... final_x=... result=PASS
 ```
 
 `peak_x` 是本次运动实际达到的最右横坐标，用于标定提前制动点：若 `peak_x<223`，适当增大 `REQ3_SWITCH_TO_PID_X`；若明显超过223，则减小该阈值。超过5秒仍未停稳会输出 `REQ3 TIMEOUT`，但控制器仍会继续向135收敛。
 
+题目3最终阶段带有静摩擦起步补偿：当球还没有进入135±2像素、速度不超过10 pixel/s，而且普通速度环输出小于180时，沿目标方向强制使用 `±180 u_milli`。球一旦运动或进入目标死区便自动退出，日志显示 `breakaway=YES/NO`。该补偿仅用于题目3，不影响普通180平衡和第4/5/6问。
+
 题目3参数集中在 `main.c`：
 
 ```c
 REQ3_ACCEL_MOTOR_MILLIDEG = 15000  // 固定电机目标+15°
-REQ3_SWITCH_TO_PID_X = 210          // 提前切换点
+REQ3_SWITCH_TO_PID_X = 195          // 提前切换点
 REQ3_FINAL_TARGET_X = 135           // 最终左侧5cm位置
 REQ3_TIME_LIMIT_MS = 5000
+REQ3_BREAKAWAY_U_MILLI = 180        // 题目3静止但未到位时的最小倾斜需求
 ```
 
 ## 命令
